@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class User_PrefixMigration : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,6 +31,7 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Country_Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Country_Prefix = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Country_Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },

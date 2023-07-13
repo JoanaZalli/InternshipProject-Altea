@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Infrastructure.Repository.Configuration;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,8 +17,14 @@ namespace Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
-        
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Prefix)
+                .WithMany()
+                .HasForeignKey(u => u.PrefixId);
+
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+
         }
 
         public DbSet<User> Users {  get; set; }
