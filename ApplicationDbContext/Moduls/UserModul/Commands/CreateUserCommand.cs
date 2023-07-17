@@ -1,8 +1,11 @@
 ﻿using Application.Contracts;
 using Application.DTOS;
+using Application.Exceptions;
+using Application.Validations;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,17 +40,19 @@ namespace Application.Moduls.UserModul.Commands
         }
         public async Task<UserRegistrationDTO> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var userForRegistration = _mapper.Map<UserRegistrationDTO>(request);
-            var result = await _authenticationService.CreateUser(userForRegistration);
-            if (!result.Succeeded)
-            {
-                var errorMessages = result.Errors.Select(error => error.Description).ToList();
 
-                throw new ApplicationException($"User creation failed: {string.Join(", ", errorMessages)}");
+            var userForRegistration = _mapper.Map<UserRegistrationDTO>(request);
+
+            var validator = new UserValidations();
+            var validationResult = validator.Validate(userForRegistration);
+            if (!validationResult.IsValid)
+            {
+                var errorMessages = validationResult.Errors.Select(error => error.ErrorMessage).ToList();
+              throw new UserCreationBadRequest(errorMessages) ;
             }
 
-            var user = _mapper.Map<UserRegistrationDTO>(userForRegistration);
-            return user;
+          
+            return userForRegistration;
         }
     }
 

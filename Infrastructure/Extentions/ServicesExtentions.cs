@@ -12,6 +12,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Moduls.UserModul;
+using Application.Validations;
+using FluentValidation;
+using Application.Exceptions;
+
 namespace Infrastructure.Extentions
 {
     public static class ServicesExtentions
@@ -19,22 +23,17 @@ namespace Infrastructure.Extentions
         // Identity configurations
         public static void ConfigureIdentity(this IServiceCollection services)
         {
-            var builder = services.AddIdentity<User, IdentityRole>(o =>
-            {
-                o.Password.RequireDigit = true;
-                o.Password.RequireNonAlphanumeric = true;
-                o.Password.RequiredLength = 8;
-                o.User.RequireUniqueEmail = true;
-            }).AddEntityFrameworkStores<ApplicationDbContext>()
+            var builder = services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
+            builder.Services.AddTransient<IValidator<UserRegistrationDTO>, UserValidations>();
         }
+
+        
 
         public static void ConfigureServiceManager(this IServiceCollection services) =>
             services.AddScoped<IServiceManager, ServiceManager>();
 
-        //public static void ConfigureUserCreateHandler(this IServiceCollection services) =>
-        //    services.AddScoped<IRequestHandler<CreateUserCommand, UserRegistrationDTO>, CreateUserCommandHandler>();
-
+        
 
     }
 }
