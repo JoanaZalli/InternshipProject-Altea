@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Application.Exceptions
 {
-    public abstract class BadRequestException : Exception
+    public class ConflictException : CustomException
     {
-        protected BadRequestException(string message) : base(message) { }
+        public ConflictException(string message)
+            : base(null, HttpStatusCode.Conflict) { }
     }
 }

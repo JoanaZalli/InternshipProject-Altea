@@ -15,6 +15,8 @@ using Application.Moduls.UserModul;
 using Application.Validations;
 using FluentValidation;
 using Application.Exceptions;
+using Infrastructure.Repository;
+using Application.Contracts;
 
 namespace Infrastructure.Extentions
 {
@@ -23,17 +25,21 @@ namespace Infrastructure.Extentions
         // Identity configurations
         public static void ConfigureIdentity(this IServiceCollection services)
         {
-            var builder = services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>()
+            var builder = services.AddIdentity<User, IdentityRole>(o =>
+            {
+                o.Password.RequireUppercase = false;
+                o.User.RequireUniqueEmail = true;
+            }).AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
-            builder.Services.AddTransient<IValidator<UserRegistrationDTO>, UserValidations>();
+            //builder.Services.AddTransient<IValidator<UserRegistrationDTO>, UserValidations>();
         }
 
-        
+        public static void ConfigureLoggerService(this IServiceCollection services) =>
+                services.AddSingleton<ILoggerManager, LoggerManager>();
 
         public static void ConfigureServiceManager(this IServiceCollection services) =>
             services.AddScoped<IServiceManager, ServiceManager>();
 
-        
-
+     
     }
 }

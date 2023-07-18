@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace Application.Exceptions
 {
-    public abstract class BadRequestException : Exception
+    public  class NotFoundException : CustomException
+
     {
-        protected BadRequestException(string message) : base(message) { }
+        public NotFoundException(string message) : base(null, HttpStatusCode.NotFound)
+        {
+        }
     }
 }

@@ -1,26 +1,21 @@
 using Infrastructure;
-using System.Net.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Infrastructure.Extentions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Application.Services.Contracts;
-using Infrastructure.Services;
 using AutoMapper;
 using Application.Mappers;
 using Application.Contracts;
-using Microsoft.AspNetCore.Hosting;
+using NLog;
+using Microsoft.Extensions.Configuration;
 using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Infrastructure.Extentions;
+using Infrastructure.Services;
 using Application.DTOS;
-using Application.Moduls.UserModul.Commands;
-using System.Reflection;
-
+using FluentValidation;
 
 //using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
+LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
 // Add services to the container.
 
@@ -35,7 +30,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddAuthentication();
 builder.Services.ConfigureIdentity();
 builder.Services.AddHttpClient();
-
 builder.Services.AddAutoMapper(typeof(Program));
 //automapper
 builder.Services.AddSingleton(provider =>
@@ -55,9 +49,12 @@ builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddMediatR(typeof(Application.AssemblyReference).Assembly);
 //builder.Services.AddMediatR(typeof(Program));
 
+//builder.Services.AddTransient<IValidator<UserRegistrationDTO>, UserValidations>();
 
 
 builder.Services.ConfigureServiceManager();
+builder.Services.ConfigureLoggerService();
+
 
 var app = builder.Build();
 
@@ -69,6 +66,11 @@ using (var scope = app.Services.CreateScope())
 
 
 // Configure the HTTP request pipeline.
+
+var logger = app.Services.GetRequiredService<ILoggerManager>();
+app.UseMiddleware<ExceptionMiddlewareExtensions>();
+
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

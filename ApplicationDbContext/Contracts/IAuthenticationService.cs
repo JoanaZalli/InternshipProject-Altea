@@ -11,8 +11,5 @@ namespace Application.Contracts
     public interface IAuthenticationService
     {
         Task<IdentityResult> CreateUser(UserRegistrationDTO userForRegistration);
-
-
-
     }
 }

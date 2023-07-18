@@ -1,9 +1,12 @@
 ﻿using Application.DTOS;
+using Application.Exceptions;
 using Domain.Entities;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,13 +29,14 @@ namespace Application.Validations
 
             RuleFor(u => u.PhoneNumber)
                 .MinimumLength(8);
-
+            
             RuleFor(u => u.UserName)
                 .NotEmpty()
             .MinimumLength(8)
             .Must(HasNumber).WithMessage("Username should contain at least one number!");
 
-            RuleFor(u => u.Password).NotEmpty().MaximumLength(14).MinimumLength(8).Must(HasAlphanumericCharacter).WithMessage("Password should has at least 1 alhpa-numeric character");
+            RuleFor(u => u.Password).NotEmpty().MaximumLength(14).MinimumLength(8)
+                .Must(HasAlphanumericCharacter).WithMessage("Password should has at least 1 alhpa-numeric character");
         }
 
         private bool HasNumber(string username)
@@ -43,5 +47,13 @@ namespace Application.Validations
         {
             return password.Any(c => !char.IsLetterOrDigit(c));
         }
+        //protected override void EnsureInstanceNotNull(object instanceToValidate)
+        //{
+        //    if (instanceToValidate == null)
+        //    {
+        //        throw new UserValidationException("Ivalid userr data.");
+        //    }
+        //}
     }
 }
+

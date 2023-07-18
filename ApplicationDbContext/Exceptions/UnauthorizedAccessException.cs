@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace Application.Exceptions
 {
-    public abstract class BadRequestException : Exception
+    public class UnauthorizedAccessException: CustomException
     {
-        protected BadRequestException(string message) : base(message) { }
+        public UnauthorizedAccessException(string message) : base(null, HttpStatusCode.Unauthorized)
+        {
+        }
     }
 }
