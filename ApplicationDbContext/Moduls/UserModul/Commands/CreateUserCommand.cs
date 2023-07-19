@@ -1,4 +1,5 @@
 ﻿using Application.Contracts;
+using Application.Contracts.ValidationLocalization;
 using Application.DTOS;
 using Application.Exceptions;
 using Application.Validations;
@@ -19,26 +20,29 @@ namespace Application.Moduls.UserModul.Commands
         [JsonPropertyName("Prefix")]
         public int PrefixId { get; init; } // Added PrefixId property
         public string? PhoneNumber { get; init; }
+        public string CultureId { get; init; } 
     }
 
     public sealed class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, UserRegistrationDTO>
     {
         private readonly IAuthenticationService _authenticationService;
         private readonly IMapper _mapper;
+        private readonly IUserValidationLocalizationService _validationLocalizationService;
 
-        public CreateUserCommandHandler(IAuthenticationService authenticationService, IMapper mapper)
+        public CreateUserCommandHandler(IAuthenticationService authenticationService, IMapper mapper, IUserValidationLocalizationService validationLocalizationServic)
         {
             _authenticationService = authenticationService;
             _mapper = mapper;
+            _validationLocalizationService = validationLocalizationServic;
         }
         public async Task<UserRegistrationDTO> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             var userForRegistration = _mapper.Map<UserRegistrationDTO>(request);
-            var userValidation = new UserValidations();
+            var userValidation = new UserValidations(_validationLocalizationService, request.CultureId);
             var validationResult = await userValidation.ValidateAsync(userForRegistration);
             if (!validationResult.IsValid)
             {
-                var errorMessages = validationResult.Errors.Select(error => error.ErrorMessage).ToList();
+                var errorMessages = validationResult.Errors.Select(error => _validationLocalizationService.GetValidationMessage(error.ErrorMessage)).ToList();
                 throw new UserRegisterFluentValidationException(errorMessages);
             }
 

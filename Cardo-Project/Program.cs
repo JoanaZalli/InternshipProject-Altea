@@ -11,6 +11,7 @@ using Infrastructure.Extentions;
 using Infrastructure.Services;
 using Application.DTOS;
 using FluentValidation;
+using Microsoft.Extensions.Options;
 
 //using MediatR;
 
@@ -54,7 +55,7 @@ builder.Services.AddMediatR(typeof(Application.AssemblyReference).Assembly);
 
 builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureLoggerService();
-
+builder.Services.ConfigureLocalization();
 
 var app = builder.Build();
 

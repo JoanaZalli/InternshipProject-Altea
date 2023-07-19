@@ -17,6 +17,10 @@ using FluentValidation;
 using Application.Exceptions;
 using Infrastructure.Repository;
 using Application.Contracts;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Localization;
+using System.Globalization;
+using Application.Contracts.ValidationLocalization;
 
 namespace Infrastructure.Extentions
 {
@@ -40,6 +44,25 @@ namespace Infrastructure.Extentions
         public static void ConfigureServiceManager(this IServiceCollection services) =>
             services.AddScoped<IServiceManager, ServiceManager>();
 
-     
+        public static void ConfigureLocalization(this IServiceCollection services)
+        {
+            services.AddLocalization(options => options.ResourcesPath = "Resources\\UserResources");
+
+            services.AddSingleton<IStringLocalizerFactory, ResourceManagerStringLocalizerFactory>();
+            services.AddTransient<IUserValidationLocalizationService, UserValidationLocalizationService>();
+
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[]
+                {
+                    new CultureInfo("en"),
+                    new CultureInfo("it")
+                };
+
+                options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("en");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
+        }
     }
 }

@@ -20,13 +20,23 @@ namespace Cardo_Project.Controllers
             _serviceManager = serviceManager;
             _mediator = mediator;
         }
-
         [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody]CreateUserCommand command)
+        public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand command, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
-           
-            var user = await _mediator.Send(command);
-               return Ok(user);
+            var newCommand = new CreateUserCommand
+            {
+                CultureId = cultureId,
+                FirstName = command.FirstName,
+                LastName = command.LastName,
+                UserName = command.UserName,
+                Password = command.Password,
+                Email = command.Email,
+                PrefixId = command.PrefixId,
+                PhoneNumber = command.PhoneNumber
+            };
+            var user = await _mediator.Send(newCommand);
+            return Ok(user);
         }
+
     }
 }

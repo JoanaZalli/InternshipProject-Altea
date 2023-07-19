@@ -8,7 +8,7 @@ namespace Application.Exceptions
 {
     public class UserRegisterFluentValidationException : CustomException
     {
-        public UserRegisterFluentValidationException(List<string> errorMessage) : base(errorMessage)
+        public UserRegisterFluentValidationException(List<string> errorMessage, string? localizerKey=null) : base(errorMessage)
         {
         }
     }

@@ -1,4 +1,5 @@
-﻿using Application.DTOS;
+﻿using Application.Contracts.ValidationLocalization;
+using Application.DTOS;
 using Application.Exceptions;
 using Domain.Entities;
 using FluentValidation;
@@ -14,29 +15,44 @@ namespace Application.Validations
 {
     public class UserValidations : AbstractValidator<UserRegistrationDTO>
     {
+        private readonly IUserValidationLocalizationService _localizationService;
+        private readonly string _cultureId;
+
+        public UserValidations(IUserValidationLocalizationService localizationService, string cultureId)
+        {
+            _localizationService = localizationService;
+            _cultureId = cultureId;
+        }
         public UserValidations()
         {
             RuleFor(u => u.FirstName)
-                .NotEmpty()
-                .MaximumLength(30);
+                .NotEmpty().WithMessage(u=>_localizationService.GetValidationMessage("FirstName_Required"))
+                .MaximumLength(30).WithMessage(u => _localizationService.GetValidationMessage("FirstName_MaxLength"));
 
             RuleFor(u => u.LastName)        
-                .NotEmpty()
-                .MaximumLength(30);
-            RuleFor(u => u.Email).EmailAddress();
+                .NotEmpty().WithMessage(u => _localizationService.GetValidationMessage("LastName_Required"))
+                .MaximumLength(30).WithMessage(u => _localizationService.GetValidationMessage("LastName_MaxLength"));
+
+
+            RuleFor(u => u.Email).EmailAddress().WithMessage(u => _localizationService.GetValidationMessage("Email_InvalidFormat"))
+                .WithMessage(u => _localizationService.GetValidationMessage("Email_Required"));
+
             RuleFor(u => u.PrefixId)
-                .NotEmpty();
+                .NotEmpty().WithMessage(u => _localizationService.GetValidationMessage("PrefixId_Required"));
 
             RuleFor(u => u.PhoneNumber)
-                .MinimumLength(8);
+                .MinimumLength(8).WithMessage(u => _localizationService.GetValidationMessage("PhoneNumber_MinLength"))
+                .NotEmpty().WithMessage(u => _localizationService.GetValidationMessage("PhoneNumber_Required"));
             
             RuleFor(u => u.UserName)
-                .NotEmpty()
-            .MinimumLength(8)
-            .Must(HasNumber).WithMessage("Username should contain at least one number!");
+                .NotEmpty().WithMessage(u => _localizationService.GetValidationMessage("UserName_Required"))
+            .MinimumLength(8).WithMessage(u => _localizationService.GetValidationMessage("UserName_MinLength"))
+            .Must(HasNumber).WithMessage(u => _localizationService.GetValidationMessage("UserName_RequiresNumber"));
 
-            RuleFor(u => u.Password).NotEmpty().MaximumLength(14).MinimumLength(8)
-                .Must(HasAlphanumericCharacter).WithMessage("Password should has at least 1 alhpa-numeric character");
+            RuleFor(u => u.Password).NotEmpty().WithMessage(u => _localizationService.GetValidationMessage("Password_Required"))
+                .MaximumLength(14).WithMessage(u => _localizationService.GetValidationMessage("Password_MinLength")).
+                MinimumLength(8).WithMessage(u => _localizationService.GetValidationMessage("Password_MaxLength"))
+                .Must(HasAlphanumericCharacter).WithMessage(u => _localizationService.GetValidationMessage("Password_RequiresAlphanumeric"));
         }
 
         private bool HasNumber(string username)
@@ -47,13 +63,7 @@ namespace Application.Validations
         {
             return password.Any(c => !char.IsLetterOrDigit(c));
         }
-        //protected override void EnsureInstanceNotNull(object instanceToValidate)
-        //{
-        //    if (instanceToValidate == null)
-        //    {
-        //        throw new UserValidationException("Ivalid userr data.");
-        //    }
-        //}
+       
     }
 }
 
