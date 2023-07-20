@@ -11,6 +11,11 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="FluentValidation" Version="11.6.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="MediatR" Version="11.1.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="7.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="7.0.9" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Moduls\UserModul\Commands\" />
     <Folder Include="Moduls\UserModul\Handlers\" />
     <Folder Include="Moduls\UserModul\Queries\" />
   </ItemGroup>

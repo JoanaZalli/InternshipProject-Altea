@@ -1,4 +1,5 @@
 ﻿using Application.DTOS;
+using Application.Moduls.UserModul.Commands;
 using AutoMapper;
 using Domain.Entities;
 using System;
@@ -12,9 +13,9 @@ namespace Application.Mappers
     public class MappingProfile : Profile
     {
         public MappingProfile() {
-            CreateMap<User, UserDTO>().ReverseMap();
+            CreateMap<UserRegistrationDTO, User>().ReverseMap();
 
-        
+            CreateMap<UserRegistrationDTO, CreateUserCommand>().ReverseMap();
         }
     }
 }

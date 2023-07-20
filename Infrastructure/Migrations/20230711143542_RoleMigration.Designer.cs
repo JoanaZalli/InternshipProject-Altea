@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230711143542_RoleMigration")]
+    partial class RoleMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -157,19 +160,19 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "88b4c231-cf19-43a1-9c01-8867ba9b0338",
+                            Id = "933a7741-8989-49c0-97bb-801c3546c97e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "c2c42648-763f-4d5a-ab6f-8ab95be24a4d",
+                            Id = "427fb834-a450-48a7-bd0f-7fc4dd234ef1",
                             Name = "Loan Officer",
                             NormalizedName = "LOAN OFFICER"
                         },
                         new
                         {
-                            Id = "243c92de-0670-48e3-9cad-e0bbe73c9c0f",
+                            Id = "7e254cbb-361e-4cfe-b026-00caa7f2aa3c",
                             Name = "Borrower",
                             NormalizedName = "BORROWER"
                         });

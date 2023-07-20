@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230710150602_PrefixSeeddMigration")]
-    partial class PrefixSeeddMigration
+    [Migration("20230712090739_PrefixUpdatetedMigration1")]
+    partial class PrefixUpdatetedMigration1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,13 +33,20 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Country_Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasAnnotation("Relational:JsonPropertyName", "code");
+
                     b.Property<string>("Country_Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasAnnotation("Relational:JsonPropertyName", "name");
 
                     b.Property<string>("Country_Prefix")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasAnnotation("Relational:JsonPropertyName", "prefix");
 
                     b.HasKey("Id");
 
@@ -149,6 +156,26 @@ namespace Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "88b4c231-cf19-43a1-9c01-8867ba9b0338",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "c2c42648-763f-4d5a-ab6f-8ab95be24a4d",
+                            Name = "Loan Officer",
+                            NormalizedName = "LOAN OFFICER"
+                        },
+                        new
+                        {
+                            Id = "243c92de-0670-48e3-9cad-e0bbe73c9c0f",
+                            Name = "Borrower",
+                            NormalizedName = "BORROWER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
