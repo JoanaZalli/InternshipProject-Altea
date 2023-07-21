@@ -20,12 +20,15 @@ using Application.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Localization;
 using System.Globalization;
-using Application.Contracts.ValidationLocalization;
+using Humanizer.Localisation;
+using Microsoft.AspNetCore.Localization;
 
 namespace Infrastructure.Extentions
 {
-    public static class ServicesExtentions
+    public static class Startup
     {
+
+
         // Identity configurations
         public static void ConfigureIdentity(this IServiceCollection services)
         {
@@ -35,34 +38,44 @@ namespace Infrastructure.Extentions
                 o.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
-            //builder.Services.AddTransient<IValidator<UserRegistrationDTO>, UserValidations>();
+          //  builder.Services.AddTransient<IValidator<UserRegistrationDTO>, UserValidations>();
         }
 
         public static void ConfigureLoggerService(this IServiceCollection services) =>
                 services.AddSingleton<ILoggerManager, LoggerManager>();
 
-        public static void ConfigureServiceManager(this IServiceCollection services) =>
+        public static void ConfigureServiceManager(this IServiceCollection services)
+        {
             services.AddScoped<IServiceManager, ServiceManager>();
-
+        }
         public static void ConfigureLocalization(this IServiceCollection services)
         {
-            services.AddLocalization(options => options.ResourcesPath = "Resources\\UserResources");
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-            services.AddSingleton<IStringLocalizerFactory, ResourceManagerStringLocalizerFactory>();
-            services.AddTransient<IUserValidationLocalizationService, UserValidationLocalizationService>();
+           // services.AddSingleton<IStringLocalizerFactory, ResourceManagerStringLocalizerFactory>();
+           // services.AddSingleton(typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
 
             services.Configure<RequestLocalizationOptions>(options =>
-            {
+            { 
                 var supportedCultures = new[]
                 {
-                    new CultureInfo("en"),
-                    new CultureInfo("it")
+                  "en","it"
                 };
 
-                options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("en");
-                options.SupportedCultures = supportedCultures;
-                options.SupportedUICultures = supportedCultures;
+                options.SetDefaultCulture(supportedCultures[0]).AddSupportedCultures(supportedCultures).AddSupportedUICultures(supportedCultures);
+               // options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("en");
+                //options.SupportedCultures = supportedCultures;
+                //options.SupportedUICultures = supportedCultures;
+
+                //options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async context =>
+                //{
+                //    // My custom request culture logic
+                //    return new ProviderCultureResult("en");
+                //}));
             });
+           // return services;
         }
+
+
     }
 }

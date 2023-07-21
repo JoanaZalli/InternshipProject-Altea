@@ -12,6 +12,7 @@ using Infrastructure.Services;
 using Application.DTOS;
 using FluentValidation;
 using Microsoft.Extensions.Options;
+using Application.Validations;
 
 //using MediatR;
 
@@ -50,7 +51,6 @@ builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddMediatR(typeof(Application.AssemblyReference).Assembly);
 //builder.Services.AddMediatR(typeof(Program));
 
-//builder.Services.AddTransient<IValidator<UserRegistrationDTO>, UserValidations>();
 
 
 builder.Services.ConfigureServiceManager();
@@ -64,7 +64,8 @@ using (var scope = app.Services.CreateScope())
     var services= scope.ServiceProvider;
     SeedData.Initizlize(services);
 }
-
+var localizationOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
+app.UseRequestLocalization(localizationOptions.Value);
 
 // Configure the HTTP request pipeline.
 

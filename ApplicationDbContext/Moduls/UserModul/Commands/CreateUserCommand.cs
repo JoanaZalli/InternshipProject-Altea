@@ -1,10 +1,11 @@
 ﻿using Application.Contracts;
-using Application.Contracts.ValidationLocalization;
 using Application.DTOS;
 using Application.Exceptions;
 using Application.Validations;
 using AutoMapper;
+using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.Localization;
 using System.Text.Json.Serialization;
 
 namespace Application.Moduls.UserModul.Commands
@@ -27,22 +28,24 @@ namespace Application.Moduls.UserModul.Commands
     {
         private readonly IAuthenticationService _authenticationService;
         private readonly IMapper _mapper;
-        private readonly IUserValidationLocalizationService _validationLocalizationService;
+        private readonly IStringLocalizer<CreateUserCommand> _validationLocalizationService;
 
-        public CreateUserCommandHandler(IAuthenticationService authenticationService, IMapper mapper, IUserValidationLocalizationService validationLocalizationServic)
+
+        public CreateUserCommandHandler(IAuthenticationService authenticationService, IMapper mapper, IStringLocalizer<CreateUserCommand> validationLocalizationServic )
         {
             _authenticationService = authenticationService;
             _mapper = mapper;
             _validationLocalizationService = validationLocalizationServic;
+
         }
         public async Task<UserRegistrationDTO> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             var userForRegistration = _mapper.Map<UserRegistrationDTO>(request);
-            var userValidation = new UserValidations(_validationLocalizationService, request.CultureId);
-            var validationResult = await userValidation.ValidateAsync(userForRegistration);
+            var userValidation = new CreateUserValidations(_validationLocalizationService,request.CultureId);
+            var validationResult = await userValidation.ValidateAsync(request);
             if (!validationResult.IsValid)
             {
-                var errorMessages = validationResult.Errors.Select(error => _validationLocalizationService.GetValidationMessage(error.ErrorMessage)).ToList();
+                var errorMessages = validationResult.Errors.Select(error => _validationLocalizationService[error.ErrorMessage, request.CultureId]).ToList();
                 throw new UserRegisterFluentValidationException(errorMessages);
             }
 

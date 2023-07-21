@@ -14,13 +14,15 @@ using System.Threading.Tasks;
 using Domain.Entities;
 using Application.Exceptions;
 using Microsoft.Extensions.Localization;
+using Domain;
+
 namespace Infrastructure.Extentions {
     public class ExceptionMiddlewareExtensions
     {
         private readonly RequestDelegate _next;
-        private readonly IStringLocalizer<ExceptionHandlerMiddleware> _localizer;
+        private readonly IStringLocalizer<LocalizationResource> _localizer;
 
-        public ExceptionMiddlewareExtensions(RequestDelegate next, IStringLocalizer<ExceptionHandlerMiddleware> localizer)
+        public ExceptionMiddlewareExtensions(RequestDelegate next, IStringLocalizer<LocalizationResource> localizer)
         {
             _next = next;
             _localizer = localizer;
@@ -40,8 +42,9 @@ namespace Infrastructure.Extentions {
 
         private static Task HandleExceptionAsync(HttpContext context, Exception exception, IStringLocalizer localizer)
         {
+
             HttpStatusCode statusCode;
-            List<string> errorMessages = new List<string>();
+            List<LocalizedString> errorMessages = new List<LocalizedString>();
 
             if (exception is CustomException customException)
             {

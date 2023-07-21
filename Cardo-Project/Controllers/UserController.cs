@@ -5,6 +5,7 @@ using Application.Services.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 
 namespace Cardo_Project.Controllers
 {
@@ -12,13 +13,13 @@ namespace Cardo_Project.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IServiceManager _serviceManager;
         private readonly IMediator _mediator;
+        private readonly IStringLocalizer<CreateUserCommand> _localizer;
 
-        public UserController(IServiceManager serviceManager, IMediator mediator)
+        public UserController( IMediator mediator, IStringLocalizer<CreateUserCommand> localizer)
         {
-            _serviceManager = serviceManager;
             _mediator = mediator;
+            _localizer = localizer;
         }
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand command, [FromHeader(Name = "Accept-Language")] string cultureId)
