@@ -9,8 +9,10 @@ namespace Application.Exceptions
 {
     public class UserRegisterFluentValidationException : CustomException
     {
+        public List<LocalizedString> ErrorMessages { get; }
         public UserRegisterFluentValidationException(List<LocalizedString> errorMessage/*, string localizerKey*/) : base(errorMessage)
         {
+            ErrorMessages = errorMessage;
         }
 
     }

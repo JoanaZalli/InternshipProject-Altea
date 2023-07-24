@@ -1,4 +1,5 @@
-﻿using Application.DTOS;
+﻿using Application.Contracts.Repositories;
+using Application.DTOS;
 using Application.Exceptions;
 using Application.Moduls.UserModul.Commands;
 using Application.Resources;
@@ -12,18 +13,19 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Application.Validations
 {
     public class CreateUserValidations : AbstractValidator<CreateUserCommand>
     {
-        //private readonly IUserValidationLocalizationService _localizationService;
+        private readonly IUserRepository _userRepository;
 
-        public CreateUserValidations(IStringLocalizer<CreateUserCommand> localizationService , string cultureId )
+        public CreateUserValidations(IStringLocalizer<CreateUserCommand> localizationService , string cultureId, IUserRepository  userRepository)
         {
-            //_localizationService = localizationService; 
-
+            _userRepository = userRepository;
+           
             RuleFor(u => u.FirstName)
                 .NotEmpty().WithMessage(u => localizationService[ValidationResource.FirstName_Required, cultureId])
                     .MaximumLength(30).WithMessage(u => localizationService[ValidationResource.FirstName_MaxLength, cultureId]);
@@ -35,6 +37,7 @@ namespace Application.Validations
 
             RuleFor(u => u.Email).EmailAddress().WithMessage(u => localizationService[ValidationResource.Email_InvalidFormat, cultureId])
                 .NotEmpty().WithMessage(u => localizationService[ValidationResource.Email_Required, cultureId]);
+               
 
             RuleFor(u => u.PrefixId)
                 .NotEmpty().WithMessage(u => localizationService[ValidationResource.PrefixId_Required, cultureId]);
@@ -62,7 +65,12 @@ namespace Application.Validations
             {
                 return password.Any(c => !char.IsLetterOrDigit(c));
             }
+       
 
-        }
+
+
+
+
+    }
     }
 

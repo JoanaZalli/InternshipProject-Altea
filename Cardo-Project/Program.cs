@@ -13,6 +13,8 @@ using Application.DTOS;
 using FluentValidation;
 using Microsoft.Extensions.Options;
 using Application.Validations;
+using Application.Contracts.Repositories;
+using Infrastructure.Repositories;
 
 //using MediatR;
 
@@ -51,6 +53,11 @@ builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddMediatR(typeof(Application.AssemblyReference).Assembly);
 //builder.Services.AddMediatR(typeof(Program));
 
+builder.Services.AddHttpContextAccessor();
+//builder.Services.ConfigureRepositoryManager();
+//builder.Services.AddScoped<IRepositoryBase, RepositoryBase<T>>();
+builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 
 builder.Services.ConfigureServiceManager();

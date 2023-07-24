@@ -15,6 +15,7 @@ using Domain.Entities;
 using Application.Exceptions;
 using Microsoft.Extensions.Localization;
 using Domain;
+using Application.Resources;
 
 namespace Infrastructure.Extentions {
     public class ExceptionMiddlewareExtensions
@@ -55,6 +56,16 @@ namespace Infrastructure.Extentions {
             {
                 statusCode = HttpStatusCode.BadRequest;
                 errorMessages.Add(localizer[fluentValidationException.Message]);
+            }
+            else if (exception is EmailInUseException emailInUseException)
+            {
+                statusCode = HttpStatusCode.BadRequest;
+                errorMessages.Add(localizer[ValidationResource.Unique_Email, emailInUseException.Email]);
+            }
+            else if (exception is UserNameInUseException userNameInUseException)
+            {
+                statusCode = HttpStatusCode.BadRequest;
+                errorMessages.Add(localizer[ValidationResource.Unique_Username, userNameInUseException.UserName]);
             }
             else
             {

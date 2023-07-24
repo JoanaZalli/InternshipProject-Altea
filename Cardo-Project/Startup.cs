@@ -15,13 +15,14 @@ using Application.Moduls.UserModul;
 using Application.Validations;
 using FluentValidation;
 using Application.Exceptions;
-using Infrastructure.Repository;
 using Application.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Localization;
 using System.Globalization;
 using Humanizer.Localisation;
 using Microsoft.AspNetCore.Localization;
+using Application.Contracts.Repositories;
+using Infrastructure.Repositories;
 
 namespace Infrastructure.Extentions
 {
@@ -52,9 +53,7 @@ namespace Infrastructure.Extentions
         {
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-           // services.AddSingleton<IStringLocalizerFactory, ResourceManagerStringLocalizerFactory>();
-           // services.AddSingleton(typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
-
+           
             services.Configure<RequestLocalizationOptions>(options =>
             { 
                 var supportedCultures = new[]
@@ -63,18 +62,13 @@ namespace Infrastructure.Extentions
                 };
 
                 options.SetDefaultCulture(supportedCultures[0]).AddSupportedCultures(supportedCultures).AddSupportedUICultures(supportedCultures);
-               // options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("en");
-                //options.SupportedCultures = supportedCultures;
-                //options.SupportedUICultures = supportedCultures;
-
-                //options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async context =>
-                //{
-                //    // My custom request culture logic
-                //    return new ProviderCultureResult("en");
-                //}));
+               
             });
-           // return services;
+           
         }
+
+        //public static void ConfigureRepositoryManager(this IServiceCollection services) =>
+        //    services.AddScoped<IRepositoryManager, RepositoryManager>();
 
 
     }

@@ -1,6 +1,7 @@
 ﻿using Application.DTOS;
 using Application.Exceptions;
 using Application.Moduls.UserModul.Commands;
+using Application.Moduls.UserModul.Query;
 using Application.Services.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -15,6 +16,7 @@ namespace Cardo_Project.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IStringLocalizer<CreateUserCommand> _localizer;
+
 
         public UserController( IMediator mediator, IStringLocalizer<CreateUserCommand> localizer)
         {
@@ -38,6 +40,11 @@ namespace Cardo_Project.Controllers
             var user = await _mediator.Send(newCommand);
             return Ok(user);
         }
-
+        [HttpGet]
+        public async Task<IActionResult> GetUsers()
+        {
+            var users = await _mediator.Send(new GetAllUsersQuery(TrackChanges:false));
+            return Ok(users);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Application.Contracts;
+using Application.Contracts.Repositories;
 using Application.DTOS;
 using Application.Exceptions;
 using Application.Validations;
@@ -29,25 +30,38 @@ namespace Application.Moduls.UserModul.Commands
         private readonly IAuthenticationService _authenticationService;
         private readonly IMapper _mapper;
         private readonly IStringLocalizer<CreateUserCommand> _validationLocalizationService;
+        private readonly IUserRepository _userRepository;
 
 
-        public CreateUserCommandHandler(IAuthenticationService authenticationService, IMapper mapper, IStringLocalizer<CreateUserCommand> validationLocalizationServic )
+        public CreateUserCommandHandler(IAuthenticationService authenticationService, IMapper mapper, IStringLocalizer<CreateUserCommand> validationLocalizationServic, IUserRepository userRepository )
         {
             _authenticationService = authenticationService;
             _mapper = mapper;
             _validationLocalizationService = validationLocalizationServic;
+            _userRepository = userRepository;
 
         }
         public async Task<UserRegistrationDTO> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             var userForRegistration = _mapper.Map<UserRegistrationDTO>(request);
-            var userValidation = new CreateUserValidations(_validationLocalizationService,request.CultureId);
+            var userValidation = new CreateUserValidations(_validationLocalizationService,request.CultureId,_userRepository);
             var validationResult = await userValidation.ValidateAsync(request);
             if (!validationResult.IsValid)
             {
                 var errorMessages = validationResult.Errors.Select(error => _validationLocalizationService[error.ErrorMessage, request.CultureId]).ToList();
                 throw new UserRegisterFluentValidationException(errorMessages);
             }
+            if(await _userRepository.FindByEmailAsync(request.Email)){
+                
+                throw new EmailInUseException(string.Format( request.Email),request.CultureId);
+
+            }
+            if(await _userRepository.FindByUsernameAsync(request.UserName))
+            {
+                throw new UserNameInUseException(string.Format(request.UserName),request.CultureId);
+            }
+
+
 
             await _authenticationService.CreateUser(userForRegistration);
             var user = _mapper.Map<UserRegistrationDTO>(userForRegistration);

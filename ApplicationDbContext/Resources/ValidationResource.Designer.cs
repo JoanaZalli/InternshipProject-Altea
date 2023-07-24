@@ -178,6 +178,33 @@ namespace Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Questo nome utente è già in uso..
+        /// </summary>
+        public static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This e-mail is already in use..
+        /// </summary>
+        public static string Unique_Email {
+            get {
+                return ResourceManager.GetString("Unique_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This username is already in use..
+        /// </summary>
+        public static string Unique_Username {
+            get {
+                return ResourceManager.GetString("Unique_Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username should have at least 8 characters..
         /// </summary>
         public static string UserName_MinLength {

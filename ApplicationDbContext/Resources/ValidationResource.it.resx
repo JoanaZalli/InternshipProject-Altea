@@ -156,6 +156,12 @@
   <data name="PrefixId_Required" xml:space="preserve">
     <value>Il prefisso è obbligatorio</value>
   </data>
+  <data name="Unique_Email" xml:space="preserve">
+    <value>Questa e-mail è già in uso.</value>
+  </data>
+  <data name="Unique_Username" xml:space="preserve">
+    <value>Questo nome utente è già in uso.</value>
+  </data>
   <data name="UserName_MinLength" xml:space="preserve">
     <value>Il nome utente deve contenere almeno 8 caratteri.</value>
   </data>
