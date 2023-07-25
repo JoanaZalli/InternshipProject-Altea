@@ -23,6 +23,8 @@ namespace Application.Moduls.UserModul.Query
         public int PrefixId { get; init; } // Added PrefixId property
         public string? PhoneNumber { get; init; }
         public string CultureId { get; init; }
+        public string Token { get; set; }
+        public DateTime TokenCreationTime { get; set; }
     }
 
     internal sealed class GetUsersHandler : IRequestHandler<GetAllUsersQuery, IEnumerable<UserRegistrationDTO>>

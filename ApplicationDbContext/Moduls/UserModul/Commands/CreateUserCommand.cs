@@ -9,6 +9,7 @@ using MediatR;
 using Microsoft.Extensions.Localization;
 using System.Text.Json.Serialization;
 
+
 namespace Application.Moduls.UserModul.Commands
 {
     public sealed record CreateUserCommand : IRequest<UserRegistrationDTO>
@@ -22,7 +23,9 @@ namespace Application.Moduls.UserModul.Commands
         [JsonPropertyName("Prefix")]
         public int PrefixId { get; init; } // Added PrefixId property
         public string? PhoneNumber { get; init; }
-        public string CultureId { get; init; } 
+        public string CultureId { get; init; }
+        public string Token { get; set; } = "";
+        public DateTime TokenCreationTime { get; set; }
     }
 
     public sealed class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, UserRegistrationDTO>
@@ -31,18 +34,24 @@ namespace Application.Moduls.UserModul.Commands
         private readonly IMapper _mapper;
         private readonly IStringLocalizer<CreateUserCommand> _validationLocalizationService;
         private readonly IUserRepository _userRepository;
+        private readonly IEmailService _emailService;
 
-
-        public CreateUserCommandHandler(IAuthenticationService authenticationService, IMapper mapper, IStringLocalizer<CreateUserCommand> validationLocalizationServic, IUserRepository userRepository )
+        public CreateUserCommandHandler(IAuthenticationService authenticationService, IMapper mapper,
+            IStringLocalizer<CreateUserCommand> validationLocalizationServic, IUserRepository userRepository,
+            IEmailService emailService)
         {
             _authenticationService = authenticationService;
             _mapper = mapper;
             _validationLocalizationService = validationLocalizationServic;
             _userRepository = userRepository;
+            _emailService = emailService;
 
         }
         public async Task<UserRegistrationDTO> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
+            var token = TokenGenerator.GenerateToken();
+            request.Token = token;
+            request.TokenCreationTime = DateTime.Now;
             var userForRegistration = _mapper.Map<UserRegistrationDTO>(request);
             var userValidation = new CreateUserValidations(_validationLocalizationService,request.CultureId,_userRepository);
             var validationResult = await userValidation.ValidateAsync(request);
@@ -61,10 +70,19 @@ namespace Application.Moduls.UserModul.Commands
                 throw new UserNameInUseException(string.Format(request.UserName),request.CultureId);
             }
 
+            
+
+            string emailBody = $"Dear {userForRegistration.FirstName},<br><br>"
+                             + "Welcome to our website! Please click the link below to activate your account:<br><br>"
+                             + $"<a href=\"https://localhost:7198/activate?token={userForRegistration.Token}\">Activate Account</a><br><br>"
+                             + "Thank you!<br>";
+            await _emailService.SendEmailAsync(userForRegistration.Email, "Account Activation", emailBody);
 
 
             await _authenticationService.CreateUser(userForRegistration);
             var user = _mapper.Map<UserRegistrationDTO>(userForRegistration);
+
+           
             return user;
         }
     }

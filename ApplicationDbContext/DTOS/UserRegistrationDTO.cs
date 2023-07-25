@@ -20,6 +20,9 @@ namespace Application.DTOS
         [JsonPropertyName("Prefix")]
         public int PrefixId { get; init; } // Added PrefixId property
         public string? PhoneNumber { get; init; }
+        public string Token { get; set; }
+        public DateTime TokenCreationTime { get; set; }
+
 
     }
 }

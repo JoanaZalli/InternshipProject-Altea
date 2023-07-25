@@ -37,9 +37,9 @@ namespace Infrastructure.Extentions
             {
                 o.Password.RequireUppercase = false;
                 o.User.RequireUniqueEmail = true;
+                o.SignIn.RequireConfirmedEmail = true;
             }).AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
-          //  builder.Services.AddTransient<IValidator<UserRegistrationDTO>, UserValidations>();
         }
 
         public static void ConfigureLoggerService(this IServiceCollection services) =>
@@ -66,9 +66,8 @@ namespace Infrastructure.Extentions
             });
            
         }
+        
 
-        //public static void ConfigureRepositoryManager(this IServiceCollection services) =>
-        //    services.AddScoped<IRepositoryManager, RepositoryManager>();
 
 
     }

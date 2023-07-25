@@ -12,8 +12,10 @@ namespace Domain.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int PrefixId { get; set; }
-        public virtual Prefix Prefix { get; set; }
-        
+        public virtual Prefix Prefix { get; set; }     
+        public string Token { get; set; }
+        public DateTime TokenCreationTime { get; set; }
+
 
     }
 }

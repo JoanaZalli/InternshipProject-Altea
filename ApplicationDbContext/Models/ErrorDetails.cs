@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Domain.Entities
+namespace Application.Models
 {
     public class ErrorDetails
     {

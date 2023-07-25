@@ -38,7 +38,7 @@ namespace Cardo_Project.Controllers
                 PhoneNumber = command.PhoneNumber
             };
             var user = await _mediator.Send(newCommand);
-            return Ok(user);
+            return Ok(new { Message = "User registered successfully. Verification email sent." });
         }
         [HttpGet]
         public async Task<IActionResult> GetUsers()

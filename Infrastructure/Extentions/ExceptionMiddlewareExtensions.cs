@@ -16,6 +16,7 @@ using Application.Exceptions;
 using Microsoft.Extensions.Localization;
 using Domain;
 using Application.Resources;
+using Application.Models;
 
 namespace Infrastructure.Extentions {
     public class ExceptionMiddlewareExtensions
