@@ -4,6 +4,7 @@ using Application.Moduls.UserModul.Commands;
 using Application.Moduls.UserModul.Query;
 using Application.Services.Contracts;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
@@ -16,12 +17,15 @@ namespace Cardo_Project.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IStringLocalizer<CreateUserCommand> _localizer;
+        private readonly IServiceManager _service;
 
 
-        public UserController( IMediator mediator, IStringLocalizer<CreateUserCommand> localizer)
+
+        public UserController( IMediator mediator, IStringLocalizer<CreateUserCommand> localizer, IServiceManager service)
         {
             _mediator = mediator;
             _localizer = localizer;
+            _service = service;
         }
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand command, [FromHeader(Name = "Accept-Language")] string cultureId)
@@ -41,6 +45,7 @@ namespace Cardo_Project.Controllers
             return Ok(new { Message = "User registered successfully. Verification email sent." });
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetUsers()
         {
             var users = await _mediator.Send(new GetAllUsersQuery(TrackChanges:false));
@@ -63,5 +68,15 @@ namespace Cardo_Project.Controllers
 
             return Ok(new { Message = result });
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
+        {
+            if (!await _service.AuthenticationService.ValidateUser(user, user.CultureId))
+                return Unauthorized();
+            var tokenDto = await _service.AuthenticationService.CreateToken();
+            return Ok(tokenDto);
+        }
+
     }
 }

@@ -80,7 +80,16 @@ namespace Infrastructure.Extentions {
             {
                 statusCode=HttpStatusCode.BadRequest;
                 errorMessages.Add(localizer[ValidationResource.EmailConfirmed]);
-                    }
+            }
+            else if (exception is EmailNotConfirmedException emailNotConfirmedException)
+            {
+                statusCode=HttpStatusCode.BadRequest;
+                errorMessages.Add(localizer[ValidationResource.EmailNotConfirmed]);
+            } else if (exception is AuthenticationFailedException)
+            {
+                statusCode = HttpStatusCode.BadRequest;
+                errorMessages.Add(localizer[ValidationResource.AuthenticationFailed]);
+            }
             else
             {
                 statusCode = HttpStatusCode.InternalServerError;

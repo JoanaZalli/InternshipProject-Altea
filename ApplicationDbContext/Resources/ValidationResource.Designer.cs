@@ -61,6 +61,15 @@ namespace Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Authentication failed. Wrong username or password..
+        /// </summary>
+        public static string AuthenticationFailed {
+            get {
+                return ResourceManager.GetString("AuthenticationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid email format..
         /// </summary>
         public static string Email_InvalidFormat {
@@ -84,6 +93,15 @@ namespace Application.Resources {
         public static string EmailConfirmed {
             get {
                 return ResourceManager.GetString("EmailConfirmed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your email has not been confirmed. Please confirm your email..
+        /// </summary>
+        public static string EmailNotConfirmed {
+            get {
+                return ResourceManager.GetString("EmailNotConfirmed", resourceCulture);
             }
         }
         

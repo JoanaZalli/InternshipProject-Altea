@@ -56,6 +56,7 @@ namespace Application.Moduls.UserModul.Commands
             var userValidation = new CreateUserValidations(_validationLocalizationService,request.CultureId,_userRepository);
             var validationResult = await userValidation.ValidateAsync(request);
             var emailInUse = await _userRepository.FindByEmailAsync(request.Email);
+            var usernameInUse = await _userRepository.FindByUsernameAsync(request.UserName);
             if (!validationResult.IsValid)
             {
                 var errorMessages = validationResult.Errors.Select(error => _validationLocalizationService[error.ErrorMessage, request.CultureId]).ToList();
@@ -67,7 +68,7 @@ namespace Application.Moduls.UserModul.Commands
                 throw new EmailInUseException(string.Format( request.Email),request.CultureId);
 
             }
-            if(await _userRepository.FindByUsernameAsync(request.UserName))
+            if(usernameInUse!=null)
             {
                 throw new UserNameInUseException(string.Format(request.UserName),request.CultureId);
             }

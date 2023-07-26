@@ -25,12 +25,12 @@ namespace Infrastructure.Repositories
 
             return user ;
         }
-        public async Task<bool> FindByUsernameAsync(string username)
+        public async Task<User> FindByUsernameAsync(string username)
         {
             var user = await _context.Set<User>()
                 .FirstOrDefaultAsync(u => u.UserName == username);
 
-            return user != null;
+            return user;
         }
 
         public async Task<User> FindByTokenAsync(string token)

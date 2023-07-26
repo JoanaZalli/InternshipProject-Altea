@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AuthenticationFailed" xml:space="preserve">
+    <value>Autenticazione fallita. Utente sbagliato nome o password.</value>
+  </data>
   <data name="EmailConfirmed" xml:space="preserve">
     <value>Questa email è già confermata.</value>
+  </data>
+  <data name="EmailNotConfirmed" xml:space="preserve">
+    <value>La tua email non è stata confermata. Per favore, conferma la tua email.</value>
   </data>
   <data name="Email_InvalidFormat" xml:space="preserve">
     <value>Formato email non valido.</value>

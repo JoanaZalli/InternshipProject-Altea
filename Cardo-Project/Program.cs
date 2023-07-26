@@ -60,6 +60,10 @@ builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddMediatR(typeof(Application.AssemblyReference).Assembly);
 builder.Services.AddHttpContextAccessor();
 
+//Jwt
+builder.Services.ConfigureJWT(builder.Configuration);
+
+
 // Localization
 builder.Services.ConfigureLocalization();
 // Load SMTP configuration from appsettings.json

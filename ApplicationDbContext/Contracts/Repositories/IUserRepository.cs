@@ -12,7 +12,7 @@ namespace Application.Contracts.Repositories
        Task <IEnumerable<User>> GetAllUsersAsync(bool trackChanges);
 
         Task<User> FindByEmailAsync(string email);
-        Task<bool> FindByUsernameAsync(string email);
+        Task<User> FindByUsernameAsync(string email);
 
         Task<User> FindByTokenAsync(string token);
         Task SaveChangesAsync();
