@@ -55,6 +55,13 @@ namespace Cardo_Project.Controllers
             
             return Ok(new { Message = "Account activated successfully." });
         }
+        [HttpPost("requestNewToken")]
+        public async Task<IActionResult> RequestNewToken([FromBody] RequestNewTokenCommand request)
+        {
 
+            var result = await _mediator.Send(request);
+
+            return Ok(new { Message = result });
+        }
     }
 }

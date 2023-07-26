@@ -1,4 +1,5 @@
 ﻿using Application.Contracts.Repositories;
+using Application.DTOS;
 using Application.Exceptions;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -17,12 +18,12 @@ namespace Infrastructure.Repositories
 
         public async Task<IEnumerable<User>> GetAllUsersAsync(bool trcakChanges)=>await GetAll(trcakChanges).ToListAsync();
 
-        public async Task<bool> FindByEmailAsync(string email)
+        public async Task<User> FindByEmailAsync(string email)
         {
             var user = await _context.Set<User>()
                 .FirstOrDefaultAsync(u => u.Email == email);
 
-            return user != null;
+            return user ;
         }
         public async Task<bool> FindByUsernameAsync(string username)
         {

@@ -56,6 +56,9 @@ namespace Application.Moduls.UserModul.Query
             {
                 throw new TokenExpiredException(request.CultureId);
             }
+            if(user.EmailConfirmed) { 
+            throw new  EmailAlreadyConfirmedExcepion(request.CultureId);
+                    }
             user.EmailConfirmed = true;
             await _userRepository.SaveChangesAsync();
 

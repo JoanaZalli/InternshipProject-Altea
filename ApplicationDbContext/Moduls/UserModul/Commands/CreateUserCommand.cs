@@ -55,12 +55,14 @@ namespace Application.Moduls.UserModul.Commands
             var userForRegistration = _mapper.Map<UserRegistrationDTO>(request);
             var userValidation = new CreateUserValidations(_validationLocalizationService,request.CultureId,_userRepository);
             var validationResult = await userValidation.ValidateAsync(request);
+            var emailInUse = await _userRepository.FindByEmailAsync(request.Email);
             if (!validationResult.IsValid)
             {
                 var errorMessages = validationResult.Errors.Select(error => _validationLocalizationService[error.ErrorMessage, request.CultureId]).ToList();
                 throw new UserRegisterFluentValidationException(errorMessages);
             }
-            if(await _userRepository.FindByEmailAsync(request.Email)){
+            if(emailInUse!=null)
+            {
                 
                 throw new EmailInUseException(string.Format( request.Email),request.CultureId);
 

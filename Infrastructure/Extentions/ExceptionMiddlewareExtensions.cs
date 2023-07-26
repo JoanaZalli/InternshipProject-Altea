@@ -75,7 +75,12 @@ namespace Infrastructure.Extentions {
             {
                 statusCode = HttpStatusCode.BadRequest;
                 errorMessages.Add(localizer[ValidationResource.TokenExpired]);
-            }
+            } 
+            else if (exception is EmailAlreadyConfirmedExcepion emailAlreadyConfirmedExcepion)
+            {
+                statusCode=HttpStatusCode.BadRequest;
+                errorMessages.Add(localizer[ValidationResource.EmailConfirmed]);
+                    }
             else
             {
                 statusCode = HttpStatusCode.InternalServerError;

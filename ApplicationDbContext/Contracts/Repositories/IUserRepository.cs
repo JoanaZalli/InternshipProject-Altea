@@ -11,7 +11,7 @@ namespace Application.Contracts.Repositories
     {
        Task <IEnumerable<User>> GetAllUsersAsync(bool trackChanges);
 
-        Task<bool> FindByEmailAsync(string email);
+        Task<User> FindByEmailAsync(string email);
         Task<bool> FindByUsernameAsync(string email);
 
         Task<User> FindByTokenAsync(string token);
