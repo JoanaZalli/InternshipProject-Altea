@@ -70,12 +70,12 @@ namespace Application.Moduls.UserModul.Commands
                 throw new UserNameInUseException(string.Format(request.UserName),request.CultureId);
             }
 
-            
+
 
             string emailBody = $"Dear {userForRegistration.FirstName},<br><br>"
-                             + "Welcome to our website! Please click the link below to activate your account:<br><br>"
-                             + $"<a href=\"https://localhost:7198/activate?token={userForRegistration.Token}\">Activate Account</a><br><br>"
-                             + "Thank you!<br>";
+                  + "Welcome to our website! Please click the link below to activate your account:<br><br>"
+                  + $"<a href=\"https://localhost:7198/api/user/activate?token={userForRegistration.Token}\">Activate Account</a><br><br>"
+                  + "Thank you!<br>";
             await _emailService.SendEmailAsync(userForRegistration.Email, "Account Activation", emailBody);
 
 

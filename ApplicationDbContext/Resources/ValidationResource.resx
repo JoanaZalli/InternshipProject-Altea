@@ -159,6 +159,9 @@
   <data name="String1" xml:space="preserve">
     <value>Questo nome utente è già in uso.</value>
   </data>
+  <data name="TokenExpired" xml:space="preserve">
+    <value>This token has expired.</value>
+  </data>
   <data name="Unique_Email" xml:space="preserve">
     <value>This e-mail is already in use.</value>
   </data>
@@ -173,5 +176,8 @@
   </data>
   <data name="UserName_RequiresNumber" xml:space="preserve">
     <value>Username should contain at least one number.</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>This user was not found.</value>
   </data>
 </root>

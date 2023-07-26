@@ -1,4 +1,5 @@
 ﻿using Application.Contracts.Repositories;
+using Application.Exceptions;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -29,6 +30,16 @@ namespace Infrastructure.Repositories
                 .FirstOrDefaultAsync(u => u.UserName == username);
 
             return user != null;
+        }
+
+        public async Task<User> FindByTokenAsync(string token)
+        {
+            var user=await _context.Set<User>().FirstOrDefaultAsync(u => u.Token == token);
+            return user;
+        }
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -67,6 +67,14 @@ namespace Infrastructure.Extentions {
             {
                 statusCode = HttpStatusCode.BadRequest;
                 errorMessages.Add(localizer[ValidationResource.Unique_Username, userNameInUseException.UserName]);
+            }else if (exception is UserNotFoundException userNotFoundException)
+            {
+                statusCode= HttpStatusCode.NotFound;
+                errorMessages.Add(localizer[ValidationResource.UserNotFound]);
+            } else if (exception is TokenExpiredException tokenExpiredException)
+            {
+                statusCode = HttpStatusCode.BadRequest;
+                errorMessages.Add(localizer[ValidationResource.TokenExpired]);
             }
             else
             {

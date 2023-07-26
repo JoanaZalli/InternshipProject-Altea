@@ -15,5 +15,6 @@ namespace Application.Contracts.Repositories
         void Update(T entity);
         void Delete(T entity);
 
+        Task SaveChangesAsync();
     }
 }

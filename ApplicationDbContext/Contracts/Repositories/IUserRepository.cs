@@ -13,5 +13,9 @@ namespace Application.Contracts.Repositories
 
         Task<bool> FindByEmailAsync(string email);
         Task<bool> FindByUsernameAsync(string email);
+
+        Task<User> FindByTokenAsync(string token);
+        Task SaveChangesAsync();
+
     }
 }

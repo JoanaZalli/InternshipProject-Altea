@@ -29,7 +29,7 @@ namespace Cardo_Project.Controllers
             var newCommand = new CreateUserCommand
             {
                 CultureId = cultureId,
-                FirstName = command.FirstName,
+                FirstName = command.FirstName, 
                 LastName = command.LastName,
                 UserName = command.UserName,
                 Password = command.Password,
@@ -46,5 +46,15 @@ namespace Cardo_Project.Controllers
             var users = await _mediator.Send(new GetAllUsersQuery(TrackChanges:false));
             return Ok(users);
         }
+
+        [HttpGet("activate")]
+        public async Task<IActionResult> ActivateAccount([FromQuery] string token )
+        {
+            await _mediator.Send(new GetUserByTokenQuery { Token = token });
+              
+            
+            return Ok(new { Message = "Account activated successfully." });
+        }
+
     }
 }

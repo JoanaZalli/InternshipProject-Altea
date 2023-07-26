@@ -10,14 +10,20 @@ namespace Application
 {
     public class TokenGenerator
     {
-        public static string GenerateToken(int length = 64)
+        private const int TokenLength = 64;
+        private const int TokenExpirationMinutes = 30;
+        public static string GenerateToken()
         {
-            var randomNumber = new byte[length];
+            var randomNumber = new byte[TokenLength];
             using (var rng = RandomNumberGenerator.Create())
             {
                 rng.GetBytes(randomNumber);
                 return Convert.ToBase64String(randomNumber);
             }
+        }
+        public static bool IsTokenExpired(DateTime tokenCreationTime)
+        {
+            return DateTime.UtcNow > tokenCreationTime.AddMinutes(TokenExpirationMinutes);
         }
     }
 }

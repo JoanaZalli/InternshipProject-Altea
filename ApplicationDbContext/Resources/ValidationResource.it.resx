@@ -156,6 +156,9 @@
   <data name="PrefixId_Required" xml:space="preserve">
     <value>Il prefisso è obbligatorio</value>
   </data>
+  <data name="TokenExpired" xml:space="preserve">
+    <value>Questo token è scaduto.</value>
+  </data>
   <data name="Unique_Email" xml:space="preserve">
     <value>Questa e-mail è già in uso.</value>
   </data>
@@ -170,5 +173,8 @@
   </data>
   <data name="UserName_RequiresNumber" xml:space="preserve">
     <value>Il nome utente deve contenere almeno un numero.</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>Questo utente non è stato trovato!</value>
   </data>
 </root>
