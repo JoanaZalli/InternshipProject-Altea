@@ -12,6 +12,7 @@ namespace Application
     {
         private const int TokenLength = 64;
         private const int TokenExpirationMinutes = 30;
+
         public static string GenerateToken()
         {
             var randomNumber = new byte[TokenLength];
@@ -21,9 +22,10 @@ namespace Application
                 return Convert.ToBase64String(randomNumber);
             }
         }
-        public static bool IsTokenExpired(DateTime tokenCreationTime)
+        public static bool IsTokenExpired(DateTime tokenCreationTime, int tokenExpirationMinutes = TokenExpirationMinutes)
         {
             return DateTime.UtcNow > tokenCreationTime.AddMinutes(TokenExpirationMinutes);
         }
+       
     }
 }

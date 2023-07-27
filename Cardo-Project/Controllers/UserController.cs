@@ -3,6 +3,7 @@ using Application.Exceptions;
 using Application.Moduls.UserModul.Commands;
 using Application.Moduls.UserModul.Query;
 using Application.Services.Contracts;
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -86,6 +87,21 @@ namespace Cardo_Project.Controllers
 
             return Ok(new { Message = result });
         }
+       
+        
+        [HttpPost("forgotPassword")]
+        public async Task<IActionResult> PasswordRecovery([FromBody] ForgotPasswordCommand request)
+        {
+            var token = await _mediator.Send(request);
 
+            return Ok(new { Message = "Password recovery initiated. Check your email for the recovery link and token.", PasswordRecoveyToken = token });
+        }
+        [HttpPost("setNewPassword")]
+        public async Task<IActionResult> SetNewPasswordWithToken([FromBody] SetNewPasswordCommand request)
+        {
+            var result = await _mediator.Send(request);
+
+            return Ok("Password changed!");
+        }
     }
 }

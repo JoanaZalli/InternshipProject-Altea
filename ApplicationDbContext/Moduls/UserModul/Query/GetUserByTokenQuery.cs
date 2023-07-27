@@ -50,7 +50,7 @@ namespace Application.Moduls.UserModul.Query
             var user = await _userRepository.FindByTokenAsync(request.Token);
             if (user == null)
             {
-                throw new UserNotFoundException(request.Token, request.CultureId);
+                throw new UserNotFoundException(request.CultureId);
             }
             if (TokenGenerator.IsTokenExpired(user.TokenCreationTime))
             {

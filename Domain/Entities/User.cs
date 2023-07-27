@@ -19,6 +19,8 @@ namespace Domain.Entities
         public DateTime? RefreshTokenExpiryTime { get; set; }
         public string? AccesToken { get;set; }
         public DateTime? AccesTokenExpiryTime { get; set;}
+        public string? PasswordRecoveyToken { get; set; }
+        public DateTime? PasswordRecoveyTokenCreationTime { get; set; }
 
 
     }

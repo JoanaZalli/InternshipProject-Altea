@@ -8,10 +8,8 @@ namespace Application.Exceptions
 {
     public class UserNotFoundException : NotFoundException
     {
-        public string UserName { get; }
         public string CultureId { get; }
-        public UserNotFoundException(string user, string cultureId) : base(null) {
-        UserName = user;
+        public UserNotFoundException( string cultureId) : base(null) {
         CultureId = cultureId;
         }
     }

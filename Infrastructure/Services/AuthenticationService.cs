@@ -1,4 +1,5 @@
-﻿using Application.Contracts;
+﻿using Application;
+using Application.Contracts;
 using Application.DTOS;
 using Application.Exceptions;
 using Application.Services.Contracts;
@@ -56,7 +57,29 @@ namespace Infrastructure.Services
             }
             return result;
         }
+        public async Task<IdentityResult> UpdateUserPassword(string userId, string newPassword, string cultureId)
+        {
+            var user=await _userManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                throw new UserNotFoundException(cultureId);
+            }
+            bool isTokenExpired = TokenGenerator.IsTokenExpired(user.TokenCreationTime,15);
+            if (isTokenExpired)
+            {
+                throw new TokenExpiredException(cultureId);
+            }
+            var result = await _userManager.ResetPasswordAsync(user, user.Token, newPassword);
+            if (result.Succeeded)
+            {
+                user.Token = null;
+                user.TokenCreationTime = default(DateTime);
+                await _userManager.UpdateAsync(user);
+            }
 
+            return result;
+
+        }
         public async Task<AuthenticationTokenDTO> CreateToken(bool populateExp)
         {
             var signingCredintials = GetSigningCredentials();

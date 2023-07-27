@@ -48,12 +48,7 @@ namespace Infrastructure.Extentions {
             HttpStatusCode statusCode;
             List<LocalizedString> errorMessages = new List<LocalizedString>();
 
-            if (exception is CustomException customException)
-            {
-                statusCode = customException.StatusCode;
-                errorMessages = customException.ErrorMessages ?? errorMessages;
-            }
-            else if (exception is UserRegisterFluentValidationException fluentValidationException)
+             if (exception is UserRegisterFluentValidationException fluentValidationException)
             {
                 statusCode = HttpStatusCode.BadRequest;
                 errorMessages.Add(localizer[fluentValidationException.Message]);

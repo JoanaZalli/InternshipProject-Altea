@@ -14,7 +14,6 @@ namespace Application.Moduls.UserModul.Commands
     {
         public string Email { get; init; }
         public string CultureId { get; init; }
-
     }
     internal sealed class ForgotUsernameHandler : IRequestHandler<ForgotUsernameCommand, string>
     {
@@ -34,7 +33,7 @@ namespace Application.Moduls.UserModul.Commands
             var user = await _userRepository.FindByEmailAsync(request.Email);
             if (user == null)
             {
-                throw new UserNotFoundException(request.Email, request.CultureId);
+                throw new UserNotFoundException(request.CultureId);
             }
 
             string emailBody = $"Dear {user.FirstName}<br><br>"

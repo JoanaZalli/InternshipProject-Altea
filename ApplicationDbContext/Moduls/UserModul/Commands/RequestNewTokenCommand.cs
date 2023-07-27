@@ -33,7 +33,7 @@ namespace Application.Moduls.UserModul.Commands
             var user = await _userRepository.FindByEmailAsync(request.Email);
             if (user == null)
             {
-                throw new UserNotFoundException(request.Email, request.CultureId);
+                throw new UserNotFoundException(request.CultureId);
             }
 
             var newToken = TokenGenerator.GenerateToken();
