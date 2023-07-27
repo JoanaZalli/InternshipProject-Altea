@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230727092000_RefreshTokenMigration")]
+    partial class RefreshTokenMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,12 +57,6 @@ namespace Infrastructure.Migrations
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AccesToken")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("AccesTokenExpiryTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -176,19 +173,19 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f16fe5bb-01ec-470b-b049-9537a02ff539",
+                            Id = "540b670f-683f-4dfa-bc86-e09cbdaced0c",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "4a76d96a-a80f-4dfa-b251-b2fe22d3b22e",
+                            Id = "b9718c24-3a91-484b-a4f1-d866d588d8f7",
                             Name = "Loan Officer",
                             NormalizedName = "LOAN OFFICER"
                         },
                         new
                         {
-                            Id = "502d1b0b-f7da-4deb-9297-716bd39c5656",
+                            Id = "b2f49f2c-2d31-4388-b929-5429312a5782",
                             Name = "Borrower",
                             NormalizedName = "BORROWER"
                         });

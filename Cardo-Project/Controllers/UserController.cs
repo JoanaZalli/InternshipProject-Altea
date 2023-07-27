@@ -74,8 +74,17 @@ namespace Cardo_Project.Controllers
         {
             if (!await _service.AuthenticationService.ValidateUser(user, user.CultureId))
                 return Unauthorized();
-            var tokenDto = await _service.AuthenticationService.CreateToken();
+            var tokenDto = await _service.AuthenticationService.CreateToken(Exp:true);
             return Ok(tokenDto);
+        }
+
+        [HttpPost("forgotUsername")]
+        public async Task<IActionResult> ForgotUsername([FromBody] ForgotUsernameCommand request)
+        {
+
+            var result = await _mediator.Send(request);
+
+            return Ok(new { Message = result });
         }
 
     }

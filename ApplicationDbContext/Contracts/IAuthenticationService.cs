@@ -12,6 +12,8 @@ namespace Application.Contracts
     {
         Task<IdentityResult> CreateUser(UserRegistrationDTO userForRegistration);
         Task<bool> ValidateUser(UserForAuthenticationDto userForAuthentication, string CultureId);
-        Task<string> CreateToken( );
+        Task<AuthenticationTokenDTO> CreateToken(bool Exp);
+
+
     }
 }

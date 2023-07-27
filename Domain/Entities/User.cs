@@ -15,6 +15,10 @@ namespace Domain.Entities
         public virtual Prefix Prefix { get; set; }     
         public string Token { get; set; }
         public DateTime TokenCreationTime { get; set; }
+        public string? RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpiryTime { get; set; }
+        public string? AccesToken { get;set; }
+        public DateTime? AccesTokenExpiryTime { get; set;}
 
 
     }
