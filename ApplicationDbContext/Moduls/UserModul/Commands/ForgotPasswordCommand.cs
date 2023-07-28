@@ -2,10 +2,13 @@
 using Application.Contracts.Repositories;
 using Application.DTOS;
 using Application.Exceptions;
+using Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Application.Moduls.UserModul.Commands
 {
@@ -19,11 +22,14 @@ namespace Application.Moduls.UserModul.Commands
     {
         private readonly IUserRepository _userRepository;
         private readonly IEmailService _emailService;
+        private readonly UserManager<User> _userManager;
 
-        public ForgotPasswordCommandHandler(IUserRepository userRepository, IEmailService emailService)
+
+        public ForgotPasswordCommandHandler(IUserRepository userRepository, IEmailService emailService, UserManager<User> userManager)
         {
             _userRepository = userRepository;
             _emailService = emailService;
+            _userManager = userManager;
         }
 
         public async Task<string> Handle(ForgotPasswordCommand request, CancellationToken cancellationToken)
@@ -34,7 +40,8 @@ namespace Application.Moduls.UserModul.Commands
                 throw new UserNotFoundException(request.CultureId);
             }
 
-            user.PasswordRecoveyToken = TokenGenerator.GenerateToken();
+            user.PasswordRecoveyToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+          //  user.PasswordRecoveyToken= HttpUtility.UrlDecode(user.PasswordRecoveyToken);
             user.PasswordRecoveyTokenCreationTime = DateTime.Now;
 
             await _userRepository.SaveChangesAsync();
@@ -51,7 +58,7 @@ namespace Application.Moduls.UserModul.Commands
                 </html>";
 
             await _emailService.SendEmailAsync(user.Email, "Password Recovery", emailBody);
-            return user.Token;
+            return user.PasswordRecoveyToken;
         }
     }
 }

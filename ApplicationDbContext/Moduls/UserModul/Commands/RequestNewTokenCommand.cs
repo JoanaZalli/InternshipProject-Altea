@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.Exceptions;
 using AutoMapper;
+using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace Application.Moduls.UserModul.Commands
 {
@@ -21,11 +23,14 @@ namespace Application.Moduls.UserModul.Commands
     {
         private readonly IUserRepository _userRepository;
         private readonly IEmailService _emailService;
+        private readonly UserManager<User> _userManager;
 
-        public RequestNewTokenCommandHandler(IUserRepository userRepository, IEmailService emailService)
+
+        public RequestNewTokenCommandHandler(IUserRepository userRepository, IEmailService emailService, UserManager<User> userManager)
         {
             _userRepository = userRepository;
             _emailService = emailService;
+            _userManager = userManager;
         }
 
         public async Task<string> Handle(RequestNewTokenCommand request, CancellationToken cancellationToken)
@@ -36,7 +41,7 @@ namespace Application.Moduls.UserModul.Commands
                 throw new UserNotFoundException(request.CultureId);
             }
 
-            var newToken = TokenGenerator.GenerateToken();
+            var newToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             user.Token = newToken;
             user.TokenCreationTime = DateTime.Now;
 

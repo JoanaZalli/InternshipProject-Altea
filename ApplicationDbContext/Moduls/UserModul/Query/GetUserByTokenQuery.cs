@@ -52,7 +52,7 @@ namespace Application.Moduls.UserModul.Query
             {
                 throw new UserNotFoundException(request.CultureId);
             }
-            if (TokenGenerator.IsTokenExpired(user.TokenCreationTime))
+            if (TokenGenerator.IsTokenExpired(user.TokenCreationTime,30))
             {
                 throw new TokenExpiredException(request.CultureId);
             }

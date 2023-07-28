@@ -101,7 +101,7 @@ namespace Cardo_Project.Controllers
         {
             var result = await _mediator.Send(request);
 
-            return Ok("Password changed!");
+            return Ok(new { Message = result });
         }
     }
 }

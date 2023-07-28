@@ -13,7 +13,7 @@ namespace Application.Contracts
         Task<IdentityResult> CreateUser(UserRegistrationDTO userForRegistration);
         Task<bool> ValidateUser(UserForAuthenticationDto userForAuthentication, string CultureId);
         Task<AuthenticationTokenDTO> CreateToken(bool Exp);
-        Task<IdentityResult> UpdateUserPassword(string userId, string newPassword, string cultureId);
+       // Task<IdentityResult> UpdateUserPassword(string userId, string newPassword, string cultureId);
 
 
 

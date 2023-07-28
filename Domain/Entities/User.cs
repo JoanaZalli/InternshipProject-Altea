@@ -13,14 +13,18 @@ namespace Domain.Entities
         public string LastName { get; set; }
         public int PrefixId { get; set; }
         public virtual Prefix Prefix { get; set; }     
-        public string Token { get; set; }
+        public string? Token { get; set; }
         public DateTime TokenCreationTime { get; set; }
         public string? RefreshToken { get; set; }
         public DateTime? RefreshTokenExpiryTime { get; set; }
         public string? AccesToken { get;set; }
         public DateTime? AccesTokenExpiryTime { get; set;}
         public string? PasswordRecoveyToken { get; set; }
-        public DateTime? PasswordRecoveyTokenCreationTime { get; set; }
+        public DateTime PasswordRecoveyTokenCreationTime { get; set; }
+        public bool IsBlocked { get; set; }
+        public DateTime? BlockEnd {  get; set; }
+        public int FailedLoginAttempts { get; set; }
+
 
 
     }

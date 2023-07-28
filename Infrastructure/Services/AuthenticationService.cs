@@ -25,6 +25,7 @@ namespace Infrastructure.Services
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
+        private const int MaxFailedLoginAttempts = 3;
 
         private User? _user;
         public AuthenticationService(UserManager<User> userManager, IMapper mapper,IConfiguration configuration)
@@ -45,6 +46,14 @@ namespace Infrastructure.Services
         public async Task<bool> ValidateUser(UserForAuthenticationDto userForAuth, string cultureId)
         {
             _user = await _userManager.FindByNameAsync(userForAuth.UserName);
+            if (_user == null)
+            {
+                throw new UserNotFoundException(cultureId);
+            }
+            if(_user.IsBlocked && _user.BlockEnd > DateTime.UtcNow)
+            {
+                throw new AccountBlockedException(cultureId);
+            }
             if (_user != null && !_user.EmailConfirmed)
             {
                 throw new EmailNotConfirmedException(cultureId);
@@ -53,33 +62,35 @@ namespace Infrastructure.Services
            
             if (!result)
             {
+                _user.FailedLoginAttempts++;
+                if (_user.FailedLoginAttempts >= MaxFailedLoginAttempts)
+                {
+                    _user.IsBlocked = true;
+                    _user.BlockEnd = DateTime.UtcNow.AddHours(1); 
+                    _user.FailedLoginAttempts = 0;
+                    throw new AccountBlockedException(cultureId);
+                }
+                await _userManager.UpdateAsync(_user);
                 throw new AuthenticationFailedException(cultureId);
             }
+            _user.FailedLoginAttempts = 0;
+            await _userManager.UpdateAsync(_user);
             return result;
         }
-        public async Task<IdentityResult> UpdateUserPassword(string userId, string newPassword, string cultureId)
-        {
-            var user=await _userManager.FindByIdAsync(userId);
-            if (user != null)
-            {
-                throw new UserNotFoundException(cultureId);
-            }
-            bool isTokenExpired = TokenGenerator.IsTokenExpired(user.TokenCreationTime,15);
-            if (isTokenExpired)
-            {
-                throw new TokenExpiredException(cultureId);
-            }
-            var result = await _userManager.ResetPasswordAsync(user, user.Token, newPassword);
-            if (result.Succeeded)
-            {
-                user.Token = null;
-                user.TokenCreationTime = default(DateTime);
-                await _userManager.UpdateAsync(user);
-            }
+        //public async Task<IdentityResult> UpdateUserPassword(string Email, string newPassword, string cultureId)
+        //{
+           
+        //    var result = await _userManager.ResetPasswordAsync(user, user.Token, newPassword);
+        //    if (result.Succeeded)
+        //    {
+        //        user.Token = null;
+        //        user.TokenCreationTime = default(DateTime);
+        //        await _userManager.UpdateAsync(user);
+        //    }
 
-            return result;
+        //    return result;
 
-        }
+      //  }
         public async Task<AuthenticationTokenDTO> CreateToken(bool populateExp)
         {
             var signingCredintials = GetSigningCredentials();

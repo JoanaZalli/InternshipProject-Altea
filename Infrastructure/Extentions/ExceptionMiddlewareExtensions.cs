@@ -84,6 +84,14 @@ namespace Infrastructure.Extentions {
             {
                 statusCode = HttpStatusCode.BadRequest;
                 errorMessages.Add(localizer[ValidationResource.AuthenticationFailed]);
+            } else if(exception is PasswordsDoNotMatchException)
+            {
+                statusCode = HttpStatusCode.BadRequest;
+                errorMessages.Add(localizer[ValidationResource.PasswordsDoNotMatch]);
+            }else if (exception is AccountBlockedException)
+            {
+                statusCode = HttpStatusCode.BadRequest;
+                errorMessages.Add(localizer[ValidationResource.AccountBlocked]);
             }
             else
             {

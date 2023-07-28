@@ -61,6 +61,15 @@ namespace Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your account has been blocked!.
+        /// </summary>
+        public static string AccountBlocked {
+            get {
+                return ResourceManager.GetString("AccountBlocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Authentication failed. Wrong username or password..
         /// </summary>
         public static string AuthenticationFailed {
@@ -174,6 +183,15 @@ namespace Application.Resources {
         public static string Password_RequiresAlphanumeric {
             get {
                 return ResourceManager.GetString("Password_RequiresAlphanumeric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passwords do not match..
+        /// </summary>
+        public static string PasswordsDoNotMatch {
+            get {
+                return ResourceManager.GetString("PasswordsDoNotMatch", resourceCulture);
             }
         }
         
