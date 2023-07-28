@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230728141846_CompanyTypeMigration")]
+    partial class CompanyTypeMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,47 +24,6 @@ namespace Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Domain.Entities.Borrower", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CompanyTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateUpdated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FiscalCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("VatNumber")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CompanyTypeId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Borrowers");
-                });
 
             modelBuilder.Entity("Domain.Entities.CompanyType", b =>
                 {
@@ -80,44 +42,44 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CompanyTypes");
+                    b.ToTable("CompanyType");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             Company_Type = "Sole proprietorship (S.I.)",
-                            DateCreated = new DateTime(2023, 7, 28, 16, 44, 16, 55, DateTimeKind.Local).AddTicks(9059)
+                            DateCreated = new DateTime(2023, 7, 28, 16, 18, 46, 251, DateTimeKind.Local).AddTicks(1630)
                         },
                         new
                         {
                             Id = 2,
                             Company_Type = "Other",
-                            DateCreated = new DateTime(2023, 7, 28, 16, 44, 16, 55, DateTimeKind.Local).AddTicks(9120)
+                            DateCreated = new DateTime(2023, 7, 28, 16, 18, 46, 251, DateTimeKind.Local).AddTicks(1675)
                         },
                         new
                         {
                             Id = 3,
                             Company_Type = "Partnership limited by shares (p.l.sh.)",
-                            DateCreated = new DateTime(2023, 7, 28, 16, 44, 16, 55, DateTimeKind.Local).AddTicks(9122)
+                            DateCreated = new DateTime(2023, 7, 28, 16, 18, 46, 251, DateTimeKind.Local).AddTicks(1677)
                         },
                         new
                         {
                             Id = 4,
                             Company_Type = "Limited partnership (l.p.)",
-                            DateCreated = new DateTime(2023, 7, 28, 16, 44, 16, 55, DateTimeKind.Local).AddTicks(9124)
+                            DateCreated = new DateTime(2023, 7, 28, 16, 18, 46, 251, DateTimeKind.Local).AddTicks(1713)
                         },
                         new
                         {
                             Id = 5,
                             Company_Type = "Cooperative Society (c.s.)",
-                            DateCreated = new DateTime(2023, 7, 28, 16, 44, 16, 55, DateTimeKind.Local).AddTicks(9126)
+                            DateCreated = new DateTime(2023, 7, 28, 16, 18, 46, 251, DateTimeKind.Local).AddTicks(1716)
                         },
                         new
                         {
                             Id = 6,
                             Company_Type = "General partnership (g.p.)",
-                            DateCreated = new DateTime(2023, 7, 28, 16, 44, 16, 55, DateTimeKind.Local).AddTicks(9128)
+                            DateCreated = new DateTime(2023, 7, 28, 16, 18, 46, 251, DateTimeKind.Local).AddTicks(1717)
                         });
                 });
 
@@ -289,19 +251,19 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "32763f1a-d526-4745-ac05-ffa1a2bc7508",
+                            Id = "9c731f22-9fb1-4c2a-9006-871e2325ffb5",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "f7a6ce52-b1e0-4296-af72-4839e37efb06",
+                            Id = "7f86f387-657c-44ba-8f53-e0b719ee5d3a",
                             Name = "Loan Officer",
                             NormalizedName = "LOAN OFFICER"
                         },
                         new
                         {
-                            Id = "3f49b046-29b9-4ccc-826d-8bd32dd114a8",
+                            Id = "d76e6ec5-5b81-4d61-b4aa-63a611d9fde3",
                             Name = "Borrower",
                             NormalizedName = "BORROWER"
                         });
@@ -413,25 +375,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Borrower", b =>
-                {
-                    b.HasOne("Domain.Entities.CompanyType", "CompanyType")
-                        .WithMany()
-                        .HasForeignKey("CompanyTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.User", "User")
-                        .WithMany("Borrowers")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CompanyType");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
                     b.HasOne("Domain.Entities.Prefix", "Prefix")
@@ -492,11 +435,6 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Entities.User", b =>
-                {
-                    b.Navigation("Borrowers");
                 });
 #pragma warning restore 612, 618
         }

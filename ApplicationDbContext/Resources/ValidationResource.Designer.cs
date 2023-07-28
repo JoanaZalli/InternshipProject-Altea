@@ -79,6 +79,24 @@ namespace Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company name is required..
+        /// </summary>
+        public static string CompanyNameRequired {
+            get {
+                return ResourceManager.GetString("CompanyNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company type is required..
+        /// </summary>
+        public static string CompanyTypeRequired {
+            get {
+                return ResourceManager.GetString("CompanyTypeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid email format..
         /// </summary>
         public static string Email_InvalidFormat {
@@ -129,6 +147,42 @@ namespace Application.Resources {
         public static string FirstName_Required {
             get {
                 return ResourceManager.GetString("FirstName_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fiscal code should have 11 characters..
+        /// </summary>
+        public static string FiscalCodeLendthOther {
+            get {
+                return ResourceManager.GetString("FiscalCodeLendthOther", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fiscal code should be 16 characters..
+        /// </summary>
+        public static string FiscalCodeLengthSP {
+            get {
+                return ResourceManager.GetString("FiscalCodeLengthSP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fiscal code is required..
+        /// </summary>
+        public static string FiscalCodeRequired {
+            get {
+                return ResourceManager.GetString("FiscalCodeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fiscal Code should be unique..
+        /// </summary>
+        public static string FiscalCodeUnique {
+            get {
+                return ResourceManager.GetString("FiscalCodeUnique", resourceCulture);
             }
         }
         
@@ -291,6 +345,24 @@ namespace Application.Resources {
         public static string UserNotFound {
             get {
                 return ResourceManager.GetString("UserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vat number should have 11 characters..
+        /// </summary>
+        public static string VatNumberLength {
+            get {
+                return ResourceManager.GetString("VatNumberLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vat number is required..
+        /// </summary>
+        public static string VatNumberRequired {
+            get {
+                return ResourceManager.GetString("VatNumberRequired", resourceCulture);
             }
         }
     }

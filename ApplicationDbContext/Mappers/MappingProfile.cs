@@ -14,9 +14,9 @@ namespace Application.Mappers
     {
         public MappingProfile() {
             CreateMap<UserRegistrationDTO, User>().ReverseMap();
-
             CreateMap<UserRegistrationDTO, CreateUserCommand>().ReverseMap();
             CreateMap<ForgotPasswordDto, ForgotPasswordCommand>().ReverseMap();
+            CreateMap<BorrowerDTO,Borrower>().ReverseMap();
 
         }
     }

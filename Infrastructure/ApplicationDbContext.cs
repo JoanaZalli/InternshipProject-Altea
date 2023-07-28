@@ -14,9 +14,18 @@ namespace Infrastructure
     {
 
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Prefix> Prefixes { get; set; }
+        public DbSet<CompanyType> CompanyTypes { get; set; }
+        public DbSet<Borrower> Borrowers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<User>()
+               .HasMany(u => u.Borrowers)
+               .WithOne(b => b.User)
+               .HasForeignKey(b => b.UserId);
+
 
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Prefix)
@@ -25,10 +34,47 @@ namespace Infrastructure
 
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
 
-        }
 
-        public DbSet<User> Users {  get; set; }
-        public DbSet<Prefix> Prefixes { get; set; }
+            modelBuilder.Entity<CompanyType>().HasData(
+            new CompanyType { 
+                Id = 1,
+                Company_Type= "Sole proprietorship (S.I.)",
+                DateCreated = DateTime.Now,
+            },
+            new CompanyType
+            {
+                Id = 2,
+                Company_Type = "Other",
+                DateCreated = DateTime.Now,
+            },
+            new CompanyType
+            {
+                Id = 3,
+                Company_Type = "Partnership limited by shares (p.l.sh.)",
+                DateCreated = DateTime.Now,
+            },
+             new CompanyType
+             {
+                 Id = 4,
+                 Company_Type = "Limited partnership (l.p.)",
+                 DateCreated = DateTime.Now,
+             },
+              new CompanyType
+              {
+                  Id = 5,
+                  Company_Type = "Cooperative Society (c.s.)",
+                  DateCreated = DateTime.Now,
+              },
+               new CompanyType
+               {
+                   Id = 6,
+                   Company_Type = "General partnership (g.p.)",
+                   DateCreated = DateTime.Now,
+               }
+            );
+
+
+        }
 
     }
 }

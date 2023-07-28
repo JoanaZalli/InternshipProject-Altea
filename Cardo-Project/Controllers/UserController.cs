@@ -96,7 +96,7 @@ namespace Cardo_Project.Controllers
 
             return Ok(new { Message = "Password recovery initiated. Check your email for the recovery link and token.", PasswordRecoveyToken = token });
         }
-        [HttpPost("setNewPassword")]
+        [HttpPut("setNewPassword")]
         public async Task<IActionResult> SetNewPasswordWithToken([FromBody] SetNewPasswordCommand request)
         {
             var result = await _mediator.Send(request);

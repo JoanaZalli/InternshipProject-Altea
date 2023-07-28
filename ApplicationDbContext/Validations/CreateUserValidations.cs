@@ -20,11 +20,9 @@ namespace Application.Validations
 {
     public class CreateUserValidations : AbstractValidator<CreateUserCommand>
     {
-        private readonly IUserRepository _userRepository;
 
-        public CreateUserValidations(IStringLocalizer<CreateUserCommand> localizationService , string cultureId, IUserRepository  userRepository)
+        public CreateUserValidations(IStringLocalizer<CreateUserCommand> localizationService , string cultureId  )
         {
-            _userRepository = userRepository;
            
             RuleFor(u => u.FirstName)
                 .NotEmpty().WithMessage(u => localizationService[ValidationResource.FirstName_Required, cultureId])

@@ -123,6 +123,12 @@
   <data name="AuthenticationFailed" xml:space="preserve">
     <value>Autenticazione fallita. Utente sbagliato nome o password.</value>
   </data>
+  <data name="CompanyNameRequired" xml:space="preserve">
+    <value>Il nome dell'azienda è obbligatorio.</value>
+  </data>
+  <data name="CompanyTypeRequired" xml:space="preserve">
+    <value>Il tipo di azienda è obbligatorio.</value>
+  </data>
   <data name="EmailConfirmed" xml:space="preserve">
     <value>Questa email è già confermata.</value>
   </data>
@@ -140,6 +146,18 @@
   </data>
   <data name="FirstName_Required" xml:space="preserve">
     <value>Il nome è obbligatorio.</value>
+  </data>
+  <data name="FiscalCodeLendthOther" xml:space="preserve">
+    <value>Il codice fiscale deve avere 11 caratteri.</value>
+  </data>
+  <data name="FiscalCodeLengthSP" xml:space="preserve">
+    <value>Il codice fiscale deve essere di 16 caratteri.</value>
+  </data>
+  <data name="FiscalCodeRequired" xml:space="preserve">
+    <value>Il codice fiscale è obbligatorio.</value>
+  </data>
+  <data name="FiscalCodeUnique" xml:space="preserve">
+    <value>Il codice fiscale dovrebbe essere unico.</value>
   </data>
   <data name="LastName_MaxLength" xml:space="preserve">
     <value>Il cognome non deve superare i 30 caratteri.</value>
@@ -191,5 +209,11 @@
   </data>
   <data name="UserNotFound" xml:space="preserve">
     <value>Questo utente non è stato trovato!</value>
+  </data>
+  <data name="VatNumberLength" xml:space="preserve">
+    <value>Il numero di partita IVA deve avere 11 caratteri.</value>
+  </data>
+  <data name="VatNumberRequired" xml:space="preserve">
+    <value>Il numero di partita IVA è obbligatorio.</value>
   </data>
 </root>

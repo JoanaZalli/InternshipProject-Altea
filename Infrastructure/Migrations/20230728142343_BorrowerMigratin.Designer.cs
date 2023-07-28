@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230728142343_BorrowerMigratin")]
+    partial class BorrowerMigratin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,8 +50,10 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId1")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("VatNumber")
@@ -58,7 +63,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("CompanyTypeId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Borrowers");
                 });
@@ -87,37 +92,37 @@ namespace Infrastructure.Migrations
                         {
                             Id = 1,
                             Company_Type = "Sole proprietorship (S.I.)",
-                            DateCreated = new DateTime(2023, 7, 28, 16, 44, 16, 55, DateTimeKind.Local).AddTicks(9059)
+                            DateCreated = new DateTime(2023, 7, 28, 16, 23, 42, 997, DateTimeKind.Local).AddTicks(714)
                         },
                         new
                         {
                             Id = 2,
                             Company_Type = "Other",
-                            DateCreated = new DateTime(2023, 7, 28, 16, 44, 16, 55, DateTimeKind.Local).AddTicks(9120)
+                            DateCreated = new DateTime(2023, 7, 28, 16, 23, 42, 997, DateTimeKind.Local).AddTicks(763)
                         },
                         new
                         {
                             Id = 3,
                             Company_Type = "Partnership limited by shares (p.l.sh.)",
-                            DateCreated = new DateTime(2023, 7, 28, 16, 44, 16, 55, DateTimeKind.Local).AddTicks(9122)
+                            DateCreated = new DateTime(2023, 7, 28, 16, 23, 42, 997, DateTimeKind.Local).AddTicks(765)
                         },
                         new
                         {
                             Id = 4,
                             Company_Type = "Limited partnership (l.p.)",
-                            DateCreated = new DateTime(2023, 7, 28, 16, 44, 16, 55, DateTimeKind.Local).AddTicks(9124)
+                            DateCreated = new DateTime(2023, 7, 28, 16, 23, 42, 997, DateTimeKind.Local).AddTicks(767)
                         },
                         new
                         {
                             Id = 5,
                             Company_Type = "Cooperative Society (c.s.)",
-                            DateCreated = new DateTime(2023, 7, 28, 16, 44, 16, 55, DateTimeKind.Local).AddTicks(9126)
+                            DateCreated = new DateTime(2023, 7, 28, 16, 23, 42, 997, DateTimeKind.Local).AddTicks(769)
                         },
                         new
                         {
                             Id = 6,
                             Company_Type = "General partnership (g.p.)",
-                            DateCreated = new DateTime(2023, 7, 28, 16, 44, 16, 55, DateTimeKind.Local).AddTicks(9128)
+                            DateCreated = new DateTime(2023, 7, 28, 16, 23, 42, 997, DateTimeKind.Local).AddTicks(771)
                         });
                 });
 
@@ -289,19 +294,19 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "32763f1a-d526-4745-ac05-ffa1a2bc7508",
+                            Id = "0b4a2c71-a325-428c-8bf2-8cdbada16c10",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "f7a6ce52-b1e0-4296-af72-4839e37efb06",
+                            Id = "a4448f6d-b228-4e52-a0ac-4f1cb62be653",
                             Name = "Loan Officer",
                             NormalizedName = "LOAN OFFICER"
                         },
                         new
                         {
-                            Id = "3f49b046-29b9-4ccc-826d-8bd32dd114a8",
+                            Id = "0436929f-b1f3-45d2-a2c7-9a459fd80d5b",
                             Name = "Borrower",
                             NormalizedName = "BORROWER"
                         });
@@ -422,10 +427,8 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.User", "User")
-                        .WithMany("Borrowers")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("CompanyType");
 
@@ -492,11 +495,6 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Entities.User", b =>
-                {
-                    b.Navigation("Borrowers");
                 });
 #pragma warning restore 612, 618
         }

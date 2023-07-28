@@ -24,6 +24,8 @@ namespace Domain.Entities
         public bool IsBlocked { get; set; }
         public DateTime? BlockEnd {  get; set; }
         public int FailedLoginAttempts { get; set; }
+        public ICollection<Borrower> Borrowers { get; set; }
+
 
 
 

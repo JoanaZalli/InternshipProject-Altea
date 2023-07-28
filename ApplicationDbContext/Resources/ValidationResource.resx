@@ -123,6 +123,12 @@
   <data name="AuthenticationFailed" xml:space="preserve">
     <value>Authentication failed. Wrong username or password.</value>
   </data>
+  <data name="CompanyNameRequired" xml:space="preserve">
+    <value>Company name is required.</value>
+  </data>
+  <data name="CompanyTypeRequired" xml:space="preserve">
+    <value>Company type is required.</value>
+  </data>
   <data name="EmailConfirmed" xml:space="preserve">
     <value>This email is already confirmed.</value>
   </data>
@@ -140,6 +146,18 @@
   </data>
   <data name="FirstName_Required" xml:space="preserve">
     <value>First name is required.</value>
+  </data>
+  <data name="FiscalCodeLendthOther" xml:space="preserve">
+    <value>Fiscal code should have 11 characters.</value>
+  </data>
+  <data name="FiscalCodeLengthSP" xml:space="preserve">
+    <value>Fiscal code should be 16 characters.</value>
+  </data>
+  <data name="FiscalCodeRequired" xml:space="preserve">
+    <value>Fiscal code is required.</value>
+  </data>
+  <data name="FiscalCodeUnique" xml:space="preserve">
+    <value>Fiscal Code should be unique.</value>
   </data>
   <data name="LastName_MaxLength" xml:space="preserve">
     <value>Last name should not exceed 30 characters.</value>
@@ -194,5 +212,11 @@
   </data>
   <data name="UserNotFound" xml:space="preserve">
     <value>This user was not found.</value>
+  </data>
+  <data name="VatNumberLength" xml:space="preserve">
+    <value>Vat number should have 11 characters.</value>
+  </data>
+  <data name="VatNumberRequired" xml:space="preserve">
+    <value>Vat number is required.</value>
   </data>
 </root>

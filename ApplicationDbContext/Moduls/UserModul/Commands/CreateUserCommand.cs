@@ -55,7 +55,7 @@ namespace Application.Moduls.UserModul.Commands
         {
 
             var userForRegistration = _mapper.Map<UserRegistrationDTO>(request);
-            var userValidation = new CreateUserValidations(_validationLocalizationService,request.CultureId,_userRepository);
+            var userValidation = new CreateUserValidations(_validationLocalizationService,request.CultureId);
             var validationResult = await userValidation.ValidateAsync(request);
             var emailInUse = await _userRepository.FindByEmailAsync(request.Email);
             var usernameInUse = await _userRepository.FindByUsernameAsync(request.UserName);
