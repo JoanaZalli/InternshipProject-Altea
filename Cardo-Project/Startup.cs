@@ -1,6 +1,5 @@
 ﻿using Application.DTOS;
 using Application.Moduls.UserModul.Commands;
-using Application.Services.Contracts;
 using Domain.Entities;
 using Infrastructure.Services;
 using MediatR;
@@ -70,8 +69,7 @@ namespace Infrastructure.Extentions
         }
         public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
         {
-            var jwtSettings = configuration.GetSection("JwtSettings");
-            var secretKey = jwtSettings["secret"];
+         //   var secretKey = jwtSettings["secret"];
 
             services.AddAuthentication(opt =>
             {
@@ -80,6 +78,9 @@ namespace Infrastructure.Extentions
             })
             .AddJwtBearer(options =>
             {
+                var jwtSettings = configuration.GetSection("JwtSettings");
+                var secretKey = jwtSettings["secret"];
+                options.SaveToken = true;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,

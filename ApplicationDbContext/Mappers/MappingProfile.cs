@@ -1,4 +1,6 @@
 ﻿using Application.DTOS;
+using Application.Moduls.BorrowerModul.Command;
+using Application.Moduls.PermissionModul.Command;
 using Application.Moduls.UserModul.Commands;
 using AutoMapper;
 using Domain.Entities;
@@ -17,6 +19,10 @@ namespace Application.Mappers
             CreateMap<UserRegistrationDTO, CreateUserCommand>().ReverseMap();
             CreateMap<ForgotPasswordDto, ForgotPasswordCommand>().ReverseMap();
             CreateMap<BorrowerDTO,Borrower>().ReverseMap();
+            CreateMap<BorrowerDTO, CreateBorrowerCommand>().ReverseMap();
+            CreateMap<Borrower, CreateBorrowerCommand>().ReverseMap();
+            CreateMap<Permission, CreatePermissionCommand>().ReverseMap();
+
 
         }
     }

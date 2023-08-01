@@ -75,6 +75,10 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 // Repository services
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IBorrowerRepository, BorrowerRepository>();
+builder.Services.AddScoped<ICompanyTypeRepository, CompanyTypeRepository>();
+builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
+
 
 // ServiceManager and Logger
 builder.Services.ConfigureServiceManager();

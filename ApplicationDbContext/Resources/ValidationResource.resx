@@ -189,6 +189,12 @@
   <data name="PrefixId_Required" xml:space="preserve">
     <value>Prefix is required</value>
   </data>
+  <data name="RoleExists" xml:space="preserve">
+    <value>This role already exists.</value>
+  </data>
+  <data name="RoleWasNotFound" xml:space="preserve">
+    <value>Role was not found.</value>
+  </data>
   <data name="String1" xml:space="preserve">
     <value>Questo nome utente è già in uso.</value>
   </data>

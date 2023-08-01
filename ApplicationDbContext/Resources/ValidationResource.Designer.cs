@@ -277,6 +277,24 @@ namespace Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This role already exists..
+        /// </summary>
+        public static string RoleExists {
+            get {
+                return ResourceManager.GetString("RoleExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Role was not found..
+        /// </summary>
+        public static string RoleWasNotFound {
+            get {
+                return ResourceManager.GetString("RoleWasNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Questo nome utente è già in uso..
         /// </summary>
         public static string String1 {

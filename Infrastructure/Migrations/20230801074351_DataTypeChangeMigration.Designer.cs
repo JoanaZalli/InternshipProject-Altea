@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230801074351_DataTypeChangeMigration")]
+    partial class DataTypeChangeMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,59 +91,38 @@ namespace Infrastructure.Migrations
                         {
                             Id = 1,
                             Company_Type = "Sole proprietorship (S.I.)",
-                            DateCreated = new DateTime(2023, 8, 1, 14, 38, 17, 984, DateTimeKind.Local).AddTicks(3262)
+                            DateCreated = new DateTime(2023, 8, 1, 9, 43, 51, 217, DateTimeKind.Local).AddTicks(2496)
                         },
                         new
                         {
                             Id = 2,
                             Company_Type = "Other",
-                            DateCreated = new DateTime(2023, 8, 1, 14, 38, 17, 984, DateTimeKind.Local).AddTicks(3309)
+                            DateCreated = new DateTime(2023, 8, 1, 9, 43, 51, 217, DateTimeKind.Local).AddTicks(2541)
                         },
                         new
                         {
                             Id = 3,
                             Company_Type = "Partnership limited by shares (p.l.sh.)",
-                            DateCreated = new DateTime(2023, 8, 1, 14, 38, 17, 984, DateTimeKind.Local).AddTicks(3311)
+                            DateCreated = new DateTime(2023, 8, 1, 9, 43, 51, 217, DateTimeKind.Local).AddTicks(2543)
                         },
                         new
                         {
                             Id = 4,
                             Company_Type = "Limited partnership (l.p.)",
-                            DateCreated = new DateTime(2023, 8, 1, 14, 38, 17, 984, DateTimeKind.Local).AddTicks(3313)
+                            DateCreated = new DateTime(2023, 8, 1, 9, 43, 51, 217, DateTimeKind.Local).AddTicks(2545)
                         },
                         new
                         {
                             Id = 5,
                             Company_Type = "Cooperative Society (c.s.)",
-                            DateCreated = new DateTime(2023, 8, 1, 14, 38, 17, 984, DateTimeKind.Local).AddTicks(3315)
+                            DateCreated = new DateTime(2023, 8, 1, 9, 43, 51, 217, DateTimeKind.Local).AddTicks(2547)
                         },
                         new
                         {
                             Id = 6,
                             Company_Type = "General partnership (g.p.)",
-                            DateCreated = new DateTime(2023, 8, 1, 14, 38, 17, 984, DateTimeKind.Local).AddTicks(3317)
+                            DateCreated = new DateTime(2023, 8, 1, 9, 43, 51, 217, DateTimeKind.Local).AddTicks(2549)
                         });
-                });
-
-            modelBuilder.Entity("Domain.Entities.Permission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Permissions");
                 });
 
             modelBuilder.Entity("Domain.Entities.Prefix", b =>
@@ -169,21 +151,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Prefixes");
-                });
-
-            modelBuilder.Entity("Domain.Entities.RolePermission", b =>
-                {
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RoleId", "PermissionId");
-
-                    b.HasIndex("PermissionId");
-
-                    b.ToTable("RolePermissions");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
@@ -326,19 +293,19 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4963467c-d8d5-4ea7-bc54-8f4b9d23ac02",
+                            Id = "0cb0f943-e8c2-4224-a3a4-036e6bfadd04",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "e8326b38-8f0c-4d69-b1e4-3b9a44bf67cd",
+                            Id = "e44083e5-8be6-45f6-8ca8-f105330fcbf3",
                             Name = "Loan Officer",
                             NormalizedName = "LOAN OFFICER"
                         },
                         new
                         {
-                            Id = "83dd89b3-7435-4e13-8998-bd2b45dae7cc",
+                            Id = "c023fd01-528f-472b-a89f-f6629c0d2ed3",
                             Name = "Borrower",
                             NormalizedName = "BORROWER"
                         });
@@ -467,25 +434,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("CompanyType");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Domain.Entities.RolePermission", b =>
-                {
-                    b.HasOne("Domain.Entities.Permission", "Permission")
-                        .WithMany()
-                        .HasForeignKey("PermissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Permission");
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>

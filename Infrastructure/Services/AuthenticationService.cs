@@ -2,7 +2,6 @@
 using Application.Contracts;
 using Application.DTOS;
 using Application.Exceptions;
-using Application.Services.Contracts;
 using AutoMapper;
 using Domain.Entities;
 using Microsoft.AspNetCore.Identity;

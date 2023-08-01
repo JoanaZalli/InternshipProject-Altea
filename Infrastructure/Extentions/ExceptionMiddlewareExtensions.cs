@@ -48,7 +48,7 @@ namespace Infrastructure.Extentions {
             HttpStatusCode statusCode;
             List<LocalizedString> errorMessages = new List<LocalizedString>();
 
-             if (exception is UserRegisterFluentValidationException fluentValidationException)
+             if (exception is FluentValidationException fluentValidationException)
             {
                 statusCode = HttpStatusCode.BadRequest;
                 errorMessages.Add(localizer[fluentValidationException.Message]);
@@ -92,6 +92,14 @@ namespace Infrastructure.Extentions {
             {
                 statusCode = HttpStatusCode.BadRequest;
                 errorMessages.Add(localizer[ValidationResource.AccountBlocked]);
+            } else if(exception is RoleExistsException)
+            {
+                statusCode = HttpStatusCode.BadRequest;
+                errorMessages.Add(localizer[ValidationResource.RoleExists]);
+            } else if(exception is RoleWasNotFoundException)
+            {
+                statusCode = HttpStatusCode.BadRequest;
+                errorMessages.Add(localizer[ValidationResource.RoleWasNotFound]);
             }
             else
             {

@@ -18,6 +18,10 @@ namespace Infrastructure
         public DbSet<Prefix> Prefixes { get; set; }
         public DbSet<CompanyType> CompanyTypes { get; set; }
         public DbSet<Borrower> Borrowers { get; set; }
+
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<RolePermission> RolePermissions { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -26,6 +30,18 @@ namespace Infrastructure
                .WithOne(b => b.User)
                .HasForeignKey(b => b.UserId);
 
+            modelBuilder.Entity<RolePermission>()
+              .HasKey(rp => new { rp.RoleId, rp.PermissionId });
+
+            modelBuilder.Entity<RolePermission>()
+                .HasOne(rp => rp.Role)
+                .WithMany()
+                .HasForeignKey(rp => rp.RoleId);
+
+            modelBuilder.Entity<RolePermission>()
+                .HasOne(rp => rp.Permission)
+                .WithMany()
+                .HasForeignKey(rp => rp.PermissionId);
 
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Prefix)

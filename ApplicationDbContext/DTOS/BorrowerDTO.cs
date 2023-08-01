@@ -13,11 +13,11 @@ namespace Application.DTOS
         public string CompanyName { get; set; }
         public int CompanyTypeId { get; set; }
         public CompanyType CompanyType { get; set; }
-        public int VatNumber { get; set; }
+        public string VatNumber { get; set; }
         public string FiscalCode { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public User User { get; set; }
     }
 }

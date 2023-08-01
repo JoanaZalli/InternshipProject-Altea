@@ -189,6 +189,12 @@
   <data name="PrefixId_Required" xml:space="preserve">
     <value>Il prefisso è obbligatorio</value>
   </data>
+  <data name="RoleExists" xml:space="preserve">
+    <value>Questo ruolo esiste già.</value>
+  </data>
+  <data name="RoleWasNotFound" xml:space="preserve">
+    <value>Ruolo non trovato.</value>
+  </data>
   <data name="TokenExpired" xml:space="preserve">
     <value>Questo token è scaduto.</value>
   </data>

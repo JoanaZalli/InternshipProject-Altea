@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Application.Exceptions
 {
-    public class UserRegisterFluentValidationException : CustomException
+    public class FluentValidationException : CustomException
     {
         public List<LocalizedString> ErrorMessages { get; }
-        public UserRegisterFluentValidationException(List<LocalizedString> errorMessage/*, string localizerKey*/) : base(errorMessage)
+        public FluentValidationException(List<LocalizedString> errorMessage) : base(errorMessage)
         {
             ErrorMessages = errorMessage;
         }

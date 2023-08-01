@@ -1,8 +1,8 @@
-﻿using Application.DTOS;
+﻿using Application.Contracts;
+using Application.DTOS;
 using Application.Exceptions;
 using Application.Moduls.UserModul.Commands;
 using Application.Moduls.UserModul.Query;
-using Application.Services.Contracts;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

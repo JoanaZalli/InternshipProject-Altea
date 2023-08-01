@@ -24,7 +24,7 @@ namespace Application.Moduls.UserModul.Commands
         public string? Email { get; init; }
 
         [JsonPropertyName("Prefix")]
-        public int PrefixId { get; init; } // Added PrefixId property
+        public int PrefixId { get; init; } 
         public string? PhoneNumber { get; init; }
         public string CultureId { get; init; }
         public string Token { get; set; } = "";
@@ -62,7 +62,7 @@ namespace Application.Moduls.UserModul.Commands
             if (!validationResult.IsValid)
             {
                 var errorMessages = validationResult.Errors.Select(error => _validationLocalizationService[error.ErrorMessage, request.CultureId]).ToList();
-                throw new UserRegisterFluentValidationException(errorMessages);
+                throw new FluentValidationException(errorMessages);
             }
             if(emailInUse!=null)
             {
