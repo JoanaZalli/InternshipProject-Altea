@@ -26,7 +26,7 @@ namespace Application.Moduls.UserModul.Commands
         [JsonPropertyName("Prefix")]
         public int PrefixId { get; init; } 
         public string? PhoneNumber { get; init; }
-        public string CultureId { get; init; }
+        public string CultureId { get; set; }
         public string Token { get; set; } = "";
     }
 

@@ -19,9 +19,9 @@ namespace Cardo_Project.Controllers
         }
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> CreateBorrower([FromBody] CreateBorrowerCommand command)
+        public async Task<IActionResult> CreateBorrower([FromBody] CreateBorrowerCommand command, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
-
+            command.CultureId = cultureId;
             var result = await _mediator.Send(command);
                 return Ok("Borrower Created!");
             

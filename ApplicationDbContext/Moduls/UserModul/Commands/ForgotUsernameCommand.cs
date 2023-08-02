@@ -12,8 +12,8 @@ namespace Application.Moduls.UserModul.Commands
 {
     public sealed record ForgotUsernameCommand : IRequest<string>
     {
-        public string Email { get; init; }
-        public string CultureId { get; init; }
+        public string Email { get; set; }
+        public string CultureId { get; set; }
     }
     internal sealed class ForgotUsernameHandler : IRequestHandler<ForgotUsernameCommand, string>
     {

@@ -12,9 +12,10 @@ namespace Infrastructure.Repositories
     public class PermissionRepository : RepositoryBase<Permission>, IPermissionRepository
     {
         public PermissionRepository(ApplicationDbContext context) : base(context) {}
-        public async Task CreateAsync(Permission permission)
+        public Permission Create(Permission permission)
         {
-            await _context.Set<Permission>().AddAsync(permission);
+             _context.Set<Permission>().Add(permission);
+            return permission;
         }
         public async Task UpdateAsync(Permission permission)
         {

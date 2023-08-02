@@ -51,7 +51,10 @@ namespace Infrastructure.Extentions {
              if (exception is FluentValidationException fluentValidationException)
             {
                 statusCode = HttpStatusCode.BadRequest;
-                errorMessages.Add(localizer[fluentValidationException.Message]);
+                foreach (var errorMessage in fluentValidationException.ErrorMessages)
+                {
+                    errorMessages.Add(localizer[errorMessage]);
+                }
             }
             else if (exception is EmailInUseException emailInUseException)
             {
@@ -100,6 +103,10 @@ namespace Infrastructure.Extentions {
             {
                 statusCode = HttpStatusCode.BadRequest;
                 errorMessages.Add(localizer[ValidationResource.RoleWasNotFound]);
+            }
+            else if (exception is PermissionToRoleAssignedException) {
+                statusCode = HttpStatusCode.BadRequest;
+                errorMessages.Add(localizer[ValidationResource.RolePermission]);
             }
             else
             {

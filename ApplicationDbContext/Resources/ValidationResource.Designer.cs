@@ -250,6 +250,24 @@ namespace Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Permission description is required.
+        /// </summary>
+        public static string PermissionDescriptionRequired {
+            get {
+                return ResourceManager.GetString("PermissionDescriptionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Permission name is required..
+        /// </summary>
+        public static string PermissionNameRequired {
+            get {
+                return ResourceManager.GetString("PermissionNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Phone number should have at least 8 numbers..
         /// </summary>
         public static string PhoneNumber_MinLength {
@@ -282,6 +300,24 @@ namespace Application.Resources {
         public static string RoleExists {
             get {
                 return ResourceManager.GetString("RoleExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Role name is required..
+        /// </summary>
+        public static string RoleNameRequired {
+            get {
+                return ResourceManager.GetString("RoleNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This role has this permission already assigned..
+        /// </summary>
+        public static string RolePermission {
+            get {
+                return ResourceManager.GetString("RolePermission", resourceCulture);
             }
         }
         

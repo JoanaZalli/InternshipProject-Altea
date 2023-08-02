@@ -180,6 +180,12 @@
   <data name="Password_RequiresAlphanumeric" xml:space="preserve">
     <value>La password deve contenere almeno 1 carattere alfanumerico.</value>
   </data>
+  <data name="PermissionDescriptionRequired" xml:space="preserve">
+    <value>La descrizione dell'autorizzazione è obbligatoria</value>
+  </data>
+  <data name="PermissionNameRequired" xml:space="preserve">
+    <value>Il nome dell'autorizzazione è obbligatorio.</value>
+  </data>
   <data name="PhoneNumber_MinLength" xml:space="preserve">
     <value>Il numero di telefono deve avere almeno 8 numeri.</value>
   </data>
@@ -191,6 +197,12 @@
   </data>
   <data name="RoleExists" xml:space="preserve">
     <value>Questo ruolo esiste già.</value>
+  </data>
+  <data name="RoleNameRequired" xml:space="preserve">
+    <value>Il nome del ruolo è obbligatorio.</value>
+  </data>
+  <data name="RolePermission" xml:space="preserve">
+    <value>Questo ruolo ha questa autorizzazione già assegnata.</value>
   </data>
   <data name="RoleWasNotFound" xml:space="preserve">
     <value>Ruolo non trovato.</value>

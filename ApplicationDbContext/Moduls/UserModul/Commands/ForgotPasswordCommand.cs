@@ -14,8 +14,8 @@ namespace Application.Moduls.UserModul.Commands
 {
     public class ForgotPasswordCommand : IRequest<string>
     {
-        public string Email { get; init; }
-        public string CultureId { get; init; }
+        public string Email { get; set; }
+        public string CultureId { get; set; }
     }
 
     public class ForgotPasswordCommandHandler : IRequestHandler<ForgotPasswordCommand, string>

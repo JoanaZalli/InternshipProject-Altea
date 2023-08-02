@@ -15,8 +15,8 @@ namespace Application.Moduls.UserModul.Commands
 {
     public sealed record RequestNewTokenCommand : IRequest<string>
     {
-        public string Email { get; init; }
-        public string CultureId { get; init; }
+        public string Email { get; set; }
+        public string CultureId { get; set; }
     }
 
     internal sealed class RequestNewTokenCommandHandler : IRequestHandler<RequestNewTokenCommand, string>

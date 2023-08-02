@@ -16,16 +16,17 @@ namespace Cardo_Project.Controllers
             _mediator = mediator;
         }
         [HttpPost("create")]
-        public async Task<IActionResult> CreateRole([FromBody] CreateRoleCommand command)
+        public async Task<IActionResult> CreateRole([FromBody] CreateRoleCommand command, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
+            command.CultureId = cultureId;
             var result = await _mediator.Send(command);
 
                 return Ok(result);
         }
         [HttpPut("update")]
-        public async Task<IActionResult> UpdateRole([FromBody] UpdateRoleCommand command)
+        public async Task<IActionResult> UpdateRole([FromBody] UpdateRoleCommand command, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
-            
+            command.CultureId=cultureId;
             var result = await _mediator.Send(command);
 
             return Ok(result);

@@ -54,17 +54,17 @@ namespace Cardo_Project.Controllers
         }
 
         [HttpGet("activate")]
-        public async Task<IActionResult> ActivateAccount([FromQuery] string token )
+        public async Task<IActionResult> ActivateAccount([FromQuery] string token, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
-            await _mediator.Send(new GetUserByTokenQuery { Token = token });
+            await _mediator.Send(new GetUserByTokenQuery { Token = token, CultureId=cultureId });
               
             
             return Ok(new { Message = "Account activated successfully." });
         }
         [HttpPost("requestNewToken")]
-        public async Task<IActionResult> RequestNewToken([FromBody] RequestNewTokenCommand request)
+        public async Task<IActionResult> RequestNewToken([FromBody] RequestNewTokenCommand request, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
-
+            request.CultureId=cultureId;
             var result = await _mediator.Send(request);
 
             return Ok(new { Message = result });
@@ -80,9 +80,9 @@ namespace Cardo_Project.Controllers
         }
 
         [HttpPost("forgotUsername")]
-        public async Task<IActionResult> ForgotUsername([FromBody] ForgotUsernameCommand request)
+        public async Task<IActionResult> ForgotUsername([FromBody] ForgotUsernameCommand request, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
-
+            request.CultureId=cultureId;
             var result = await _mediator.Send(request);
 
             return Ok(new { Message = result });
@@ -90,15 +90,17 @@ namespace Cardo_Project.Controllers
        
         
         [HttpPost("forgotPassword")]
-        public async Task<IActionResult> PasswordRecovery([FromBody] ForgotPasswordCommand request)
+        public async Task<IActionResult> PasswordRecovery([FromBody] ForgotPasswordCommand request, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
+            request.CultureId= cultureId;
             var token = await _mediator.Send(request);
 
             return Ok(new { Message = "Password recovery initiated. Check your email for the recovery link and token.", PasswordRecoveyToken = token });
         }
         [HttpPut("setNewPassword")]
-        public async Task<IActionResult> SetNewPasswordWithToken([FromBody] SetNewPasswordCommand request)
+        public async Task<IActionResult> SetNewPasswordWithToken([FromBody] SetNewPasswordCommand request, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
+            request.CultureId= cultureId;
             var result = await _mediator.Send(request);
 
             return Ok(new { Message = result });

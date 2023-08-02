@@ -9,7 +9,7 @@ namespace Application.Contracts.Repositories
 {
     public interface IPermissionRepository
     {
-        Task CreateAsync(Permission permission);
+        Permission Create(Permission permission);
         Task UpdateAsync(Permission permission);
         Task DeleteAsync(int permissionId);
         Task<IEnumerable<Permission>> GetAllAsync();
