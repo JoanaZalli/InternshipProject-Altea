@@ -48,7 +48,7 @@ namespace Infrastructure.Extentions {
             HttpStatusCode statusCode;
             List<LocalizedString> errorMessages = new List<LocalizedString>();
 
-             if (exception is FluentValidationException fluentValidationException)
+           if (exception is FluentValidationException fluentValidationException)
             {
                 statusCode = HttpStatusCode.BadRequest;
                 foreach (var errorMessage in fluentValidationException.ErrorMessages)
@@ -108,7 +108,11 @@ namespace Infrastructure.Extentions {
                 statusCode = HttpStatusCode.BadRequest;
                 errorMessages.Add(localizer[ValidationResource.RolePermission]);
             }
-            else
+            else if (exception is DuplicateFiscalCodeException)
+            {
+                statusCode= HttpStatusCode.BadRequest;
+                errorMessages.Add(localizer[ValidationResource.FiscalCodeUnique]);
+            }else
             {
                 statusCode = HttpStatusCode.InternalServerError;
                 errorMessages.Add(localizer["An error occurred while processing your request."]);

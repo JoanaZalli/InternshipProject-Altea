@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Infrastructure.Repository.Configuration;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -48,8 +49,13 @@ namespace Infrastructure
                 .WithMany()
                 .HasForeignKey(u => u.PrefixId);
 
+            // create index 
+            modelBuilder.Entity<Borrower>()
+                .HasIndex(x => new { x.FiscalCode, x.UserId}).IsUnique();
+
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
 
+            
 
             modelBuilder.Entity<CompanyType>().HasData(
             new CompanyType { 
@@ -88,8 +94,17 @@ namespace Infrastructure
                    DateCreated = DateTime.Now,
                }
             );
-
-
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    FirstName="admin",
+                    LastName="admin",
+                    PrefixId=1,
+                    UserName="admin1",
+                    Email="admin@gmail.com",
+                    EmailConfirmed=true,                   
+                });
+           
         }
 
     }

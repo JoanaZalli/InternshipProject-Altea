@@ -1,5 +1,6 @@
 ﻿using Application.Contracts.Repositories;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,10 @@ namespace Infrastructure.Repositories
             _context.SaveChanges();
             return borrower;
         }
-
+        public async Task<List<Borrower>> GetBorrowersByUserIdAsync(string userId)
+        {
+            var borrwers = await _context.Borrowers.Where(b => b.UserId == userId).ToListAsync();
+            return borrwers;
+        }
     }
 }

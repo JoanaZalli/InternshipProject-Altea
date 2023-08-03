@@ -19,6 +19,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Application.Mappers;
 using Application.Models;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
@@ -63,6 +64,9 @@ builder.Services.AddHttpContextAccessor();
 //Jwt
 builder.Services.ConfigureJWT(builder.Configuration);
 
+builder.Services.AddFluentValidation(s => {
+    s.RegisterValidatorsFromAssemblyContaining<Program>();
+});
 
 // Localization
 builder.Services.ConfigureLocalization();

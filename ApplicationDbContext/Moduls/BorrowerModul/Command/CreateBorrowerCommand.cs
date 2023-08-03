@@ -18,16 +18,16 @@ using System.Threading.Tasks;
 
 namespace Application.Moduls.BorrowerModul.Command
 {
-    public sealed record  CreateBorrowerCommand : IRequest<BorrowerDTO>
+    public sealed record CreateBorrowerCommand : IRequest<bool>
     {
         public string CompanyName { get; set; }
         public int CompanyTypeId { get; set; }
-        public Guid UserId { get; set; }
+        //public Guid UserId { get; set; }
         public string VatNumber { get; set; }
         public string FiscalCode { get; set; }
         public string CultureId { get; set; }
     }
-    public sealed class CreateBorrowerCommandHandler : IRequestHandler<CreateBorrowerCommand, BorrowerDTO>
+    public sealed class CreateBorrowerCommandHandler : IRequestHandler<CreateBorrowerCommand,bool>
     {
         private readonly IMapper _mapper;
         private readonly IStringLocalizer<CreateBorrowerCommand> _validationLocalizationService;
@@ -37,18 +37,18 @@ namespace Application.Moduls.BorrowerModul.Command
         private readonly UserManager<User> _userManager;
 
 
-        public CreateBorrowerCommandHandler(IMapper mapper, IStringLocalizer<CreateBorrowerCommand> validationLocalizationService, 
+        public CreateBorrowerCommandHandler(IMapper mapper, IStringLocalizer<CreateBorrowerCommand> validationLocalizationService,
             IBorrowerRepository borrowerRepository, ICompanyTypeRepository companyTypeRepository, IHttpContextAccessor httpContextAccessor,
-           UserManager<User> userManager )
+           UserManager<User> userManager)
         {
             _mapper = mapper;
             _validationLocalizationService = validationLocalizationService;
             _borrowerRepository = borrowerRepository;
             _companyTypeRepository = companyTypeRepository;
-            _httpContextAccessor= httpContextAccessor;
+            _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
-    }
-    public async Task<BorrowerDTO> Handle(CreateBorrowerCommand request, CancellationToken cancellationToken)
+        }
+        public async Task<bool> Handle(CreateBorrowerCommand request, CancellationToken cancellationToken)
         {
 
             var uName = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
@@ -60,6 +60,7 @@ namespace Application.Moduls.BorrowerModul.Command
             Guid userId = new Guid(user.Id);
 
             var companyTypes = await _companyTypeRepository.GetAllCompanyTypesAsync(trackChanges: false);
+           // var userBorrowers = await _borrowerRepository.GetBorrowersByUserIdAsync(user.Id);
 
             var validator = new CreateBorrowerValidation(_validationLocalizationService, request.CultureId, companyTypes);
             var validationResult = await validator.ValidateAsync(request);
@@ -68,12 +69,21 @@ namespace Application.Moduls.BorrowerModul.Command
                 var errorMessages = validationResult.Errors.Select(error => _validationLocalizationService[error.ErrorMessage, request.CultureId]).ToList();
                 throw new FluentValidationException(errorMessages);
             }
-            request.UserId = userId;
+            //request.UserId = userId;
             var borrowerForCreate = _mapper.Map<Borrower>(request);
-            borrowerForCreate = _borrowerRepository.CreateBorrower(borrowerForCreate);
+            borrowerForCreate.UserId = userId.ToString();
+            try
+            {
+                borrowerForCreate = _borrowerRepository.CreateBorrower(borrowerForCreate);
+            }
+            catch (Exception ex)
+            {
+                var duplicateFiscalCode = 12345678911;
+                throw new DuplicateFiscalCodeException(request.CultureId);
 
-            var borrowerDTO = _mapper.Map<BorrowerDTO>(borrowerForCreate);
-            return borrowerDTO;
+
+            }
+            return true;
         }
     }
 

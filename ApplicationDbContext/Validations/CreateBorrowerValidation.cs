@@ -19,7 +19,8 @@ namespace Application.Validations
         private readonly IEnumerable<CompanyType> _companyTypes;
 
 
-        public CreateBorrowerValidation(IStringLocalizer<CreateBorrowerCommand> localizationService, string cultureId, IEnumerable<CompanyType> companyTypes) {
+        public CreateBorrowerValidation(IStringLocalizer<CreateBorrowerCommand> localizationService, string cultureId, IEnumerable<CompanyType> companyTypes)
+        {
 
             _companyTypes = companyTypes;
 
@@ -32,7 +33,8 @@ namespace Application.Validations
                 .MaximumLength(11).WithMessage(u => localizationService[ValidationResource.VatNumberLength, cultureId])
                 .NotEmpty().WithMessage(u => localizationService[ValidationResource.VatNumberRequired, cultureId]);
 
-            RuleFor(b => b.FiscalCode).Custom((value, context) =>{
+            RuleFor(b => b.FiscalCode).Custom((value, context) =>
+            {
 
                 var companyType = _companyTypes.FirstOrDefault(ct => ct.Id == context.InstanceToValidate.CompanyTypeId);
 
@@ -53,9 +55,20 @@ namespace Application.Validations
 
             }).NotEmpty().WithMessage(u => localizationService[ValidationResource.FiscalCodeRequired, cultureId]);
 
+            //    RuleFor(b => b.FiscalCode)
+            //               .Must((command, fiscalCode) => IsFiscalCodeUnique(command.UserId.ToString(), fiscalCode))
+            //               .WithMessage(u => localizationService[ValidationResource.FiscalCodeUnique, cultureId]);
+            //}
 
+            //private bool IsFiscalCodeUnique(string userId, string fiscalCode)
+            //{
+            //    var b = _borrowers.Any(b=>b.UserId==userId &&  b.FiscalCode == fiscalCode);
+            //    if (b)
+            //    {
+            //        return false;
+            //    }
+            //    return true;
+            //}
         }
-
-        
     }
 }

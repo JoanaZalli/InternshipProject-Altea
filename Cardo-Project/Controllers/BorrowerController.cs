@@ -23,8 +23,8 @@ namespace Cardo_Project.Controllers
         {
             command.CultureId = cultureId;
             var result = await _mediator.Send(command);
-                return Ok("Borrower Created!");
-            
+            return Ok("Borrower Created!");
+
         }
     }
 }

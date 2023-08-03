@@ -22,11 +22,11 @@ namespace Infrastructure
                 {
                     return;
                 }
-                var env= serviceProvider.GetRequiredService<IWebHostEnvironment>();
+                var env = serviceProvider.GetRequiredService<IWebHostEnvironment>();
                 var path = Path.Combine(env.WebRootPath, "Files", "prefixes.json");
 
-                var jsonString=System.IO.File.ReadAllText(path);
-                if(jsonString != null)
+                var jsonString = System.IO.File.ReadAllText(path);
+                if (jsonString != null)
                 {
 #pragma warning disable CS8600
                     var prefixes = System.Text.Json.JsonSerializer.Deserialize<List<Prefix>>(jsonString);

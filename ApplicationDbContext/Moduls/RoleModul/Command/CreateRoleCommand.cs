@@ -17,7 +17,6 @@ namespace Application.Moduls.RoleModul.Command
     public sealed record CreateRoleCommand : IRequest<bool>
     {
         public string RoleName { get; set; }
-       
         public string CultureId { get; set; }
 
 
@@ -42,7 +41,7 @@ namespace Application.Moduls.RoleModul.Command
                 throw new RoleExistsException(request.CultureId);
             }
 
-             var   role= new IdentityRole { Name = request.RoleName };
+            var   role= new IdentityRole { Name = request.RoleName };
             var roleValidation= new CreateRoleValidation(_validationLocalizationService, request.CultureId);
             var validationResult = await roleValidation.ValidateAsync(request);
             if (!validationResult.IsValid)

@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230803133713_IndexMigratiion")]
+    partial class IndexMigratiion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,37 +94,37 @@ namespace Infrastructure.Migrations
                         {
                             Id = 1,
                             Company_Type = "Sole proprietorship (S.I.)",
-                            DateCreated = new DateTime(2023, 8, 3, 16, 38, 55, 389, DateTimeKind.Local).AddTicks(8092)
+                            DateCreated = new DateTime(2023, 8, 3, 15, 37, 13, 87, DateTimeKind.Local).AddTicks(3420)
                         },
                         new
                         {
                             Id = 2,
                             Company_Type = "Other",
-                            DateCreated = new DateTime(2023, 8, 3, 16, 38, 55, 389, DateTimeKind.Local).AddTicks(8142)
+                            DateCreated = new DateTime(2023, 8, 3, 15, 37, 13, 87, DateTimeKind.Local).AddTicks(3467)
                         },
                         new
                         {
                             Id = 3,
                             Company_Type = "Partnership limited by shares (p.l.sh.)",
-                            DateCreated = new DateTime(2023, 8, 3, 16, 38, 55, 389, DateTimeKind.Local).AddTicks(8144)
+                            DateCreated = new DateTime(2023, 8, 3, 15, 37, 13, 87, DateTimeKind.Local).AddTicks(3469)
                         },
                         new
                         {
                             Id = 4,
                             Company_Type = "Limited partnership (l.p.)",
-                            DateCreated = new DateTime(2023, 8, 3, 16, 38, 55, 389, DateTimeKind.Local).AddTicks(8146)
+                            DateCreated = new DateTime(2023, 8, 3, 15, 37, 13, 87, DateTimeKind.Local).AddTicks(3471)
                         },
                         new
                         {
                             Id = 5,
                             Company_Type = "Cooperative Society (c.s.)",
-                            DateCreated = new DateTime(2023, 8, 3, 16, 38, 55, 389, DateTimeKind.Local).AddTicks(8148)
+                            DateCreated = new DateTime(2023, 8, 3, 15, 37, 13, 87, DateTimeKind.Local).AddTicks(3473)
                         },
                         new
                         {
                             Id = 6,
                             Company_Type = "General partnership (g.p.)",
-                            DateCreated = new DateTime(2023, 8, 3, 16, 38, 55, 389, DateTimeKind.Local).AddTicks(8150)
+                            DateCreated = new DateTime(2023, 8, 3, 15, 37, 13, 87, DateTimeKind.Local).AddTicks(3474)
                         });
                 });
 
@@ -298,28 +301,6 @@ namespace Infrastructure.Migrations
                     b.HasIndex("PrefixId");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "3b719ecd-3ebb-4089-84fc-49c45541bedd",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "2b71bf1f-7b42-4037-bdc5-2cf6d041b9d6",
-                            Email = "admin@gmail.com",
-                            EmailConfirmed = true,
-                            FailedLoginAttempts = 0,
-                            FirstName = "admin",
-                            IsBlocked = false,
-                            LastName = "admin",
-                            LockoutEnabled = false,
-                            PasswordRecoveyTokenCreationTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PhoneNumberConfirmed = false,
-                            PrefixId = 1,
-                            SecurityStamp = "b516db98-c929-4d49-bda7-26e058a3f47c",
-                            TokenCreationTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TwoFactorEnabled = false,
-                            UserName = "admin1"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -351,19 +332,19 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d61f1f9b-de07-4910-a0bd-708874c04698",
+                            Id = "44829347-a1a2-4b4f-9195-3ff36afcd170",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "3960bdd1-6ae2-462f-a93c-7dd03dce725f",
+                            Id = "a1dc9480-855b-4aa5-bea9-cbb47d7207f9",
                             Name = "Loan Officer",
                             NormalizedName = "LOAN OFFICER"
                         },
                         new
                         {
-                            Id = "669f2bb4-655e-4dce-bead-5c6d48c2c824",
+                            Id = "aa0e3d62-8760-4b1a-a21b-0b340ae1732a",
                             Name = "Borrower",
                             NormalizedName = "BORROWER"
                         });
