@@ -1,4 +1,5 @@
 ﻿using Application.Contracts.Repositories;
+using Application.DTOS;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,10 +22,27 @@ namespace Infrastructure.Repositories
             _context.SaveChanges();
             return borrower;
         }
-        public async Task<List<Borrower>> GetBorrowersByUserIdAsync(string userId)
+        public async Task<IEnumerable<Borrower>> GetBorrowersByUserIdAsync(string userId)
         {
-            var borrwers = await _context.Borrowers.Where(b => b.UserId == userId).ToListAsync();
-            return borrwers;
+            
+            var borrowers = await _context.Borrowers.Include(b => b.CompanyType) .Where(b => b.UserId == userId) .Select(b => new Borrower
+               {
+                   Id = b.Id,
+                   CompanyName = b.CompanyName,
+                   CompanyType = b.CompanyType, 
+                   VatNumber = b.VatNumber,
+                   FiscalCode = b.FiscalCode,
+                   DateCreated = b.DateCreated,
+                   DateUpdated = b.DateUpdated,
+                }).ToListAsync();
+
+            return borrowers;
+        }
+
+        public async Task<Borrower> GetBorrowerByIdAsync(int id)
+        {
+            var borrwer = await _context.Borrowers.FirstOrDefaultAsync(b => b.Id == id);
+            return borrwer;
         }
     }
 }

@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230804135908_ProductMigration")]
+    partial class ProductMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,37 +94,37 @@ namespace Infrastructure.Migrations
                         {
                             Id = 1,
                             Company_Type = "Sole proprietorship (S.I.)",
-                            DateCreated = new DateTime(2023, 8, 4, 16, 43, 37, 561, DateTimeKind.Local).AddTicks(3523)
+                            DateCreated = new DateTime(2023, 8, 4, 15, 59, 8, 248, DateTimeKind.Local).AddTicks(9217)
                         },
                         new
                         {
                             Id = 2,
                             Company_Type = "Other",
-                            DateCreated = new DateTime(2023, 8, 4, 16, 43, 37, 561, DateTimeKind.Local).AddTicks(3573)
+                            DateCreated = new DateTime(2023, 8, 4, 15, 59, 8, 248, DateTimeKind.Local).AddTicks(9272)
                         },
                         new
                         {
                             Id = 3,
                             Company_Type = "Partnership limited by shares (p.l.sh.)",
-                            DateCreated = new DateTime(2023, 8, 4, 16, 43, 37, 561, DateTimeKind.Local).AddTicks(3575)
+                            DateCreated = new DateTime(2023, 8, 4, 15, 59, 8, 248, DateTimeKind.Local).AddTicks(9274)
                         },
                         new
                         {
                             Id = 4,
                             Company_Type = "Limited partnership (l.p.)",
-                            DateCreated = new DateTime(2023, 8, 4, 16, 43, 37, 561, DateTimeKind.Local).AddTicks(3577)
+                            DateCreated = new DateTime(2023, 8, 4, 15, 59, 8, 248, DateTimeKind.Local).AddTicks(9276)
                         },
                         new
                         {
                             Id = 5,
                             Company_Type = "Cooperative Society (c.s.)",
-                            DateCreated = new DateTime(2023, 8, 4, 16, 43, 37, 561, DateTimeKind.Local).AddTicks(3579)
+                            DateCreated = new DateTime(2023, 8, 4, 15, 59, 8, 248, DateTimeKind.Local).AddTicks(9278)
                         },
                         new
                         {
                             Id = 6,
                             Company_Type = "General partnership (g.p.)",
-                            DateCreated = new DateTime(2023, 8, 4, 16, 43, 37, 561, DateTimeKind.Local).AddTicks(3581)
+                            DateCreated = new DateTime(2023, 8, 4, 15, 59, 8, 248, DateTimeKind.Local).AddTicks(9280)
                         });
                 });
 
@@ -352,9 +355,9 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7a8b5ae3-0b4f-42b1-970a-75dc3b8a7ec9",
+                            Id = "5142c668-e059-4859-b5d3-9a0cf4e62e59",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "baf0b03d-132d-4c7b-9414-7bd879217a7f",
+                            ConcurrencyStamp = "84eeed8d-1053-48a0-97ed-87dac96da219",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             FailedLoginAttempts = 0,
@@ -365,26 +368,11 @@ namespace Infrastructure.Migrations
                             PasswordRecoveyTokenCreationTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PhoneNumberConfirmed = false,
                             PrefixId = 1,
-                            SecurityStamp = "9ba66f0d-fc03-4d63-8e82-66737559bfc8",
+                            SecurityStamp = "b05e1a1a-81d3-4e2a-9702-2c52d85f8232",
                             TokenCreationTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TwoFactorEnabled = false,
                             UserName = "admin1"
                         });
-                });
-
-            modelBuilder.Entity("Domain.Entities.UserPermission", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "PermissionId");
-
-                    b.HasIndex("PermissionId");
-
-                    b.ToTable("UserPermissions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -416,19 +404,19 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "326a6fc4-ef5e-43ed-8744-46844ff739a1",
+                            Id = "f3ff3c04-cd86-4eb1-95f2-fb56a672ba2c",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a2f11ad9-9763-4d31-ac74-bdcb7a39df70",
+                            Id = "daac7143-9a06-447d-9cfd-072e0134b1c0",
                             Name = "Loan Officer",
                             NormalizedName = "LOAN OFFICER"
                         },
                         new
                         {
-                            Id = "abe77874-79d3-4dc2-b1d2-34f1eecf3de6",
+                            Id = "56303f94-ea01-49c1-99b4-0c255841dfbe",
                             Name = "Borrower",
                             NormalizedName = "BORROWER"
                         });
@@ -587,25 +575,6 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Prefix");
-                });
-
-            modelBuilder.Entity("Domain.Entities.UserPermission", b =>
-                {
-                    b.HasOne("Domain.Entities.Permission", "Permission")
-                        .WithMany()
-                        .HasForeignKey("PermissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Permission");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230804140618_UserPermission")]
+    partial class UserPermission
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,37 +94,37 @@ namespace Infrastructure.Migrations
                         {
                             Id = 1,
                             Company_Type = "Sole proprietorship (S.I.)",
-                            DateCreated = new DateTime(2023, 8, 4, 16, 43, 37, 561, DateTimeKind.Local).AddTicks(3523)
+                            DateCreated = new DateTime(2023, 8, 4, 16, 6, 18, 269, DateTimeKind.Local).AddTicks(9679)
                         },
                         new
                         {
                             Id = 2,
                             Company_Type = "Other",
-                            DateCreated = new DateTime(2023, 8, 4, 16, 43, 37, 561, DateTimeKind.Local).AddTicks(3573)
+                            DateCreated = new DateTime(2023, 8, 4, 16, 6, 18, 269, DateTimeKind.Local).AddTicks(9730)
                         },
                         new
                         {
                             Id = 3,
                             Company_Type = "Partnership limited by shares (p.l.sh.)",
-                            DateCreated = new DateTime(2023, 8, 4, 16, 43, 37, 561, DateTimeKind.Local).AddTicks(3575)
+                            DateCreated = new DateTime(2023, 8, 4, 16, 6, 18, 269, DateTimeKind.Local).AddTicks(9732)
                         },
                         new
                         {
                             Id = 4,
                             Company_Type = "Limited partnership (l.p.)",
-                            DateCreated = new DateTime(2023, 8, 4, 16, 43, 37, 561, DateTimeKind.Local).AddTicks(3577)
+                            DateCreated = new DateTime(2023, 8, 4, 16, 6, 18, 269, DateTimeKind.Local).AddTicks(9734)
                         },
                         new
                         {
                             Id = 5,
                             Company_Type = "Cooperative Society (c.s.)",
-                            DateCreated = new DateTime(2023, 8, 4, 16, 43, 37, 561, DateTimeKind.Local).AddTicks(3579)
+                            DateCreated = new DateTime(2023, 8, 4, 16, 6, 18, 269, DateTimeKind.Local).AddTicks(9736)
                         },
                         new
                         {
                             Id = 6,
                             Company_Type = "General partnership (g.p.)",
-                            DateCreated = new DateTime(2023, 8, 4, 16, 43, 37, 561, DateTimeKind.Local).AddTicks(3581)
+                            DateCreated = new DateTime(2023, 8, 4, 16, 6, 18, 269, DateTimeKind.Local).AddTicks(9738)
                         });
                 });
 
@@ -352,9 +355,9 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7a8b5ae3-0b4f-42b1-970a-75dc3b8a7ec9",
+                            Id = "b6b6fe83-9c86-4524-b49e-d7b776011d80",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "baf0b03d-132d-4c7b-9414-7bd879217a7f",
+                            ConcurrencyStamp = "1fb2123c-8405-485d-8ca2-a0200ec6c897",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             FailedLoginAttempts = 0,
@@ -365,7 +368,7 @@ namespace Infrastructure.Migrations
                             PasswordRecoveyTokenCreationTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PhoneNumberConfirmed = false,
                             PrefixId = 1,
-                            SecurityStamp = "9ba66f0d-fc03-4d63-8e82-66737559bfc8",
+                            SecurityStamp = "e6bc0de5-77d9-426e-ad50-97de849bdad5",
                             TokenCreationTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TwoFactorEnabled = false,
                             UserName = "admin1"
@@ -384,7 +387,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("PermissionId");
 
-                    b.ToTable("UserPermissions");
+                    b.ToTable("UserPermission");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -416,19 +419,19 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "326a6fc4-ef5e-43ed-8744-46844ff739a1",
+                            Id = "5ef8f4e2-f8e7-4c3b-b6c3-548870987560",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a2f11ad9-9763-4d31-ac74-bdcb7a39df70",
+                            Id = "facda238-5524-4433-aa9f-144aa32bba6f",
                             Name = "Loan Officer",
                             NormalizedName = "LOAN OFFICER"
                         },
                         new
                         {
-                            Id = "abe77874-79d3-4dc2-b1d2-34f1eecf3de6",
+                            Id = "476b8af9-51e1-4f91-b116-b8d5d7806dd4",
                             Name = "Borrower",
                             NormalizedName = "BORROWER"
                         });

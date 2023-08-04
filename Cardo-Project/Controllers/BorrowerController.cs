@@ -1,4 +1,6 @@
-﻿using Application.Moduls.BorrowerModul.Command;
+﻿using Application.DTOS;
+using Application.Moduls.BorrowerModul.Command;
+using Application.Moduls.BorrowerModul.Query;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -26,5 +28,28 @@ namespace Cardo_Project.Controllers
             return Ok("Borrower Created!");
 
         }
+        [HttpGet("borrower/{borrowerId}")]
+        public async Task<IActionResult> GetBorrowerById(int borrowerId, [FromHeader(Name = "Accept-Language")] string culture)
+        {
+            var query = new GetBorrowerByIdQuery { BorrowerId = borrowerId };
+            query.Culture = culture;
+            var result = await _mediator.Send(query);
+            return Ok(result);
+
+        }
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<IEnumerable<BorrowerDTO>>> GetBorrowersByUserId(string userId, string? sortBy = null, bool? sortAscending = null)
+        {
+            var query = new GetAllBorrowersOfAUserQuery
+            {
+                UserId = userId,
+                SortBy = sortBy,
+                SortAscending = sortAscending,
+            };
+
+            var borrowers = await _mediator.Send(query);
+            return Ok(borrowers);
+        }
+
     }
 }

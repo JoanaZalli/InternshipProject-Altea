@@ -1,5 +1,6 @@
 ﻿using Application.Moduls.PermissionModul.Command;
 using Application.Moduls.RolePermissionModul;
+using Application.Moduls.UserPermissionModul.Command;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,5 +32,14 @@ namespace Cardo_Project.Controllers
                 return Ok(result);
             
         }
+        [HttpPost("assignPermissionToUser")]
+        public async Task<IActionResult> AssignPermissionToUser([FromBody] CreateUserPermissionCommand command)
+        {
+
+            var result = await _mediatR.Send(command);
+            return Ok(result);
+
+        }
+
     }
 }

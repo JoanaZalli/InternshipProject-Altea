@@ -22,6 +22,8 @@ namespace Infrastructure
 
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<UserPermission> UserPermissions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,7 +32,7 @@ namespace Infrastructure
                .HasMany(u => u.Borrowers)
                .WithOne(b => b.User)
                .HasForeignKey(b => b.UserId);
-
+            //Role Permission
             modelBuilder.Entity<RolePermission>()
               .HasKey(rp => new { rp.RoleId, rp.PermissionId });
 
@@ -43,6 +45,20 @@ namespace Infrastructure
                 .HasOne(rp => rp.Permission)
                 .WithMany()
                 .HasForeignKey(rp => rp.PermissionId);
+            //User Permission
+            modelBuilder.Entity<UserPermission>()
+              .HasKey(up => new { up.UserId, up.PermissionId });
+
+            modelBuilder.Entity<UserPermission>()
+                .HasOne(up=>up.User)
+                .WithMany()
+                .HasForeignKey(up => up.UserId);
+
+            modelBuilder.Entity<UserPermission>()
+               .HasOne(up => up.Permission)
+               .WithMany()
+               .HasForeignKey(up => up.PermissionId);
+
 
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Prefix)
@@ -55,7 +71,7 @@ namespace Infrastructure
 
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
 
-            
+            //company type
 
             modelBuilder.Entity<CompanyType>().HasData(
             new CompanyType { 
@@ -94,6 +110,7 @@ namespace Infrastructure
                    DateCreated = DateTime.Now,
                }
             );
+            //admin seed data
             modelBuilder.Entity<User>().HasData(
                 new User
                 {
@@ -104,7 +121,28 @@ namespace Infrastructure
                     Email="admin@gmail.com",
                     EmailConfirmed=true,                   
                 });
-           
+
+            //Products
+            modelBuilder.Entity<Product>().HasData(
+                new Product
+                {
+                    Id=1,
+                    Name = "Installments with pre-amortization at a fixed rate",
+                    Description = "Installments with pre-amortization at a fixed rate",
+                    Refernce_rate = 0.0025,
+                    Max_Financed_Amount= 200000000,
+                    Min_Financed_Amount= 1000000
+                },
+                new Product
+                {
+                    Id=2,
+                    Name = "Installment with variable rate pre-amortization",
+                    Description = "Installment with variable rate pre-amortization",
+                    Refernce_rate = 0.03,
+                    Max_Financed_Amount = 100000000,
+                    Min_Financed_Amount = 1000000
+                }
+            ) ;
         }
 
     }

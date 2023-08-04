@@ -10,7 +10,8 @@ namespace Application.Contracts.Repositories
     public interface IBorrowerRepository 
     {
         Borrower CreateBorrower(Borrower borrower);
-        Task<List<Borrower>> GetBorrowersByUserIdAsync(string userId);
+        Task<IEnumerable<Borrower>> GetBorrowersByUserIdAsync(string userId);
+         Task<Borrower> GetBorrowerByIdAsync(int id); 
 
     }
 }

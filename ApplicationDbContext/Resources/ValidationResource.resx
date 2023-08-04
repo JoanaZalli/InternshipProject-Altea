@@ -123,6 +123,9 @@
   <data name="AuthenticationFailed" xml:space="preserve">
     <value>Authentication failed. Wrong username or password.</value>
   </data>
+  <data name="BorrowerNotFound" xml:space="preserve">
+    <value>This borrower was not found.</value>
+  </data>
   <data name="CompanyNameRequired" xml:space="preserve">
     <value>Company name is required.</value>
   </data>
@@ -209,6 +212,9 @@
   </data>
   <data name="String1" xml:space="preserve">
     <value>Questo nome utente è già in uso.</value>
+  </data>
+  <data name="String2" xml:space="preserve">
+    <value />
   </data>
   <data name="TokenExpired" xml:space="preserve">
     <value>This token has expired.</value>

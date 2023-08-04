@@ -20,6 +20,8 @@ using Microsoft.EntityFrameworkCore;
 using Application.Mappers;
 using Application.Models;
 using FluentValidation.AspNetCore;
+using Application.Sorting;
+using Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
@@ -83,6 +85,8 @@ builder.Services.AddScoped<IBorrowerRepository, BorrowerRepository>();
 builder.Services.AddScoped<ICompanyTypeRepository, CompanyTypeRepository>();
 builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
 builder.Services.AddScoped<IRolePermissionRepository, RolePermissionRepository>();
+builder.Services.AddScoped<IUserPermissionRepository, UserPermissionRepository>();
+builder.Services.AddScoped<BaseSorter<Borrower>, BorrowerSorter>();
 
 
 // ServiceManager and Logger

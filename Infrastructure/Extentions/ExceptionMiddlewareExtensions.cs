@@ -101,7 +101,7 @@ namespace Infrastructure.Extentions {
                 errorMessages.Add(localizer[ValidationResource.RoleExists]);
             } else if(exception is RoleWasNotFoundException)
             {
-                statusCode = HttpStatusCode.BadRequest;
+                statusCode = HttpStatusCode.NotFound;
                 errorMessages.Add(localizer[ValidationResource.RoleWasNotFound]);
             }
             else if (exception is PermissionToRoleAssignedException) {
@@ -112,7 +112,12 @@ namespace Infrastructure.Extentions {
             {
                 statusCode= HttpStatusCode.BadRequest;
                 errorMessages.Add(localizer[ValidationResource.FiscalCodeUnique]);
-            }else
+            }else if (exception is BorrowerNotFoundException)
+            {
+                statusCode = HttpStatusCode.NotFound;
+                errorMessages.Add(localizer[ValidationResource.BorrowerNotFound]);
+            }
+            else
             {
                 statusCode = HttpStatusCode.InternalServerError;
                 errorMessages.Add(localizer["An error occurred while processing your request."]);

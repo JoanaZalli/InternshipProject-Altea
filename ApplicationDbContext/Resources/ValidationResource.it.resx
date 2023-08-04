@@ -123,6 +123,9 @@
   <data name="AuthenticationFailed" xml:space="preserve">
     <value>Autenticazione fallita. Utente sbagliato nome o password.</value>
   </data>
+  <data name="BorrowerNotFound" xml:space="preserve">
+    <value>Questo mutuatario non è stato trovato.</value>
+  </data>
   <data name="CompanyNameRequired" xml:space="preserve">
     <value>Il nome dell'azienda è obbligatorio.</value>
   </data>
