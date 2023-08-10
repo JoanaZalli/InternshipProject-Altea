@@ -17,7 +17,7 @@ namespace Infrastructure
             using (var context = new ApplicationDbContext(
                 serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             {
-               
+
 
                 if (!context.Users.Any(u => u.UserName == "admin1"))
                 {

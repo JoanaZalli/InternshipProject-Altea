@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230810131300_CompanyProfileMigration")]
+    partial class CompanyProfileMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,60 +24,6 @@ namespace Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Domain.Entities.Application", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ApplicationName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ApplicationStatusId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BorrowerId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateUpdated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<byte[]>("ExcelFileData")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("FinancingPurposeDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsApproved")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("RequestedAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("RequestedTenor")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationStatusId");
-
-                    b.HasIndex("BorrowerId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Application");
-                });
 
             modelBuilder.Entity("Domain.Entities.ApplicationStatus", b =>
                 {
@@ -102,58 +51,58 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Created = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7269),
+                            Created = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3908),
                             Name = "In Charge",
-                            Updated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7271)
+                            Updated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3910)
                         },
                         new
                         {
                             Id = 2,
-                            Created = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7274),
+                            Created = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3912),
                             Name = "Loan Issued",
-                            Updated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7275)
+                            Updated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3913)
                         },
                         new
                         {
                             Id = 3,
-                            Created = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7325),
+                            Created = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3915),
                             Name = "Loan Canceled",
-                            Updated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7327)
+                            Updated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3917)
                         },
                         new
                         {
                             Id = 4,
-                            Created = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7329),
+                            Created = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3919),
                             Name = "Loan Defaulted",
-                            Updated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7330)
+                            Updated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3920)
                         },
                         new
                         {
                             Id = 5,
-                            Created = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7332),
+                            Created = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3922),
                             Name = "Loan Disbursed",
-                            Updated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7334)
+                            Updated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3923)
                         },
                         new
                         {
                             Id = 6,
-                            Created = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7336),
+                            Created = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3925),
                             Name = "Loan Guaranteed",
-                            Updated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7337)
+                            Updated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3927)
                         },
                         new
                         {
                             Id = 7,
-                            Created = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7339),
+                            Created = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3929),
                             Name = "Loan Rejected",
-                            Updated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7341)
+                            Updated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3930)
                         },
                         new
                         {
                             Id = 8,
-                            Created = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7342),
+                            Created = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3932),
                             Name = "Loan Repaid",
-                            Updated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7344)
+                            Updated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3934)
                         });
                 });
 
@@ -283,37 +232,37 @@ namespace Infrastructure.Migrations
                         {
                             Id = 1,
                             Company_Type = "Sole proprietorship (S.I.)",
-                            DateCreated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7167)
+                            DateCreated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3794)
                         },
                         new
                         {
                             Id = 2,
                             Company_Type = "Other",
-                            DateCreated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7213)
+                            DateCreated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3840)
                         },
                         new
                         {
                             Id = 3,
                             Company_Type = "Partnership limited by shares (p.l.sh.)",
-                            DateCreated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7215)
+                            DateCreated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3842)
                         },
                         new
                         {
                             Id = 4,
                             Company_Type = "Limited partnership (l.p.)",
-                            DateCreated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7217)
+                            DateCreated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3844)
                         },
                         new
                         {
                             Id = 5,
                             Company_Type = "Cooperative Society (c.s.)",
-                            DateCreated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7219)
+                            DateCreated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3845)
                         },
                         new
                         {
                             Id = 6,
                             Company_Type = "General partnership (g.p.)",
-                            DateCreated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7221)
+                            DateCreated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3847)
                         });
                 });
 
@@ -343,72 +292,72 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Created = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7365),
+                            Created = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3953),
                             Name = "Created",
-                            Updated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7367)
+                            Updated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3954)
                         },
                         new
                         {
                             Id = 2,
-                            Created = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7369),
+                            Created = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3957),
                             Name = "Accepted",
-                            Updated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7371)
+                            Updated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3958)
                         },
                         new
                         {
                             Id = 3,
-                            Created = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7373),
+                            Created = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3960),
                             Name = "Rejected",
-                            Updated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7374)
+                            Updated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3961)
                         },
                         new
                         {
                             Id = 4,
-                            Created = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7376),
+                            Created = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3963),
                             Name = "Disbursed",
-                            Updated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7377)
+                            Updated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3965)
                         },
                         new
                         {
                             Id = 5,
-                            Created = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7379),
+                            Created = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3967),
                             Name = "Current",
-                            Updated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7381)
+                            Updated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3968)
                         },
                         new
                         {
                             Id = 6,
-                            Created = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7383),
+                            Created = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3970),
                             Name = "In Arrears",
-                            Updated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7384)
+                            Updated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3972)
                         },
                         new
                         {
                             Id = 7,
-                            Created = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7386),
+                            Created = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3974),
                             Name = "Defaulted",
-                            Updated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7388)
+                            Updated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3975)
                         },
                         new
                         {
                             Id = 8,
-                            Created = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7390),
+                            Created = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3977),
                             Name = "Repaid",
-                            Updated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7391)
+                            Updated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3979)
                         },
                         new
                         {
                             Id = 9,
-                            Created = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7393),
+                            Created = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3981),
                             Name = "Guaranteed",
-                            Updated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7395)
+                            Updated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3982)
                         },
                         new
                         {
                             Id = 10,
-                            Created = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7397),
+                            Created = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3984),
                             Name = "Erased",
-                            Updated = new DateTime(2023, 8, 10, 16, 33, 26, 893, DateTimeKind.Local).AddTicks(7398)
+                            Updated = new DateTime(2023, 8, 10, 15, 12, 59, 880, DateTimeKind.Local).AddTicks(3986)
                         });
                 });
 
@@ -635,6 +584,28 @@ namespace Infrastructure.Migrations
                     b.HasIndex("PrefixId");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "705ba5f5-9f64-411e-ba83-be0731de0410",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "b97bef3e-093f-410d-9c83-ac1a85c967cd",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = true,
+                            FailedLoginAttempts = 0,
+                            FirstName = "admin",
+                            IsBlocked = false,
+                            LastName = "admin",
+                            LockoutEnabled = false,
+                            PasswordRecoveyTokenCreationTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PhoneNumberConfirmed = false,
+                            PrefixId = 1,
+                            SecurityStamp = "b15d27b1-7797-4715-bc1b-a54a80b7d7b2",
+                            TokenCreationTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TwoFactorEnabled = false,
+                            UserName = "admin1"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.UserPermission", b =>
@@ -681,19 +652,19 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e995ccf4-801b-41ed-9bab-82d6745dba80",
+                            Id = "5f2c4eb0-0a53-43bd-b087-b25e9c5bc135",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "6eb872cc-7da6-45cb-b0ed-6904c4bbd06d",
+                            Id = "3000e407-397e-483c-bd80-2292110cdfa5",
                             Name = "Loan Officer",
                             NormalizedName = "LOAN OFFICER"
                         },
                         new
                         {
-                            Id = "f9c9c767-83d8-4181-9a03-90669c4f307b",
+                            Id = "a7ed814d-0286-40b8-84a0-a92d215a51f3",
                             Name = "Borrower",
                             NormalizedName = "BORROWER"
                         });
@@ -803,33 +774,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.Application", b =>
-                {
-                    b.HasOne("Domain.Entities.ApplicationStatus", "ApplicationStatus")
-                        .WithMany("Applications")
-                        .HasForeignKey("ApplicationStatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Borrower", "Borrower")
-                        .WithMany("Applications")
-                        .HasForeignKey("BorrowerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Product", "Product")
-                        .WithMany("Applications")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ApplicationStatus");
-
-                    b.Navigation("Borrower");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Domain.Entities.Borrower", b =>
@@ -949,21 +893,6 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Entities.ApplicationStatus", b =>
-                {
-                    b.Navigation("Applications");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Borrower", b =>
-                {
-                    b.Navigation("Applications");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Product", b =>
-                {
-                    b.Navigation("Applications");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>

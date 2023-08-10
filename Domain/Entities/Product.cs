@@ -14,5 +14,7 @@ namespace Domain.Entities
         public double Refernce_rate { get; set; }
         public decimal Max_Financed_Amount { get; set; }
         public decimal Min_Financed_Amount { get; set; }
+        public ICollection<Applicationn> Applications { get; set; }
+
     }
 }

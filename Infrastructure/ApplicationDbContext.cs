@@ -24,10 +24,33 @@ namespace Infrastructure
         public DbSet<RolePermission> RolePermissions { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<UserPermission> UserPermissions { get; set; }
+        public DbSet<ApplicationStatus> ApplicationStatuses { get; set; }
+        public DbSet<LoanStatus> LoanStatuses { get; set; }
+        public DbSet<CompanyProfile> CompanyProfiles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            //borrower=>applications
+            modelBuilder.Entity<Borrower>()
+                .HasMany(b => b.Applications)
+                .WithOne(b => b.Borrower)
+                .HasForeignKey(b => b.BorrowerId);
+
+            //products=>applications
+            modelBuilder.Entity<Product>()
+                .HasMany(b => b.Applications)
+                .WithOne(b => b.Product)
+                .HasForeignKey(b => b.ProductId);
+
+            //applicationStatus=>applications
+            modelBuilder.Entity<ApplicationStatus>()
+                .HasMany(b => b.Applications)
+                .WithOne(b => b.ApplicationStatus)
+                .HasForeignKey(b => b.ApplicationStatusId);
+
+
             modelBuilder.Entity<User>()
                .HasMany(u => u.Borrowers)
                .WithOne(b => b.User)
@@ -50,7 +73,7 @@ namespace Infrastructure
               .HasKey(up => new { up.UserId, up.PermissionId });
 
             modelBuilder.Entity<UserPermission>()
-                .HasOne(up=>up.User)
+                .HasOne(up => up.User)
                 .WithMany()
                 .HasForeignKey(up => up.UserId);
 
@@ -67,16 +90,17 @@ namespace Infrastructure
 
             // create index 
             modelBuilder.Entity<Borrower>()
-                .HasIndex(x => new { x.FiscalCode, x.UserId}).IsUnique();
+                .HasIndex(x => new { x.FiscalCode, x.UserId }).IsUnique();
 
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
 
             //company type
 
             modelBuilder.Entity<CompanyType>().HasData(
-            new CompanyType { 
+            new CompanyType
+            {
                 Id = 1,
-                Company_Type= "Sole proprietorship (S.I.)",
+                Company_Type = "Sole proprietorship (S.I.)",
                 DateCreated = DateTime.Now,
             },
             new CompanyType
@@ -110,39 +134,161 @@ namespace Infrastructure
                    DateCreated = DateTime.Now,
                }
             );
-            //admin seed data
-            modelBuilder.Entity<User>().HasData(
-                new User
-                {
-                    FirstName="admin",
-                    LastName="admin",
-                    PrefixId=1,
-                    UserName="admin1",
-                    Email="admin@gmail.com",
-                    EmailConfirmed=true,                   
-                });
-
+          
             //Products
             modelBuilder.Entity<Product>().HasData(
                 new Product
                 {
-                    Id=1,
+                    Id = 1,
                     Name = "Installments with pre-amortization at a fixed rate",
                     Description = "Installments with pre-amortization at a fixed rate",
                     Refernce_rate = 0.0025,
-                    Max_Financed_Amount= 200000000,
-                    Min_Financed_Amount= 1000000
+                    Max_Financed_Amount = 200000000,
+                    Min_Financed_Amount = 1000000
                 },
                 new Product
                 {
-                    Id=2,
+                    Id = 2,
                     Name = "Installment with variable rate pre-amortization",
                     Description = "Installment with variable rate pre-amortization",
                     Refernce_rate = 0.03,
                     Max_Financed_Amount = 100000000,
                     Min_Financed_Amount = 1000000
                 }
-            ) ;
+            );
+            //application statuses data seed
+            modelBuilder.Entity<ApplicationStatus>().HasData(
+                new ApplicationStatus
+                {
+                    Id=1,
+                    Name="In Charge",
+                    Created= DateTime.Now,
+                    Updated= DateTime.Now,
+                },
+                new ApplicationStatus
+                {
+                    Id = 2,
+                    Name = "Loan Issued",
+                    Created = DateTime.Now,
+                    Updated = DateTime.Now,
+                },
+                new ApplicationStatus
+                {
+                    Id = 3,
+                    Name = "Loan Canceled",
+                    Created = DateTime.Now,
+                    Updated = DateTime.Now,
+                },
+                 new ApplicationStatus
+                 {
+                     Id = 4,
+                     Name = "Loan Defaulted",
+                     Created = DateTime.Now,
+                     Updated = DateTime.Now,
+                 },
+                  new ApplicationStatus
+                  {
+                      Id = 5,
+                      Name = "Loan Disbursed",
+                      Created = DateTime.Now,
+                      Updated = DateTime.Now,
+                  },
+                   new ApplicationStatus
+                   {
+                       Id = 6,
+                       Name = "Loan Guaranteed",
+                       Created = DateTime.Now,
+                       Updated = DateTime.Now,
+                   },
+                    new ApplicationStatus
+                    {
+                        Id = 7,
+                        Name = "Loan Rejected",
+                        Created = DateTime.Now,
+                        Updated = DateTime.Now,
+                    },
+                     new ApplicationStatus
+                     {
+                         Id = 8,
+                         Name = "Loan Repaid",
+                         Created = DateTime.Now,
+                         Updated = DateTime.Now,
+                     }
+                );
+            //loan statusees data seed
+            modelBuilder.Entity<LoanStatus>().HasData(
+                new LoanStatus
+                {
+                    Id = 1,
+                    Name = "Created",
+                    Created = DateTime.Now,
+                    Updated = DateTime.Now,
+                },
+                new LoanStatus
+                {
+                    Id = 2,
+                    Name = "Accepted",
+                    Created = DateTime.Now,
+                    Updated = DateTime.Now,
+                },
+                new LoanStatus
+                {
+                    Id = 3,
+                    Name = "Rejected",
+                    Created = DateTime.Now,
+                    Updated = DateTime.Now,
+                },
+                new LoanStatus
+                {
+                    Id = 4,
+                    Name = "Disbursed",
+                    Created = DateTime.Now,
+                    Updated = DateTime.Now,
+                },
+                new LoanStatus
+                {
+                    Id = 5,
+                    Name = "Current",
+                    Created = DateTime.Now,
+                    Updated = DateTime.Now,
+                },
+                new LoanStatus
+                {
+                    Id = 6,
+                    Name = "In Arrears",
+                    Created = DateTime.Now,
+                    Updated = DateTime.Now,
+                },
+                new LoanStatus
+                {
+                    Id = 7,
+                    Name = "Defaulted",
+                    Created = DateTime.Now,
+                    Updated = DateTime.Now,
+                },
+                new LoanStatus
+                {
+                    Id = 8,
+                    Name = "Repaid",
+                    Created = DateTime.Now,
+                    Updated = DateTime.Now,
+                },
+                new LoanStatus
+                {
+                    Id = 9,
+                    Name = "Guaranteed",
+                    Created = DateTime.Now,
+                    Updated = DateTime.Now,
+                },
+                new LoanStatus
+                {
+                    Id = 10,
+                    Name = "Erased",
+                    Created = DateTime.Now,
+                    Updated = DateTime.Now,
+                }
+              );
+
         }
 
     }

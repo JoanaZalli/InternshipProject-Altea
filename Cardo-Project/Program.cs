@@ -87,7 +87,7 @@ builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
 builder.Services.AddScoped<IRolePermissionRepository, RolePermissionRepository>();
 builder.Services.AddScoped<IUserPermissionRepository, UserPermissionRepository>();
 builder.Services.AddScoped<BaseSorter<Borrower>, BorrowerSorter>();
-
+builder.Services.AddScoped<IFinhubService, FinhubService>();
 
 // ServiceManager and Logger
 builder.Services.ConfigureServiceManager();
@@ -100,6 +100,7 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     SeedData.Initizlize(services);
+    SeedAdmin.Initialize(services);
 }
 
 var localizationOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();

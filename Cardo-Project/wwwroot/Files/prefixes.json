@@ -1,982 +1,1178 @@
 [
   {
+    "id": 1,
     "name": "Afghanistan",
     "prefix": "93",
     "code": "AF"
   },
   {
+    "id": 2,
     "name": "Albania",
     "prefix": "355",
     "code": "AL"
   },
   {
+    "id": 3,
     "name": "Algeria",
     "prefix": "213",
     "code": "DZ"
   },
   {
+    "id": 4,
     "name": "Andorra",
     "prefix": "376",
     "code": "AD"
   },
   {
+    "id": 5,
     "name": "Angola",
     "prefix": "244",
     "code": "AO"
   },
   {
+    "id": 6,
     "name": "Antigua and Barbuda",
     "prefix": "1-268",
     "code": "AG"
   },
   {
+    "id": 7,
     "name": "Argentina",
     "prefix": "54",
     "code": "AR"
   },
   {
+    "id": 8,
     "name": "Armenia",
     "prefix": "374",
     "code": "AM"
   },
   {
+    "id": 9,
     "name": "Australia",
     "prefix": "61",
     "code": "AU"
   },
   {
+    "id": 10,
     "name": "Austria",
     "prefix": "43",
     "code": "AT"
   },
   {
+    "id": 11,
     "name": "Azerbaijan",
     "prefix": "994",
     "code": "AZ"
   },
   {
+    "id": 12,
     "name": "Bahamas",
     "prefix": "1-242",
     "code": "BS"
   },
   {
+    "id": 13,
     "name": "Bahrain",
     "prefix": "973",
     "code": "BH"
   },
   {
+    "id": 14,
     "name": "Bangladesh",
     "prefix": "880",
     "code": "BD"
   },
   {
+    "id": 15,
     "name": "Barbados",
     "prefix": "1-246",
     "code": "BB"
   },
   {
+    "id": 16,
     "name": "Belarus",
     "prefix": "375",
     "code": "BY"
   },
   {
+    "id": 17,
     "name": "Belgium",
     "prefix": "32",
     "code": "BE"
   },
   {
+    "id": 18,
     "name": "Belize",
     "prefix": "501",
     "code": "BZ"
   },
   {
+    "id": 19,
     "name": "Benin",
     "prefix": "229",
     "code": "BJ"
   },
   {
+    "id": 20,
     "name": "Bhutan",
     "prefix": "975",
     "code": "BT"
   },
   {
+    "id": 21,
     "name": "Bolivia",
     "prefix": "591",
     "code": "BO"
   },
   {
+    "id": 22,
     "name": "Bosnia and Herzegovina",
     "prefix": "387",
     "code": "BA"
   },
   {
+    "id": 23,
     "name": "Botswana",
     "prefix": "267",
     "code": "BW"
   },
   {
+    "id": 24,
     "name": "Brazil",
     "prefix": "55",
     "code": "BR"
   },
   {
+    "id": 25,
     "name": "Brunei",
     "prefix": "673",
     "code": "BN"
   },
   {
+    "id": 26,
     "name": "Bulgaria",
     "prefix": "359",
     "code": "BG"
   },
   {
+    "id": 27,
     "name": "Burkina Faso",
     "prefix": "226",
     "code": "BF"
   },
   {
+    "id": 28,
     "name": "Burundi",
     "prefix": "257",
     "code": "BI"
   },
   {
+    "id": 29,
     "name": "Cabo Verde",
     "prefix": "238",
     "code": "CV"
   },
   {
+    "id": 30,
     "name": "Cambodia",
     "prefix": "855",
     "code": "KH"
   },
   {
+    "id": 31,
     "name": "Cameroon",
     "prefix": "237",
     "code": "CM"
   },
   {
+    "id": 32,
     "name": "Canada",
     "prefix": "1",
     "code": "CA"
   },
   {
+    "id": 33,
     "name": "Central African Republic",
     "prefix": "236",
     "code": "CF"
   },
   {
+    "id": 34,
     "name": "Chad",
     "prefix": "235",
     "code": "TD"
   },
   {
+    "id": 35,
     "name": "Chile",
     "prefix": "56",
     "code": "CL"
   },
   {
+    "id": 36,
     "name": "China",
     "prefix": "86",
     "code": "CN"
   },
   {
+    "id": 37,
     "name": "Colombia",
     "prefix": "57",
     "code": "CO"
   },
   {
+    "id": 38,
     "name": "Comoros",
     "prefix": "269",
     "code": "KM"
   },
   {
+    "id": 39,
     "name": "Congo (Congo-Brazzaville)",
     "prefix": "242",
     "code": "CG"
   },
   {
+    "id": 40,
     "name": "Costa Rica",
     "prefix": "506",
     "code": "CR"
   },
   {
+    "id": 41,
     "name": "Croatia",
     "prefix": "385",
     "code": "HR"
   },
   {
+    "id": 42,
     "name": "Cuba",
     "prefix": "53",
     "code": "CU"
   },
   {
+    "id": 43,
     "name": "Cyprus",
     "prefix": "357",
     "code": "CY"
   },
   {
+    "id": 44,
     "name": "Czech Republic",
     "prefix": "420",
     "code": "CZ"
   },
   {
+    "id": 45,
     "name": "Democratic Republic of the Congo",
     "prefix": "243",
     "code": "CD"
   },
   {
+    "id": 46,
     "name": "Denmark",
     "prefix": "45",
     "code": "DK"
   },
   {
+    "id": 47,
     "name": "Djibouti",
     "prefix": "253",
     "code": "DJ"
   },
   {
+    "id": 48,
     "name": "Dominica",
     "prefix": "1-767",
     "code": "DM"
   },
   {
+    "id": 49,
     "name": "Dominican Republic",
     "prefix": "1-809, 1-829, 1-849",
     "code": "DO"
   },
   {
+    "id": 50,
     "name": "East Timor (Timor-Leste)",
     "prefix": "670",
     "code": "TL"
   },
   {
+    "id": 51,
     "name": "Ecuador",
     "prefix": "593",
     "code": "EC"
   },
   {
+    "id": 52,
     "name": "Egypt",
     "prefix": "20",
     "code": "EG"
   },
   {
+    "id": 53,
     "name": "El Salvador",
     "prefix": "503",
     "code": "SV"
   },
   {
+    "id": 54,
     "name": "Equatorial Guinea",
     "prefix": "240",
     "code": "GQ"
   },
   {
+    "id": 55,
     "name": "Eritrea",
     "prefix": "291",
     "code": "ER"
   },
   {
+    "id": 56,
     "name": "Estonia",
     "prefix": "372",
     "code": "EE"
   },
   {
+    "id": 57,
     "name": "Eswatini (fmr. \"Swaziland\")",
     "prefix": "268",
     "code": "SZ"
   },
   {
+    "id": 58,
     "name": "Ethiopia",
     "prefix": "251",
     "code": "ET"
   },
   {
+    "id": 59,
     "name": "Fiji",
     "prefix": "679",
     "code": "FJ"
   },
   {
+    "id": 60,
     "name": "Finland",
     "prefix": "358",
     "code": "FI"
   },
   {
+    "id": 61,
     "name": "France",
     "prefix": "33",
     "code": "FR"
   },
   {
+    "id": 62,
     "name": "Gabon",
     "prefix": "241",
     "code": "GA"
   },
   {
+    "id": 63,
     "name": "Gambia",
     "prefix": "220",
     "code": "GM"
   },
   {
+    "id": 64,
     "name": "Georgia",
     "prefix": "995",
     "code": "GE"
   },
   {
+    "id": 65,
     "name": "Germany",
     "prefix": "49",
     "code": "DE"
   },
   {
+    "id": 66,
     "name": "Ghana",
     "prefix": "233",
     "code": "GH"
   },
   {
+    "id": 67,
     "name": "Greece",
     "prefix": "30",
     "code": "GR"
   },
   {
+    "id": 68,
     "name": "Grenada",
     "prefix": "1-473",
     "code": "GD"
   },
   {
+    "id": 69,
     "name": "Guatemala",
     "prefix": "502",
     "code": "GT"
   },
   {
+    "id": 70,
     "name": "Guinea",
     "prefix": "224",
     "code": "GN"
   },
   {
+    "id": 71,
     "name": "Guinea-Bissau",
     "prefix": "245",
     "code": "GW"
   },
   {
+    "id": 72,
     "name": "Guyana",
     "prefix": "592",
     "code": "GY"
   },
   {
+    "id": 73,
     "name": "Haiti",
     "prefix": "509",
     "code": "HT"
   },
   {
+    "id": 74,
     "name": "Honduras",
     "prefix": "504",
     "code": "HN"
   },
   {
+    "id": 75,
     "name": "Hungary",
     "prefix": "36",
     "code": "HU"
   },
   {
+    "id": 76,
     "name": "Iceland",
     "prefix": "354",
     "code": "IS"
   },
   {
+    "id": 77,
     "name": "India",
     "prefix": "91",
     "code": "IN"
   },
   {
+    "id": 78,
     "name": "Indonesia",
     "prefix": "62",
     "code": "ID"
   },
   {
+    "id": 79,
     "name": "Iran",
     "prefix": "98",
     "code": "IR"
   },
   {
+    "id": 80,
     "name": "Iraq",
     "prefix": "964",
     "code": "IQ"
   },
   {
+    "id": 81,
     "name": "Ireland",
     "prefix": "353",
     "code": "IE"
   },
   {
+    "id": 82,
     "name": "Israel",
     "prefix": "972",
     "code": "IL"
   },
   {
+    "id": 83,
     "name": "Italy",
     "prefix": "39",
     "code": "IT"
   },
   {
+    "id": 84,
     "name": "Jamaica",
     "prefix": "1-876",
     "code": "JM"
   },
   {
+    "id": 85,
     "name": "Japan",
     "prefix": "81",
     "code": "JP"
   },
   {
+    "id": 86,
     "name": "Jordan",
     "prefix": "962",
     "code": "JO"
   },
   {
+    "id": 87,
     "name": "Kazakhstan",
     "prefix": "7",
     "code": "KZ"
   },
   {
+    "id": 88,
     "name": "Kenya",
     "prefix": "254",
     "code": "KE"
   },
   {
+    "id": 89,
     "name": "Kiribati",
     "prefix": "686",
     "code": "KI"
   },
   {
+    "id": 90,
     "name": "Korea, North",
     "prefix": "850",
     "code": "KP"
   },
   {
+    "id": 91,
     "name": "Korea, South",
     "prefix": "82",
     "code": "KR"
   },
   {
+    "id": 92,
     "name": "Kosovo",
     "prefix": "383",
     "code": "XK"
   },
   {
+    "id": 93,
     "name": "Kuwait",
     "prefix": "965",
     "code": "KW"
   },
   {
+    "id": 94,
     "name": "Kyrgyzstan",
     "prefix": "996",
     "code": "KG"
   },
   {
+    "id": 95,
     "name": "Laos",
     "prefix": "856",
     "code": "LA"
   },
   {
+    "id": 96,
     "name": "Latvia",
     "prefix": "371",
     "code": "LV"
   },
   {
+    "id": 97,
     "name": "Lebanon",
     "prefix": "961",
     "code": "LB"
   },
   {
+    "id": 98,
     "name": "Lesotho",
     "prefix": "266",
     "code": "LS"
   },
   {
+    "id": 99,
     "name": "Liberia",
     "prefix": "231",
     "code": "LR"
   },
   {
+    "id": 100,
     "name": "Libya",
     "prefix": "218",
     "code": "LY"
   },
   {
+    "id": 101,
     "name": "Liechtenstein",
     "prefix": "423",
     "code": "LI"
   },
   {
+    "id": 102,
     "name": "Lithuania",
     "prefix": "370",
     "code": "LT"
   },
   {
+    "id": 103,
     "name": "Luxembourg",
     "prefix": "352",
     "code": "LU"
   },
   {
+    "id": 104,
     "name": "Madagascar",
     "prefix": "261",
     "code": "MG"
   },
   {
+    "id": 105,
     "name": "Malawi",
     "prefix": "265",
     "code": "MW"
   },
   {
+    "id": 106,
     "name": "Malaysia",
     "prefix": "60",
     "code": "MY"
   },
   {
+    "id": 107,
     "name": "Maldives",
     "prefix": "960",
     "code": "MV"
   },
   {
+    "id": 108,
     "name": "Mali",
     "prefix": "223",
     "code": "ML"
   },
   {
+    "id": 109,
     "name": "Malta",
     "prefix": "356",
     "code": "MT"
   },
   {
+    "id": 110,
     "name": "Marshall Islands",
     "prefix": "692",
     "code": "MH"
   },
   {
+    "id": 111,
     "name": "Mauritania",
     "prefix": "222",
     "code": "MR"
   },
   {
+    "id": 112,
     "name": "Mauritius",
     "prefix": "230",
     "code": "MU"
   },
   {
+    "id": 113,
     "name": "Mexico",
     "prefix": "52",
     "code": "MX"
   },
   {
+    "id": 114,
     "name": "Micronesia",
     "prefix": "691",
     "code": "FM"
   },
   {
+    "id": 115,
     "name": "Moldova",
     "prefix": "373",
     "code": "MD"
   },
   {
+    "id": 116,
     "name": "Monaco",
     "prefix": "377",
     "code": "MC"
   },
   {
+    "id": 117,
     "name": "Mongolia",
     "prefix": "976",
     "code": "MN"
   },
   {
+    "id": 118,
     "name": "Montenegro",
     "prefix": "382",
     "code": "ME"
   },
   {
+    "id": 119,
     "name": "Morocco",
     "prefix": "212",
     "code": "MA"
   },
   {
+    "id": 120,
     "name": "Mozambique",
     "prefix": "258",
     "code": "MZ"
   },
   {
+    "id": 121,
     "name": "Myanmar (formerly Burma)",
     "prefix": "95",
     "code": "MM"
   },
   {
+    "id": 122,
     "name": "Namibia",
     "prefix": "264",
     "code": "NA"
   },
   {
+    "id": 123,
     "name": "Nauru",
     "prefix": "674",
     "code": "NR"
   },
   {
+    "id": 124,
     "name": "Nepal",
     "prefix": "977",
     "code": "NP"
   },
   {
+    "id": 125,
     "name": "Netherlands",
     "prefix": "31",
     "code": "NL"
   },
   {
+    "id": 126,
     "name": "New Zealand",
     "prefix": "64",
     "code": "NZ"
   },
   {
+    "id": 127,
     "name": "Nicaragua",
     "prefix": "505",
     "code": "NI"
   },
   {
+    "id": 128,
     "name": "Niger",
     "prefix": "227",
     "code": "NE"
   },
   {
+    "id": 129,
     "name": "Nigeria",
     "prefix": "234",
     "code": "NG"
   },
   {
+    "id": 130,
     "name": "North Macedonia (formerly Macedonia)",
     "prefix": "389",
     "code": "MK"
   },
   {
+    "id": 131,
     "name": "Norway",
     "prefix": "47",
     "code": "NO"
   },
   {
+    "id": 132,
     "name": "Oman",
     "prefix": "968",
     "code": "OM"
   },
   {
+    "id": 133,
     "name": "Pakistan",
     "prefix": "92",
     "code": "PK"
   },
   {
+    "id": 134,
     "name": "Palau",
     "prefix": "680",
     "code": "PW"
   },
   {
+    "id": 135,
     "name": "Palestine State",
     "prefix": "970",
     "code": "PS"
   },
   {
+    "id": 136,
     "name": "Panama",
     "prefix": "507",
     "code": "PA"
   },
   {
+    "id": 137,
     "name": "Papua New Guinea",
     "prefix": "675",
     "code": "PG"
   },
   {
+    "id": 138,
     "name": "Paraguay",
     "prefix": "595",
     "code": "PY"
   },
   {
+    "id": 139,
     "name": "Peru",
     "prefix": "51",
     "code": "PE"
   },
   {
+    "id": 140,
     "name": "Philippines",
     "prefix": "63",
     "code": "PH"
   },
   {
+    "id": 141,
     "name": "Poland",
     "prefix": "48",
     "code": "PL"
   },
   {
+    "id": 142,
     "name": "Portugal",
     "prefix": "351",
     "code": "PT"
   },
   {
+    "id": 143,
     "name": "Qatar",
     "prefix": "974",
     "code": "QA"
   },
   {
+    "id": 144,
     "name": "Romania",
     "prefix": "40",
     "code": "RO"
   },
   {
+    "id": 145,
     "name": "Russia",
     "prefix": "7",
     "code": "RU"
   },
   {
+    "id": 146,
     "name": "Rwanda",
     "prefix": "250",
     "code": "RW"
   },
   {
+    "id": 147,
     "name": "Saint Kitts and Nevis",
     "prefix": "1-869",
     "code": "KN"
   },
   {
+    "id": 148,
     "name": "Saint Lucia",
     "prefix": "1-758",
     "code": "LC"
   },
   {
+    "id": 149,
     "name": "Saint Vincent and the Grenadines",
     "prefix": "1-784",
     "code": "VC"
   },
   {
+    "id": 150,
     "name": "Samoa",
     "prefix": "685",
     "code": "WS"
   },
   {
+    "id": 151,
     "name": "San Marino",
     "prefix": "378",
     "code": "SM"
   },
   {
+    "id": 152,
     "name": "Sao Tome and Principe",
     "prefix": "239",
     "code": "ST"
   },
   {
+    "id": 153,
     "name": "Saudi Arabia",
     "prefix": "966",
     "code": "SA"
   },
   {
+    "id": 154,
     "name": "Senegal",
     "prefix": "221",
     "code": "SN"
   },
   {
+    "id": 155,
     "name": "Serbia",
     "prefix": "381",
     "code": "RS"
   },
   {
+    "id": 156,
     "name": "Seychelles",
     "prefix": "248",
     "code": "SC"
   },
   {
+    "id": 157,
     "name": "Sierra Leone",
     "prefix": "232",
     "code": "SL"
   },
   {
+    "id": 158,
     "name": "Singapore",
     "prefix": "65",
     "code": "SG"
   },
   {
+    "id": 159,
     "name": "Slovakia",
     "prefix": "421",
     "code": "SK"
   },
   {
+    "id": 160,
     "name": "Slovenia",
     "prefix": "386",
     "code": "SI"
   },
   {
+    "id": 161,
     "name": "Solomon Islands",
     "prefix": "677",
     "code": "SB"
   },
   {
+    "id": 162,
     "name": "Somalia",
     "prefix": "252",
     "code": "SO"
   },
   {
+    "id": 163,
     "name": "South Africa",
     "prefix": "27",
     "code": "ZA"
   },
   {
+    "id": 164,
     "name": "South Sudan",
     "prefix": "211",
     "code": "SS"
   },
   {
+    "id": 165,
     "name": "Spain",
     "prefix": "34",
     "code": "ES"
   },
   {
+    "id": 166,
     "name": "Sri Lanka",
     "prefix": "94",
     "code": "LK"
   },
   {
+    "id": 167,
     "name": "Sudan",
     "prefix": "249",
     "code": "SD"
   },
   {
+    "id": 168,
     "name": "Suriname",
     "prefix": "597",
     "code": "SR"
   },
   {
+    "id": 169,
     "name": "Sweden",
     "prefix": "46",
     "code": "SE"
   },
   {
+    "id": 170,
     "name": "Switzerland",
     "prefix": "41",
     "code": "CH"
   },
   {
+    "id": 171,
     "name": "Syria",
     "prefix": "963",
     "code": "SY"
   },
   {
+    "id": 172,
     "name": "Taiwan",
     "prefix": "886",
     "code": "TW"
   },
   {
+    "id": 173,
     "name": "Tajikistan",
     "prefix": "992",
     "code": "TJ"
   },
   {
+    "id": 174,
     "name": "Tanzania",
     "prefix": "255",
     "code": "TZ"
   },
   {
+    "id": 175,
     "name": "Thailand",
     "prefix": "66",
     "code": "TH"
   },
   {
+    "id": 176,
     "name": "Togo",
     "prefix": "228",
     "code": "TG"
   },
   {
+    "id": 177,
     "name": "Tonga",
     "prefix": "676",
     "code": "TO"
   },
   {
+    "id": 178,
     "name": "Trinidad and Tobago",
     "prefix": "1-868",
     "code": "TT"
   },
-  {
-    "name": "Tunisia",
-    "prefix": "216",
-    "code": "TN"
-  },
-  {
-    "name": "Turkey",
-    "prefix": "90",
-    "code": "TR"
-  },
-  {
-    "name": "Turkmenistan",
-    "prefix": "993",
-    "code": "TM"
-  },
-  {
-    "name": "Tuvalu",
-    "prefix": "688",
-    "code": "TV"
-  },
-  {
-    "name": "Uganda",
-    "prefix": "256",
-    "code": "UG"
-  },
-  {
-    "name": "Ukraine",
-    "prefix": "380",
-    "code": "UA"
-  },
-  {
-    "name": "United Arab Emirates",
-    "prefix": "971",
-    "code": "AE"
-  },
-  {
-    "name": "United Kingdom",
-    "prefix": "44",
-    "code": "GB"
-  },
-  {
-    "name": "United States",
-    "prefix": "1",
-    "code": "US"
-  },
-  {
-    "name": "Uruguay",
-    "prefix": "598",
-    "code": "UY"
-  },
-  {
-    "name": "Uzbekistan",
-    "prefix": "998",
-    "code": "UZ"
-  },
-  {
-    "name": "Vanuatu",
-    "prefix": "678",
-    "code": "VU"
-  },
-  {
-    "name": "Vatican City",
-    "prefix": "379",
-    "code": "VA"
-  },
-  {
-    "name": "Venezuela",
-    "prefix": "58",
-    "code": "VE"
-  },
-  {
-    "name": "Vietnam",
-    "prefix": "84",
-    "code": "VN"
-  },
-  {
-    "name": "Yemen",
-    "prefix": "967",
-    "code": "YE"
-  },
-  {
-    "name": "Zambia",
-    "prefix": "260",
-    "code": "ZM"
-  },
-  {
-    "name": "Zimbabwe",
-    "prefix": "263",
-    "code": "ZW"
-  }
+    {
+      "id": 179,
+      "name": "Tunisia",
+      "prefix": "216",
+      "code": "TN"
+    },
+    {
+      "id": 180,
+      "name": "Turkey",
+      "prefix": "90",
+      "code": "TR"
+    },
+    {
+      "id": 181,
+      "name": "Turkmenistan",
+      "prefix": "993",
+      "code": "TM"
+    },
+    {
+      "id": 182,
+      "name": "Tuvalu",
+      "prefix": "688",
+      "code": "TV"
+    },
+    {
+      "id": 183,
+      "name": "Uganda",
+      "prefix": "256",
+      "code": "UG"
+    },
+    {
+      "id": 184,
+      "name": "Ukraine",
+      "prefix": "380",
+      "code": "UA"
+    },
+    {
+      "id": 185,
+      "name": "United Arab Emirates",
+      "prefix": "971",
+      "code": "AE"
+    },
+    {
+      "id": 186,
+      "name": "United Kingdom",
+      "prefix": "44",
+      "code": "GB"
+    },
+    {
+      "id": 187,
+      "name": "United States",
+      "prefix": "1",
+      "code": "US"
+    },
+    {
+      "id": 188,
+      "name": "Uruguay",
+      "prefix": "598",
+      "code": "UY"
+    },
+    {
+      "id": 189,
+      "name": "Uzbekistan",
+      "prefix": "998",
+      "code": "UZ"
+    },
+    {
+      "id": 190,
+      "name": "Vanuatu",
+      "prefix": "678",
+      "code": "VU"
+    },
+    {
+      "id": 191,
+      "name": "Vatican City",
+      "prefix": "379",
+      "code": "VA"
+    },
+    {
+      "id": 192,
+      "name": "Venezuela",
+      "prefix": "58",
+      "code": "VE"
+    },
+    {
+      "id": 193,
+      "name": "Vietnam",
+      "prefix": "84",
+      "code": "VN"
+    },
+    {
+      "id": 194,
+      "name": "Yemen",
+      "prefix": "967",
+      "code": "YE"
+    },
+    {
+      "id": 195,
+      "name": "Zambia",
+      "prefix": "260",
+      "code": "ZM"
+    },
+    {
+      "id": 196,
+      "name": "Zimbabwe",
+      "prefix": "263",
+      "code": "ZW"
+    }
 ]

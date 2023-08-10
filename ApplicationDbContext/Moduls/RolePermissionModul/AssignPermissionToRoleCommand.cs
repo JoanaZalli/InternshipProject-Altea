@@ -31,7 +31,7 @@ namespace Application.Moduls.RolePermissionModul
             var permissionId = request.PermissionId;
 
             var existingMapping = await _rolePermissionRepository.GetRolePermissionMapping(roleId, permissionId);
-            if (existingMapping == null)
+            if (existingMapping != null)
             {
                 throw new PermissionToRoleAssignedException(request.Culture);
             }

@@ -25,7 +25,7 @@ namespace Application.Mappers
             CreateMap<Borrower, CreateBorrowerCommand>().ReverseMap();
             CreateMap<Permission, CreatePermissionCommand>().ReverseMap();
             CreateMap<IdentityRole,CreateRoleCommand>().ReverseMap();
-
+            CreateMap<ApplicationDTO, Applicationn>().ReverseMap();
 
         }
     }

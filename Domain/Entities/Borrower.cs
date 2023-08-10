@@ -18,6 +18,7 @@ namespace Domain.Entities
         public DateTime DateUpdated { get; set; }
         public string UserId { get; set; }
         public User User { get; set; }
+        public ICollection<Applicationn> Applications { get; set; }
 
 
 
