@@ -88,6 +88,8 @@ builder.Services.AddScoped<IRolePermissionRepository, RolePermissionRepository>(
 builder.Services.AddScoped<IUserPermissionRepository, UserPermissionRepository>();
 builder.Services.AddScoped<BaseSorter<Borrower>, BorrowerSorter>();
 builder.Services.AddScoped<IFinhubService, FinhubService>();
+builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 // ServiceManager and Logger
 builder.Services.ConfigureServiceManager();
@@ -99,9 +101,12 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    SeedData.Initizlize(services);
-    SeedAdmin.Initialize(services);
+    SeedData.Initizlize(services); 
+    SeedAdmin.Initialize(services).Wait();
+    SeedLoanOfficer.Initialize(services).Wait();
 }
+
+
 
 var localizationOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
 app.UseRequestLocalization(localizationOptions.Value);

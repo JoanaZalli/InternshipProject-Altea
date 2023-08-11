@@ -27,6 +27,10 @@ namespace Infrastructure
         public DbSet<ApplicationStatus> ApplicationStatuses { get; set; }
         public DbSet<LoanStatus> LoanStatuses { get; set; }
         public DbSet<CompanyProfile> CompanyProfiles { get; set; }
+        public DbSet<Applicationn> Applications { get; set; }
+        public DbSet<Lender> Lenders { get; set; }
+        public DbSet<Condition> Conditions { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -81,7 +85,7 @@ namespace Infrastructure
                .HasOne(up => up.Permission)
                .WithMany()
                .HasForeignKey(up => up.PermissionId);
-
+            
 
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Prefix)
@@ -156,6 +160,7 @@ namespace Infrastructure
                     Min_Financed_Amount = 1000000
                 }
             );
+
             //application statuses data seed
             modelBuilder.Entity<ApplicationStatus>().HasData(
                 new ApplicationStatus
@@ -288,7 +293,69 @@ namespace Infrastructure
                     Updated = DateTime.Now,
                 }
               );
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
+                 new IdentityUserRole<string>
+                 {
+                     RoleId = "e995ccf4-801b-41ed-9bab-82d6745dba80",
+                     UserId = "47359644-3e10-4e45-b26c-cab9f4ca27c8",
+                 },
+                  new IdentityUserRole<string>
+                  {
+                      RoleId = "6eb872cc-7da6-45cb-b0ed-6904c4bbd06d",
+                      UserId = "44f05ec5-c969-4b07-93c4-7c2472208fe6"
+                  }
+                );
+            //lender data seed
+            modelBuilder.Entity<Lender>().HasData(
+                
+                new Lender
+                {
+                    Id=1,
+                    Name= "PMI BTECH",
+                    DateCreated= DateTime.Now,
+                    DateUpdated= DateTime.Now,
+                },
+                 new Lender
+                 {
+                     Id = 2,
+                     Name = "AZIF",
+                     DateCreated = DateTime.Now,
+                     DateUpdated = DateTime.Now,
+                 },
+                  new Lender
+                  {
+                      Id = 3,
+                      Name = "LOGITECH",
+                      DateCreated = DateTime.Now,
+                      DateUpdated = DateTime.Now,
+                  }
+                  );
 
+            //condition data seed
+            modelBuilder.Entity<Condition>().HasData(
+                new Condition
+                {
+                    Id=1,
+                    MinRequestedAmount=100000,
+                    TenorMin=30,
+                    CompanyTypeId=5,
+                },
+                new Condition
+                {
+                    Id=2,
+                    MinRequestedAmount=400000,
+                    TenorMin=40,
+                    TenorMax=60,
+                },
+                new Condition
+                {
+                    Id=3,
+                    MinRequestedAmount=100000,
+                    TenorMin=30,
+                    TenorMax=60,
+                    CompanyTypeId=1
+                }
+                );
         }
 
     }

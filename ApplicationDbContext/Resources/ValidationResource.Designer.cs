@@ -70,11 +70,29 @@ namespace Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This application requested amount does not fulfill the conditions..
+        /// </summary>
+        public static string ApplicationCanNotBeCreated {
+            get {
+                return ResourceManager.GetString("ApplicationCanNotBeCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Authentication failed. Wrong username or password..
         /// </summary>
         public static string AuthenticationFailed {
             get {
                 return ResourceManager.GetString("AuthenticationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Borrower Id is required..
+        /// </summary>
+        public static string Borrower_Required {
+            get {
+                return ResourceManager.GetString("Borrower_Required", resourceCulture);
             }
         }
         
@@ -138,6 +156,24 @@ namespace Application.Resources {
         public static string EmailNotConfirmed {
             get {
                 return ResourceManager.GetString("EmailNotConfirmed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Financing purpose should not be more then 100 charcters..
+        /// </summary>
+        public static string Financing_Puropse_length {
+            get {
+                return ResourceManager.GetString("Financing_Puropse_length", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Financing purpose description is mandatory..
+        /// </summary>
+        public static string Financing_Purpose_Description {
+            get {
+                return ResourceManager.GetString("Financing_Purpose_Description", resourceCulture);
             }
         }
         
@@ -304,6 +340,24 @@ namespace Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Requested amount is mandatory..
+        /// </summary>
+        public static string Requested_Amount {
+            get {
+                return ResourceManager.GetString("Requested_Amount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested tenor is mandatory..
+        /// </summary>
+        public static string Requested_Tenor {
+            get {
+                return ResourceManager.GetString("Requested_Tenor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This role already exists..
         /// </summary>
         public static string RoleExists {
@@ -345,15 +399,6 @@ namespace Application.Resources {
         public static string String1 {
             get {
                 return ResourceManager.GetString("String1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string String2 {
-            get {
-                return ResourceManager.GetString("String2", resourceCulture);
             }
         }
         

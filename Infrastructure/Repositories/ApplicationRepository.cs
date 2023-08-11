@@ -16,6 +16,8 @@ namespace Infrastructure.Repositories
            application.DateCreated = DateTime.Now;
             application.DateUpdated = DateTime.Now;
             application.IsApproved = false;
+            application.ApplicationName = (application.DateCreated).ToString() + (application.RequestedAmount).ToString();
+            application.ApplicationStatusId = 1;
             _context.Add(application);
             _context.SaveChanges();
             return application;

@@ -116,6 +116,11 @@ namespace Infrastructure.Extentions {
             {
                 statusCode = HttpStatusCode.NotFound;
                 errorMessages.Add(localizer[ValidationResource.BorrowerNotFound]);
+            } else if(exception is ApplicationNotCreatedException )
+            {
+
+                statusCode = HttpStatusCode.NotFound;
+                errorMessages.Add(localizer[ValidationResource.ApplicationCanNotBeCreated]);
             }
             else
             {

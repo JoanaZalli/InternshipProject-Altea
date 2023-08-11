@@ -120,11 +120,17 @@
   <data name="AccountBlocked" xml:space="preserve">
     <value>Il tuo account è stato bloccato!</value>
   </data>
+  <data name="ApplicationCanNotBeCreated" xml:space="preserve">
+    <value>L'importo richiesto per l'applicazione non soddisfa le condizioni.</value>
+  </data>
   <data name="AuthenticationFailed" xml:space="preserve">
     <value>Autenticazione fallita. Utente sbagliato nome o password.</value>
   </data>
   <data name="BorrowerNotFound" xml:space="preserve">
     <value>Questo mutuatario non è stato trovato.</value>
+  </data>
+  <data name="Borrower_Required" xml:space="preserve">
+    <value>L'ID del mutuatario è obbligatorio.</value>
   </data>
   <data name="CompanyNameRequired" xml:space="preserve">
     <value>Il nome dell'azienda è obbligatorio.</value>
@@ -143,6 +149,12 @@
   </data>
   <data name="Email_Required" xml:space="preserve">
     <value>Il Email è obbligatorio.</value>
+  </data>
+  <data name="Financing_Puropse_length" xml:space="preserve">
+    <value>Lo scopo del finanziamento non dovrebbe superare i 100 caratteri.</value>
+  </data>
+  <data name="Financing_Purpose_Description" xml:space="preserve">
+    <value>La descrizione della finalità del finanziamento è obbligatoria.</value>
   </data>
   <data name="FirstName_MaxLength" xml:space="preserve">
     <value>Il nome non deve superare i 30 caratteri.</value>
@@ -197,6 +209,12 @@
   </data>
   <data name="PrefixId_Required" xml:space="preserve">
     <value>Il prefisso è obbligatorio</value>
+  </data>
+  <data name="Requested_Amount" xml:space="preserve">
+    <value>L'importo richiesto è obbligatorio.</value>
+  </data>
+  <data name="Requested_Tenor" xml:space="preserve">
+    <value>Il tenore richiesto è obbligatorio.</value>
   </data>
   <data name="RoleExists" xml:space="preserve">
     <value>Questo ruolo esiste già.</value>

@@ -1,4 +1,5 @@
 ﻿using Application.DTOS;
+using Application.Moduls.ApplicationModul.Commands;
 using Application.Moduls.BorrowerModul.Command;
 using Application.Moduls.PermissionModul.Command;
 using Application.Moduls.RoleModul.Command;
@@ -25,7 +26,7 @@ namespace Application.Mappers
             CreateMap<Borrower, CreateBorrowerCommand>().ReverseMap();
             CreateMap<Permission, CreatePermissionCommand>().ReverseMap();
             CreateMap<IdentityRole,CreateRoleCommand>().ReverseMap();
-            CreateMap<ApplicationDTO, Applicationn>().ReverseMap();
+            CreateMap<CreateApplicationCommand, Applicationn>().ReverseMap();
 
         }
     }

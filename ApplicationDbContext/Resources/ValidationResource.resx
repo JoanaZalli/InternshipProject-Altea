@@ -120,11 +120,17 @@
   <data name="AccountBlocked" xml:space="preserve">
     <value>Your account has been blocked!</value>
   </data>
+  <data name="ApplicationCanNotBeCreated" xml:space="preserve">
+    <value>This application requested amount does not fulfill the conditions.</value>
+  </data>
   <data name="AuthenticationFailed" xml:space="preserve">
     <value>Authentication failed. Wrong username or password.</value>
   </data>
   <data name="BorrowerNotFound" xml:space="preserve">
     <value>This borrower was not found.</value>
+  </data>
+  <data name="Borrower_Required" xml:space="preserve">
+    <value>Borrower Id is required.</value>
   </data>
   <data name="CompanyNameRequired" xml:space="preserve">
     <value>Company name is required.</value>
@@ -143,6 +149,12 @@
   </data>
   <data name="Email_Required" xml:space="preserve">
     <value>Email is required.</value>
+  </data>
+  <data name="Financing_Puropse_length" xml:space="preserve">
+    <value>Financing purpose should not be more then 100 charcters.</value>
+  </data>
+  <data name="Financing_Purpose_Description" xml:space="preserve">
+    <value>Financing purpose description is mandatory.</value>
   </data>
   <data name="FirstName_MaxLength" xml:space="preserve">
     <value>First name should not exceed 30 characters.</value>
@@ -198,6 +210,12 @@
   <data name="PrefixId_Required" xml:space="preserve">
     <value>Prefix is required</value>
   </data>
+  <data name="Requested_Amount" xml:space="preserve">
+    <value>Requested amount is mandatory.</value>
+  </data>
+  <data name="Requested_Tenor" xml:space="preserve">
+    <value>Requested tenor is mandatory.</value>
+  </data>
   <data name="RoleExists" xml:space="preserve">
     <value>This role already exists.</value>
   </data>
@@ -212,9 +230,6 @@
   </data>
   <data name="String1" xml:space="preserve">
     <value>Questo nome utente è già in uso.</value>
-  </data>
-  <data name="String2" xml:space="preserve">
-    <value />
   </data>
   <data name="TokenExpired" xml:space="preserve">
     <value>This token has expired.</value>
