@@ -79,6 +79,15 @@ namespace Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This application was not found..
+        /// </summary>
+        public static string ApplicationNotFound {
+            get {
+                return ResourceManager.GetString("ApplicationNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Authentication failed. Wrong username or password..
         /// </summary>
         public static string AuthenticationFailed {
@@ -336,6 +345,15 @@ namespace Application.Resources {
         public static string PrefixId_Required {
             get {
                 return ResourceManager.GetString("PrefixId_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prouduct was not changed..
+        /// </summary>
+        public static string ProductNotChanged {
+            get {
+                return ResourceManager.GetString("ProductNotChanged", resourceCulture);
             }
         }
         

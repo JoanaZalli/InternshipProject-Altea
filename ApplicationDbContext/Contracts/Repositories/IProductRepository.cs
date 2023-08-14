@@ -10,5 +10,6 @@ namespace Application.Contracts.Repositories
     public interface IProductRepository
     {
         Task<Product> GetProductAsync(int id);
+        Task<IEnumerable<Product>> GetProductAsync();
     }
 }

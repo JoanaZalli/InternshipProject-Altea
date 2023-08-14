@@ -30,11 +30,14 @@ namespace Infrastructure
         public DbSet<Applicationn> Applications { get; set; }
         public DbSet<Lender> Lenders { get; set; }
         public DbSet<Condition> Conditions { get; set; }
-
+        public DbSet<MatrixTemplate> MatrixTemplates { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            //MatrixTemplate configurations
+            modelBuilder.Entity<MatrixTemplate>().HasKey(mt => mt.Id);
 
             //borrower=>applications
             modelBuilder.Entity<Borrower>()
@@ -341,7 +344,7 @@ namespace Infrastructure
                     CompanyTypeId=5,
                 },
                 new Condition
-                {
+                { 
                     Id=2,
                     MinRequestedAmount=400000,
                     TenorMin=40,

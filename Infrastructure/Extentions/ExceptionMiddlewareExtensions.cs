@@ -122,6 +122,16 @@ namespace Infrastructure.Extentions {
                 statusCode = HttpStatusCode.NotFound;
                 errorMessages.Add(localizer[ValidationResource.ApplicationCanNotBeCreated]);
             }
+           else if(exception is ApplicationNotCreatedException)
+            {
+                statusCode = HttpStatusCode.NotFound;
+                errorMessages.Add(localizer[ValidationResource.ApplicationNotFound]);
+            }
+           else if(exception is ProductCanNotBeChangedException)
+            {
+                statusCode = HttpStatusCode.BadRequest;
+                errorMessages.Add(localizer[ValidationResource.ProductNotChanged]);
+            }
             else
             {
                 statusCode = HttpStatusCode.InternalServerError;

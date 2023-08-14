@@ -25,7 +25,7 @@ namespace Infrastructure.Repositories
         public async Task<IEnumerable<Borrower>> GetBorrowersByUserIdAsync(string userId)
         {
             
-            var borrowers = await _context.Borrowers.Include(b => b.CompanyType) .Where(b => b.UserId == userId) .Select(b => new Borrower
+            var borrowers = await _context.Borrowers.Include(b => b.CompanyType).Where(b => b.UserId == userId) .Select(b => new Borrower
                {
                    Id = b.Id,
                    CompanyName = b.CompanyName,
@@ -41,8 +41,8 @@ namespace Infrastructure.Repositories
 
         public async Task<Borrower> GetBorrowerByIdAsync(int id)
         {
-            var borrwer = await _context.Borrowers.FirstOrDefaultAsync(b => b.Id == id);
-            return borrwer;
+            var borrower = await _context.Borrowers.FirstOrDefaultAsync(b => b.Id == id);
+            return borrower;
         }
     }
 }

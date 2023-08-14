@@ -1,5 +1,6 @@
 ﻿using Application.Contracts.Repositories;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,5 +24,40 @@ namespace Infrastructure.Repositories
             return application;
         }
 
+        public async Task<Applicationn> GetApplicationByIdAsync(int id)
+        {
+            var application =  await _context.Applications.FirstOrDefaultAsync(x => x.Id == id);
+            return application;
+        }
+
+        public async Task<bool> ChangeProductAsync(Applicationn applicationn, int productId)
+        {
+            try
+            {
+                applicationn.ProductId = productId;
+              await  _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public async Task<IEnumerable<Applicationn>> GetApplicationsOfABorrowerById(int borrowerId)
+        {
+           var applications= await _context.Applications.Include(a=>a.Product).Include(a=>a.ApplicationStatus).Where(a=>a.BorrowerId==borrowerId).Select(a=>new Applicationn
+           {
+               ApplicationName= a.ApplicationName,
+               RequestedAmount= a.RequestedAmount,
+               RequestedTenor= a.RequestedTenor,
+               Product= a.Product,
+               IsApproved= a.IsApproved,
+               ApplicationStatus= a.ApplicationStatus,
+               FinancingPurposeDescription= a.FinancingPurposeDescription,
+               DateCreated= a.DateCreated,
+               DateUpdated= a.DateUpdated
+           }).ToListAsync();
+            return applications;
+        }
     }
 }

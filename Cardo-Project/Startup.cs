@@ -24,6 +24,7 @@ using Application.Contracts.Repositories;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using OfficeOpenXml;
 
 namespace Infrastructure.Extentions
 {
@@ -94,7 +95,14 @@ namespace Infrastructure.Extentions
             });
         }
 
+        public static void ConfigureExcel(this IServiceCollection services)
+        {
+           
 
+            ExcelPackage.LicenseContext = LicenseContext.Commercial; 
+
+            
+        }
 
 
 

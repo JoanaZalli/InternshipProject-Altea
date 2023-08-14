@@ -90,10 +90,14 @@ builder.Services.AddScoped<BaseSorter<Borrower>, BorrowerSorter>();
 builder.Services.AddScoped<IFinhubService, FinhubService>();
 builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ILenderRepository, LenderRepository>();
+builder.Services.AddScoped<IMatrixCombinationsServices, MatrixCombinationsServics>();
+builder.Services.AddScoped<IMatrixCombinationRepository, MatrixCombinationRepository>();
 
 // ServiceManager and Logger
 builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureLoggerService();
+builder.Services.ConfigureExcel();
 
 var app = builder.Build();
 

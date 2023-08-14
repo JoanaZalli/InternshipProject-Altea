@@ -18,5 +18,10 @@ namespace Infrastructure.Repositories
             var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
             return product;
         }
+        public async Task<IEnumerable<Product>> GetProductAsync()
+        {
+            var products = await _context.Products.ToListAsync();
+            return products;
+        }
     }
 }

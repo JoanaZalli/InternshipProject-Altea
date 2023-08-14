@@ -42,7 +42,8 @@ namespace Application.Moduls.UserModul.Commands
             {
                 throw new UserNotFoundException(request.CultureId);
             }
-            bool isTokenExpired = TokenGenerator.IsTokenExpired(user.PasswordRecoveyTokenCreationTime, 15);
+            DateTime time = user.PasswordRecoveyTokenCreationTime;
+            bool isTokenExpired = TokenGenerator.IsTokenExpired(time, 15);
             if (isTokenExpired)
             {
                 throw new TokenExpiredException(request.CultureId);

@@ -27,6 +27,7 @@ namespace Application.Mappers
             CreateMap<Permission, CreatePermissionCommand>().ReverseMap();
             CreateMap<IdentityRole,CreateRoleCommand>().ReverseMap();
             CreateMap<CreateApplicationCommand, Applicationn>().ReverseMap();
+            CreateMap<ApplicationDTO,Applicationn>().ReverseMap();
 
         }
     }

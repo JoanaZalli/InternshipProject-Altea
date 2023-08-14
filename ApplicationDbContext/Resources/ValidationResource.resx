@@ -123,6 +123,9 @@
   <data name="ApplicationCanNotBeCreated" xml:space="preserve">
     <value>This application requested amount does not fulfill the conditions.</value>
   </data>
+  <data name="ApplicationNotFound" xml:space="preserve">
+    <value>This application was not found.</value>
+  </data>
   <data name="AuthenticationFailed" xml:space="preserve">
     <value>Authentication failed. Wrong username or password.</value>
   </data>
@@ -209,6 +212,9 @@
   </data>
   <data name="PrefixId_Required" xml:space="preserve">
     <value>Prefix is required</value>
+  </data>
+  <data name="ProductNotChanged" xml:space="preserve">
+    <value>Prouduct was not changed.</value>
   </data>
   <data name="Requested_Amount" xml:space="preserve">
     <value>Requested amount is mandatory.</value>
