@@ -186,6 +186,9 @@
   <data name="LastName_Required" xml:space="preserve">
     <value>Il cognome è obbligatorio.</value>
   </data>
+  <data name="NoLender" xml:space="preserve">
+    <value>Non esiste un prestatore per questa applicazione.</value>
+  </data>
   <data name="PasswordsDoNotMatch" xml:space="preserve">
     <value>Le passwords non corrispondono.</value>
   </data>

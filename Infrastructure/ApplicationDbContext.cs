@@ -31,6 +31,7 @@ namespace Infrastructure
         public DbSet<Lender> Lenders { get; set; }
         public DbSet<Condition> Conditions { get; set; }
         public DbSet<MatrixTemplate> MatrixTemplates { get; set; }
+        public DbSet<Loan> Loans { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

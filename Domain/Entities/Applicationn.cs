@@ -13,7 +13,7 @@ namespace Domain.Entities
         public int BorrowerId { get; set; }
         public Borrower Borrower { get; set;}
         public decimal RequestedAmount { get; set; }
-        public decimal RequestedTenor { get; set; }
+        public int RequestedTenor { get; set; }
         public int ProductId { get; set; }
         public Product Product { get; set; }    
         public bool IsApproved { get; set; }

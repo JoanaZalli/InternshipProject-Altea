@@ -137,6 +137,11 @@ namespace Infrastructure.Extentions {
                 statusCode = HttpStatusCode.BadRequest;
                 errorMessages.Add(localizer[ValidationResource.CombinationExists]);
             }
+            else if (exception is NoEligibleLenderException)
+            {
+                statusCode = HttpStatusCode.BadRequest;
+                errorMessages.Add(localizer[ValidationResource.NoLender]);
+            }
             else
             {
                 statusCode = HttpStatusCode.InternalServerError;

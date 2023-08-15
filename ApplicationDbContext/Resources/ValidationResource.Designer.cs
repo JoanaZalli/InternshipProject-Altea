@@ -268,6 +268,15 @@ namespace Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is no lender for this application..
+        /// </summary>
+        public static string NoLender {
+            get {
+                return ResourceManager.GetString("NoLender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password should not exceed 14 characters..
         /// </summary>
         public static string Password_MaxLength {

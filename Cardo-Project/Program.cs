@@ -93,6 +93,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ILenderRepository, LenderRepository>();
 builder.Services.AddScoped<IMatrixCombinationsServices, MatrixCombinationsServics>();
 builder.Services.AddScoped<IMatrixCombinationRepository, MatrixCombinationRepository>();
+builder.Services.AddScoped<IConditionsRepository, ConditionsRepository>();
 
 // ServiceManager and Logger
 builder.Services.ConfigureServiceManager();

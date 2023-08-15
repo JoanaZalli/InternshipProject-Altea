@@ -24,5 +24,10 @@ namespace Infrastructure.Repositories
             var lender= await _context.Lenders.FirstOrDefaultAsync(l=>l.Name==lenderName);
             return lender;
         }
+        public async Task<Lender> GetLenderByIdAsync(int lenderId)
+        {
+            var lender = await _context.Lenders.FirstOrDefaultAsync(l => l.Id == lenderId);
+            return lender;
+        }
     }
 }

@@ -12,5 +12,7 @@ namespace Application.Contracts.Repositories
         Task<IEnumerable<Lender>> GetLenderAsync();
 
         Task<Lender> GetLenderByNameAsync(string lenderName);
+        Task<Lender> GetLenderByIdAsync(int lenderId);
+
     }
 }

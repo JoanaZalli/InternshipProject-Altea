@@ -16,7 +16,7 @@ namespace Application.Contracts.Repositories
 
         Task UpdateSpreadAsync(string lenderName, string productName, int tenor, double spread);
         Task UploadExcelAsync(Stream excelFileStream);
-
+        Task<double> GetSpreadAsync(int lenderId, int productId, int tenor);
 
     }
 }

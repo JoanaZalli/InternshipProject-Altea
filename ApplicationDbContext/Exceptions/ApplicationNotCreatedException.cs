@@ -9,7 +9,6 @@ namespace Application.Exceptions
     public class ApplicationNotCreatedException : BadRequestException
     {
         public string CultureId { get; }
-
         public ApplicationNotCreatedException(string cultureId) : base(null)
         {
             CultureId = cultureId;

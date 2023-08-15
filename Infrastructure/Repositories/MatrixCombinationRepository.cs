@@ -81,5 +81,14 @@ namespace Infrastructure.Repositories
                 }
             }
         }
+
+        //get spread
+        public async Task<double> GetSpreadAsync(int lenderId, int productId, int tenor)
+        {
+            var combination = await GetCombinationByLenderAndProductAsync(lenderId, productId, tenor);
+            var spread=combination.Spread??0;
+            return spread;
+        }
+
     }
 }
