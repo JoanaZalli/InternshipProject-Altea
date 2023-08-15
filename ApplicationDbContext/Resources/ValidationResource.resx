@@ -135,6 +135,9 @@
   <data name="Borrower_Required" xml:space="preserve">
     <value>Borrower Id is required.</value>
   </data>
+  <data name="CombinationExists" xml:space="preserve">
+    <value>This combination exists.</value>
+  </data>
   <data name="CompanyNameRequired" xml:space="preserve">
     <value>Company name is required.</value>
   </data>

@@ -115,6 +115,15 @@ namespace Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This combination exists..
+        /// </summary>
+        public static string CombinationExists {
+            get {
+                return ResourceManager.GetString("CombinationExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company name is required..
         /// </summary>
         public static string CompanyNameRequired {

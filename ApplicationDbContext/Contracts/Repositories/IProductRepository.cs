@@ -11,5 +11,7 @@ namespace Application.Contracts.Repositories
     {
         Task<Product> GetProductAsync(int id);
         Task<IEnumerable<Product>> GetProductAsync();
+        Task<Product> GetProductByNameAsync(string productName);
+
     }
 }

@@ -132,6 +132,11 @@ namespace Infrastructure.Extentions {
                 statusCode = HttpStatusCode.BadRequest;
                 errorMessages.Add(localizer[ValidationResource.ProductNotChanged]);
             }
+            else if (exception is CombinationExistsException)
+            {
+                statusCode = HttpStatusCode.BadRequest;
+                errorMessages.Add(localizer[ValidationResource.CombinationExists]);
+            }
             else
             {
                 statusCode = HttpStatusCode.InternalServerError;

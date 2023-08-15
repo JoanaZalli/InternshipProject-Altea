@@ -28,6 +28,7 @@ namespace Application.Mappers
             CreateMap<IdentityRole,CreateRoleCommand>().ReverseMap();
             CreateMap<CreateApplicationCommand, Applicationn>().ReverseMap();
             CreateMap<ApplicationDTO,Applicationn>().ReverseMap();
+            CreateMap<MatrixTemplateDTO,MatrixTemplate>().ReverseMap();
 
         }
     }

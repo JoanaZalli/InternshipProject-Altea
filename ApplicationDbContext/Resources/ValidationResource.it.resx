@@ -135,6 +135,9 @@
   <data name="Borrower_Required" xml:space="preserve">
     <value>L'ID del mutuatario è obbligatorio.</value>
   </data>
+  <data name="CombinationExists" xml:space="preserve">
+    <value>Questa combinazione esiste.</value>
+  </data>
   <data name="CompanyNameRequired" xml:space="preserve">
     <value>Il nome dell'azienda è obbligatorio.</value>
   </data>

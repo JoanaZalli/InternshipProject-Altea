@@ -10,5 +10,7 @@ namespace Application.Contracts.Repositories
     public interface ILenderRepository
     {
         Task<IEnumerable<Lender>> GetLenderAsync();
+
+        Task<Lender> GetLenderByNameAsync(string lenderName);
     }
 }

@@ -25,7 +25,7 @@ namespace Infrastructure.Services
                     {
                         combinations.Add(new MatrixTemplate
                         {
-                           // Id = combinationId,
+                           //Id = combinationId,
                             Lender = lender,
                             Product = product,
                             Tenor = tenor

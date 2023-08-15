@@ -35,13 +35,13 @@ namespace Application.Moduls.MatrixTemplateModul.Query
             var lenders = await _lenderRepository.GetLenderAsync();
             var products = await _productRepository.GetProductAsync();
 
-            var combinations = await _matrixCombinations.GenerateCombinations(lenders, products, request.MinTenor, request.MaxTenor);
+            var combinations = await _matrixCombinationRepository.GetCombinationsAsync(); 
 
             using (var package = new ExcelPackage())
             {
                 var worksheet = package.Workbook.Worksheets.Add("Combinations");
 
-                worksheet.Cells[1, 1].Value = "ExcelId";
+                worksheet.Cells[1, 1].Value = "Id";
                 worksheet.Cells[1, 2].Value = "Lender";
                 worksheet.Cells[1, 3].Value = "Product";
                 worksheet.Cells[1, 4].Value = "Tenor";
@@ -50,16 +50,13 @@ namespace Application.Moduls.MatrixTemplateModul.Query
                 int excelRow = 2;
                 foreach (var combination in combinations)
                 {
-                    worksheet.Cells[excelRow, 1].Value = excelRow - 1;
+                    worksheet.Cells[excelRow, 1].Value = combination.Id;
                     worksheet.Cells[excelRow, 2].Value = combination.Lender.Name;
                     worksheet.Cells[excelRow, 3].Value = combination.Product.Name;
                     worksheet.Cells[excelRow, 4].Value = combination.Tenor;
                     excelRow++;
                 }
-                foreach (var combination in combinations)
-                {
-                    await _matrixCombinationRepository.AddCombinationAsync(combination);
-                }
+             
                 using (var memoryStream = new MemoryStream())
                 {
                     package.SaveAs(memoryStream);

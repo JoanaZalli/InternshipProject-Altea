@@ -23,5 +23,11 @@ namespace Infrastructure.Repositories
             var products = await _context.Products.ToListAsync();
             return products;
         }
+
+        public async Task<Product> GetProductByNameAsync(string productName){
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Name == productName);
+            return product;
+        }
+
     }
 }

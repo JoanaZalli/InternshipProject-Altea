@@ -1,9 +1,11 @@
-﻿using Application.Moduls.MatrixTemplateModul;
+﻿using Application.DTOS;
+using Application.Moduls.MatrixTemplateModul;
 using Application.Moduls.MatrixTemplateModul.Commands;
 using Application.Moduls.MatrixTemplateModul.Query;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
 
 namespace Cardo_Project.Controllers
 {
@@ -17,42 +19,65 @@ namespace Cardo_Project.Controllers
         {
             _mediator = mediator;
         }
-        [HttpGet("generate")]
-        public async Task<IActionResult> GenerateExcelFile()
+        [HttpPost("store")]
+        public async Task<IActionResult> StoreCombinations()
+        {
+            var command = new StoreCombinationsCommand(); 
+            var result=await _mediator.Send(command);
+
+            return Ok(result);
+        }
+        [HttpGet("download")]
+        public async Task<IActionResult> DownloadCombinations()
         {
             var command = new GenerateExcelFileCommand { MinTenor = 11, MaxTenor = 65 };
             var fileBytes = await _mediator.Send(command);
+
             return File(fileBytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Combinations.xlsx");
         }
-        [HttpPost("upload/{fileIdentifier}")]
-        public async Task<IActionResult> UploadExcelFile(string fileIdentifier, IFormFile file)
+
+        [HttpPatch("upload")]
+        public async Task<IActionResult> UploadExcel(IFormFile file)
         {
-            if (file == null || file.Length == 0)
+            if (file == null || file.Length <= 0)
             {
-                return BadRequest("No file was uploaded.");
+                return BadRequest("Invalid file.");
             }
 
             using (var stream = file.OpenReadStream())
             {
-                var updatedRows = ExcelFileParser.Parse(stream);
+                var spreadUpdates = new List<UpdatedExcelRowDTO>();
 
-                if (updatedRows == null || !updatedRows.Any())
+                using (var package = new ExcelPackage(stream))
                 {
-                    return BadRequest("No valid data found in the uploaded Excel file.");
+                    var worksheet = package.Workbook.Worksheets[0];
+                    int rowCount = worksheet.Dimension.Rows;
+
+                    for (int row = 2; row <= rowCount; row++)
+                    {
+                        var updatedRow = new UpdatedExcelRowDTO
+                        {
+                            LenderName = worksheet.Cells[row, 2].Value.ToString(),
+                            ProductName = worksheet.Cells[row, 3].Value.ToString(),
+                            Tenor = Convert.ToInt32(worksheet.Cells[row, 4].Value),
+                            Spread = Convert.ToDouble(worksheet.Cells[row, 5].Value)
+                        };
+
+                        spreadUpdates.Add(updatedRow);
+                    }
                 }
 
-                try
+                var command = new UpdateSpreadValuesCommand
                 {
-                    var command = new UpdateMatrixCombinationsCommand(updatedRows);
-                    await _mediator.Send(command);
+                    SpreadUpdates = spreadUpdates
+                };
 
-                    return Ok("Matrix combinations updated successfully.");
-                }
-                catch (Exception ex)
-                {
-                    return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while updating matrix combinations.");
-                }
+                await _mediator.Send(command);
+
+                return Ok("Excel file uploaded and spreads updated.");
             }
         }
+
     }
 }
+
