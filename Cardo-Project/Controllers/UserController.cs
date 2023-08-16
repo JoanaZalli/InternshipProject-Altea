@@ -4,6 +4,7 @@ using Application.Exceptions;
 using Application.Moduls.UserModul.Commands;
 using Application.Moduls.UserModul.Query;
 using AutoMapper;
+using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -46,10 +47,16 @@ namespace Cardo_Project.Controllers
             return Ok(new { Message = "User registered successfully. Verification email sent." });
         }
         [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> GetUsers()
+        [Authorize(Roles = "Loan Officer")]
+        public async Task<ActionResult<IEnumerable<UserRegistrationDTO>>>GetUsers(string? sortBy = null, bool? sortAscending = null, string? filter=null)
         {
-            var users = await _mediator.Send(new GetAllUsersQuery(TrackChanges:false));
+            var query = new GetAllUsersQuery
+            {
+                SortBy = sortBy,
+                SortAscending = sortAscending,
+                Filter = filter
+            };
+            var users=await _mediator.Send(query);
             return Ok(users);
         }
 

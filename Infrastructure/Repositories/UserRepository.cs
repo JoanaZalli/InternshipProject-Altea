@@ -16,7 +16,11 @@ namespace Infrastructure.Repositories
         
         public UserRepository(ApplicationDbContext context) : base(context) { }
 
-        public async Task<IEnumerable<User>> GetAllUsersAsync(bool trcakChanges)=>await GetAll(trcakChanges).ToListAsync();
+        public async Task<IEnumerable<User>> GetAllUsersAsync()
+        {
+            var users=_context.Users.ToList();
+            return users;
+        }
 
         public async Task<User> FindByEmailAsync(string email)
         {

@@ -268,6 +268,15 @@ namespace Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loan was not found..
+        /// </summary>
+        public static string LoanNotFound {
+            get {
+                return ResourceManager.GetString("LoanNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There is no lender for this application..
         /// </summary>
         public static string NoLender {

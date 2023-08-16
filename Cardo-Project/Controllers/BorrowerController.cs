@@ -28,6 +28,7 @@ namespace Cardo_Project.Controllers
             return Ok("Borrower Created!");
 
         }
+        [Authorize(Roles = "Loan Officer")]
         [HttpGet("borrower/{borrowerId}")]
         public async Task<IActionResult> GetBorrowerById(int borrowerId, [FromHeader(Name = "Accept-Language")] string culture)
         {
@@ -37,14 +38,16 @@ namespace Cardo_Project.Controllers
             return Ok(result);
 
         }
+       // [Authorize(Roles = "Loan Officer")]
         [HttpGet("{userId}")]
-        public async Task<ActionResult<IEnumerable<BorrowerDTO>>> GetBorrowersByUserId(string userId, string? sortBy = null, bool? sortAscending = null)
+        public async Task<ActionResult<IEnumerable<BorrowerDTO>>> GetBorrowersByUserId(string userId, string? sortBy = null, bool? sortAscending = null, string? filter = null)
         {
             var query = new GetAllBorrowersOfAUserQuery
             {
                 UserId = userId,
                 SortBy = sortBy,
                 SortAscending = sortAscending,
+                Filter = filter
             };
 
             var borrowers = await _mediator.Send(query);

@@ -59,5 +59,36 @@ namespace Infrastructure.Repositories
            }).ToListAsync();
             return applications;
         }
+
+        public async Task<bool> UpdateApplicationStatus(int loanStatusId , int applicationId)
+        {
+            var application = await GetApplicationByIdAsync(applicationId);
+            var newApplicationStatusId = GetNewApplicationStatusId(loanStatusId);
+
+            if (application.ApplicationStatusId != newApplicationStatusId)
+            {
+                application.ApplicationStatusId = newApplicationStatusId;
+                _context.Update(application);
+                await _context.SaveChangesAsync();
+            }
+
+            return true;
+        }
+
+        private int GetNewApplicationStatusId(int loanStatusId)
+        {
+            switch (loanStatusId)
+            {
+                case 1: return 2;  // Loan Issued
+                case 10: return 3; // Loan Canceled
+                case 7: return 4;  // Loan Defaulted
+                case 4: return 5;  // Loan Disbursed
+                case 9: return 6;  // Loan Guaranteed
+                case 3: return 7;  // Loan Rejected
+                case 8: return 8;  // Loan Repaid
+                default: return 1; // In Charge
+            }
+        }
+
     }
 }

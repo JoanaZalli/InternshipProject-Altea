@@ -9,7 +9,7 @@ namespace Application.Contracts.Repositories
 {
     public interface IUserRepository
     {
-       Task <IEnumerable<User>> GetAllUsersAsync(bool trackChanges);
+       Task <IEnumerable<User>> GetAllUsersAsync();
 
         Task<User> FindByEmailAsync(string email);
         Task<User> FindByUsernameAsync(string email);

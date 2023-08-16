@@ -23,9 +23,10 @@ namespace Application.Moduls.LoanModul.Command
         private readonly IBorrowerRepository _borrowerRepository;
         private readonly IProductRepository _productRepository;
         public readonly IMatrixCombinationRepository _matrixCombinationRepository;
+        private readonly ILoanRepository _loanRepository;
         public CreateLoanCommandHandler(IApplicationRepository applicationRepository, ILenderRepository lenderRepository,
             IConditionsRepository conditionsRepository, IBorrowerRepository borrowerRepository, IProductRepository productRepository
-            , IMatrixCombinationRepository matrixCombinationRepository)
+            , IMatrixCombinationRepository matrixCombinationRepository, ILoanRepository loanRepository)
         {
             _applicationRepository = applicationRepository;
             _lenderRepository = lenderRepository;
@@ -33,6 +34,7 @@ namespace Application.Moduls.LoanModul.Command
             _borrowerRepository = borrowerRepository;
             _productRepository = productRepository;
             _matrixCombinationRepository = matrixCombinationRepository;
+            _loanRepository = loanRepository;
         }
         public async Task<bool> Handle(CreateLoanCommand request, CancellationToken cancellationToken)
         {
@@ -71,17 +73,24 @@ namespace Application.Moduls.LoanModul.Command
             var product = await _productRepository.GetProductAsync(application.ProductId);
             var referenceRate = product.Refernce_rate;
             var spread =await _matrixCombinationRepository.GetSpreadAsync(lenderId,application.ProductId,application.RequestedTenor);
-
+            
             var interestRate = spread + referenceRate;
 
-            // Create the loan entity and persist it
-            // ...
+            Loan loan = new Loan();
+            loan.RequestedAmount=application.RequestedAmount;
+            loan.ApplicationId=application.Id;
+            loan.InterestRate=interestRate;
+            loan.Tenor=loanTenor; 
+            loan.ProductId=application.ProductId;
+            loan.LenderId = lenderId;
+
+            var result=_loanRepository.CreateLoan(loan);
 
             // Update application status
-            // ...
-
-            // Optionally, generate loan agreement and notify borrower
-            // ...
+            if (result != null)
+            {
+                await _applicationRepository.UpdateApplicationStatus(loan.LoanStatusId,application.Id);
+            }
 
             return true;
         }

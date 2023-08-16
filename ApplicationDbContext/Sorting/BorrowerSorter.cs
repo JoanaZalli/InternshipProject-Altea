@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.DTOS;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 namespace Application.Sorting
 {
     
-        public class BorrowerSorter : BaseSorter<Borrower>
+        public class BorrowerSorter : BaseSorter<BorrowerDTO>
         {
-            public override IEnumerable<Borrower> Sort(IEnumerable<Borrower> borrowers, string? sortBy, bool? sortAscending)
+            public override IEnumerable<BorrowerDTO> Sort(IEnumerable<BorrowerDTO> borrowers, string? sortBy, bool? sortAscending)
             {
                 if (!string.IsNullOrEmpty(sortBy) && sortAscending.HasValue)
                 {

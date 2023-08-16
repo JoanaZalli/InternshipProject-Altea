@@ -2,6 +2,7 @@
 using Domain.Entities;
 using Infrastructure;
 using Infrastructure.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Elfie.Model;
@@ -32,27 +33,28 @@ namespace Cardo_Project.Controllers
 
                 if (companyProfile != null)
                 {
-                    bool exists = await _context.CompanyProfiles.AnyAsync(cp => cp.Symbol == symbol);
+                    bool exists = await _context.CompanyProfiles.AnyAsync(cp => cp.ticker == symbol);
 
                     if (!exists)
                     {
                         _context.CompanyProfiles.Add(companyProfile);
+                        _context.SaveChanges();
                     }
                     else
                     {
-                        CompanyProfile existingProfile = await _context.CompanyProfiles.FirstOrDefaultAsync(cp => cp.Symbol == symbol);
+                        CompanyProfile existingProfile = await _context.CompanyProfiles.FirstOrDefaultAsync(cp => cp.ticker == symbol);
                         if (existingProfile != null)
                         {
-                            existingProfile.Name = companyProfile.Name;
-                            existingProfile.Description = companyProfile.Description;
-                            existingProfile.Phone = companyProfile.Phone;
-                            existingProfile.State = companyProfile.State;
-                            existingProfile.Url = companyProfile.Url;
-                            existingProfile.Adress = companyProfile.Adress;
-                            existingProfile.Sector = companyProfile.Sector;
-                            existingProfile.SubSector = companyProfile.SubSector;
-                            existingProfile.NationalIndustry = companyProfile.NationalIndustry;
-                            existingProfile.Currency = companyProfile.Currency;
+                            existingProfile.name = companyProfile.name;
+                            existingProfile.description = companyProfile.description;
+                            existingProfile.phone = companyProfile.phone;
+                            existingProfile.state = companyProfile.state;
+                            existingProfile.weburl = companyProfile.weburl;
+                            existingProfile.address = companyProfile.address;
+                            existingProfile.naicsSector = companyProfile.naicsSector;
+                            existingProfile.naicsSubsector = companyProfile.naicsSubsector;
+                            existingProfile.naicsNationalIndustry = companyProfile.naicsNationalIndustry;
+                            existingProfile.currency = companyProfile.currency;
                         }
                     }
                 }

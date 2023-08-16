@@ -3,6 +3,7 @@ using Application.Moduls.MatrixTemplateModul;
 using Application.Moduls.MatrixTemplateModul.Commands;
 using Application.Moduls.MatrixTemplateModul.Query;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
@@ -19,6 +20,7 @@ namespace Cardo_Project.Controllers
         {
             _mediator = mediator;
         }
+        [Authorize(Roles = "Loan Officer")]
         [HttpPost("store")]
         public async Task<IActionResult> StoreCombinations()
         {
@@ -27,6 +29,7 @@ namespace Cardo_Project.Controllers
 
             return Ok(result);
         }
+        [Authorize(Roles = "Loan Officer")]
         [HttpGet("download")]
         public async Task<IActionResult> DownloadCombinations()
         {
@@ -35,7 +38,7 @@ namespace Cardo_Project.Controllers
 
             return File(fileBytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Combinations.xlsx");
         }
-
+        [Authorize(Roles = "Loan Officer")]
         [HttpPatch("upload")]
         public async Task<IActionResult> UploadExcel(IFormFile file)
         {

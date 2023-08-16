@@ -14,5 +14,6 @@ namespace Application.Contracts.Repositories
 
         Task<bool> ChangeProductAsync(Applicationn application, int productId);
         Task<IEnumerable<Applicationn>> GetApplicationsOfABorrowerById(int borrowerId);
+        Task<bool> UpdateApplicationStatus(int applicationId,int loanStatusId);
     }
 }

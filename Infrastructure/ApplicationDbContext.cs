@@ -180,6 +180,7 @@ namespace Infrastructure
                     Name = "Loan Issued",
                     Created = DateTime.Now,
                     Updated = DateTime.Now,
+                    LoanStatusId=1
                 },
                 new ApplicationStatus
                 {
@@ -187,6 +188,7 @@ namespace Infrastructure
                     Name = "Loan Canceled",
                     Created = DateTime.Now,
                     Updated = DateTime.Now,
+                    LoanStatusId=10
                 },
                  new ApplicationStatus
                  {
@@ -194,6 +196,7 @@ namespace Infrastructure
                      Name = "Loan Defaulted",
                      Created = DateTime.Now,
                      Updated = DateTime.Now,
+                     LoanStatusId=7
                  },
                   new ApplicationStatus
                   {
@@ -201,6 +204,7 @@ namespace Infrastructure
                       Name = "Loan Disbursed",
                       Created = DateTime.Now,
                       Updated = DateTime.Now,
+                      LoanStatusId=4
                   },
                    new ApplicationStatus
                    {
@@ -208,6 +212,7 @@ namespace Infrastructure
                        Name = "Loan Guaranteed",
                        Created = DateTime.Now,
                        Updated = DateTime.Now,
+                       LoanStatusId=9
                    },
                     new ApplicationStatus
                     {
@@ -215,6 +220,7 @@ namespace Infrastructure
                         Name = "Loan Rejected",
                         Created = DateTime.Now,
                         Updated = DateTime.Now,
+                        LoanStatusId=3
                     },
                      new ApplicationStatus
                      {
@@ -222,6 +228,7 @@ namespace Infrastructure
                          Name = "Loan Repaid",
                          Created = DateTime.Now,
                          Updated = DateTime.Now,
+                         LoanStatusId=8
                      }
                 );
             //loan statusees data seed

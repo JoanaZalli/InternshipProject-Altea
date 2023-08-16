@@ -1,6 +1,7 @@
 ﻿using Application.Contracts.Repositories;
 using Application.DTOS;
 using Application.Exceptions;
+using Application.Filtring;
 using Application.Sorting;
 using AutoMapper;
 using Domain.Entities;
@@ -20,6 +21,7 @@ namespace Application.Moduls.BorrowerModul.Query
         public string Culture { get; set; }
         public string? SortBy { get; set; } 
         public bool? SortAscending { get; set; }
+        public string? Filter { get; set; }
 
 
     }
@@ -28,12 +30,12 @@ namespace Application.Moduls.BorrowerModul.Query
         private readonly IBorrowerRepository _borrowerRepository;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
-        private readonly BaseSorter<Borrower> _borrowerSorter;
+        private readonly BaseSorter<BorrowerDTO> _borrowerSorter;
 
 
 
         public GetAllBorrowersOfAUserQueryHandler(IBorrowerRepository borrowerRepository, IMapper mapper, UserManager<User> userManager, 
-            BaseSorter<Borrower> borrowerSorter)
+            BaseSorter<BorrowerDTO> borrowerSorter)
         {
             _borrowerRepository = borrowerRepository;
             _mapper = mapper;
@@ -48,13 +50,16 @@ namespace Application.Moduls.BorrowerModul.Query
                 throw new UserNotFoundException(request.Culture);
             
             var borrowers= await _borrowerRepository.GetBorrowersByUserIdAsync(request.UserId);
-           
+            var borrowerDto = _mapper.Map<IEnumerable<BorrowerDTO>>(borrowers);
+            if (request.Filter != null)
+            {
+                borrowerDto = BorrowerFiltring.ApplyFilter(borrowerDto, request.Filter);
+            }
             if (!string.IsNullOrEmpty(request.SortBy) && request.SortAscending.HasValue)
             {
-                borrowers = _borrowerSorter.Sort(borrowers, request.SortBy, request.SortAscending.Value);
+                borrowerDto = _borrowerSorter.Sort(borrowerDto, request.SortBy, request.SortAscending.Value);
             }
 
-            var borrowerDto = _mapper.Map<IEnumerable<BorrowerDTO>>(borrowers);
             return borrowerDto;
         }
              

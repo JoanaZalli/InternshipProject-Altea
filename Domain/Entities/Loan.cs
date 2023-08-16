@@ -20,5 +20,7 @@ namespace Domain.Entities
         public Applicationn Application { get; set; }
         public int LoanStatusId { get; set; }
         public LoanStatus LoanStatus { get; set; }
+        public DateTime DateCreated { get; set; }
+        public DateTime DateUpdated { get; set; }
     }
 }

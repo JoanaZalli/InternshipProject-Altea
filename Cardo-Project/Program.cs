@@ -22,6 +22,7 @@ using Application.Models;
 using FluentValidation.AspNetCore;
 using Application.Sorting;
 using Domain.Entities;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
@@ -56,8 +57,31 @@ builder.Services.AddSingleton(provider =>
 
 // Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "JWT Authorization header using the Bearer scheme",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey
+    });
 
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                },
+                new string[] {}
+            }
+        });
+});
 // Application services
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddMediatR(typeof(Application.AssemblyReference).Assembly);
@@ -86,7 +110,8 @@ builder.Services.AddScoped<ICompanyTypeRepository, CompanyTypeRepository>();
 builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
 builder.Services.AddScoped<IRolePermissionRepository, RolePermissionRepository>();
 builder.Services.AddScoped<IUserPermissionRepository, UserPermissionRepository>();
-builder.Services.AddScoped<BaseSorter<Borrower>, BorrowerSorter>();
+builder.Services.AddScoped<BaseSorter<BorrowerDTO>, BorrowerSorter>();
+builder.Services.AddScoped<BaseSorter<UserRegistrationDTO>, UserSorter>();
 builder.Services.AddScoped<IFinhubService, FinhubService>();
 builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
@@ -94,6 +119,7 @@ builder.Services.AddScoped<ILenderRepository, LenderRepository>();
 builder.Services.AddScoped<IMatrixCombinationsServices, MatrixCombinationsServics>();
 builder.Services.AddScoped<IMatrixCombinationRepository, MatrixCombinationRepository>();
 builder.Services.AddScoped<IConditionsRepository, ConditionsRepository>();
+builder.Services.AddScoped<ILoanRepository, LoanRepository>();
 
 // ServiceManager and Logger
 builder.Services.ConfigureServiceManager();

@@ -16,40 +16,48 @@ namespace Infrastructure.Services
         public FinhubService(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _httpClient.DefaultRequestHeaders.Add("X-Finnhub-Secret", "cjadtshr01qji1gtidbg");
+            _httpClient.DefaultRequestHeaders.Add("cjadtshr01qji1gtidbg", "cjed84hr01qgod9alaq0cjed84hr01qgod9alaqg");
 
         }
         public async Task<CompanyProfile> GetCompanyProfileAsync(string symbol)
         {
-            string apiKey = "cjadtshr01qji1gtida0cjadtshr01qji1gtidag";
-            string apiUrl = $"https://finnhub.io/api/v1/stock/profile2?symbol={symbol}&token={apiKey}";
-
-            HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var result = await response.Content.ReadFromJsonAsync<Dictionary<string, string>>();
-                if (result != null)
-                {
-                    CompanyProfile companyProfile = new CompanyProfile
-                    {
-                        Symbol = symbol,
-                        Name = result.GetValueOrDefault("name"),
-                        Description = result.GetValueOrDefault("description"),
-                        Phone = result.GetValueOrDefault("phone"),
-                        State = result.GetValueOrDefault("state"),
-                        Url = result.GetValueOrDefault("weburl"),
-                        Adress = result.GetValueOrDefault("address"),
-                        Sector = result.GetValueOrDefault("gsector"),
-                        SubSector = result.GetValueOrDefault("naicsSubsector"),
-                        NationalIndustry = result.GetValueOrDefault("naicsNationalIndustry"),
-                        Currency = result.GetValueOrDefault("currency")
-                    };
+                string apiKey = "cjed84hr01qgod9alaq0cjed84hr01qgod9alaqg";
+                string apiUrl = $"https://finnhub.io/api/v1/stock/profile2?symbol={symbol}&token={apiKey}";
 
-                    return companyProfile;
+                HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadFromJsonAsync<CompanyProfile>();
+                    if (result != null)
+                    {
+                        CompanyProfile companyProfile = new CompanyProfile
+                        {
+                            ticker = symbol,
+                            name = result.name,
+                            description = result.description,
+                            phone = result.phone,
+                            state = result.state,
+                            weburl = result.weburl,
+                            address = result.address,
+                            naicsSector = result.naicsSector,
+                            naicsSubsector = result.naicsSubsector,
+                            naicsNationalIndustry = result.naicsNationalIndustry,
+                            currency = result.currency
+                        };
+                        return companyProfile;
+                    }
                 }
+
+                return null; 
             }
-            return null;
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
+
     }
 }

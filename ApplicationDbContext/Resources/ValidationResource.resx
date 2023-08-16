@@ -186,6 +186,9 @@
   <data name="LastName_Required" xml:space="preserve">
     <value>Last name is required.</value>
   </data>
+  <data name="LoanNotFound" xml:space="preserve">
+    <value>Loan was not found.</value>
+  </data>
   <data name="NoLender" xml:space="preserve">
     <value>There is no lender for this application.</value>
   </data>

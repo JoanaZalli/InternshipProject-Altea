@@ -122,7 +122,7 @@ namespace Infrastructure.Extentions {
                 statusCode = HttpStatusCode.NotFound;
                 errorMessages.Add(localizer[ValidationResource.ApplicationCanNotBeCreated]);
             }
-           else if(exception is ApplicationNotCreatedException)
+           else if(exception is ApplicationNotFoundException)
             {
                 statusCode = HttpStatusCode.NotFound;
                 errorMessages.Add(localizer[ValidationResource.ApplicationNotFound]);
@@ -141,6 +141,10 @@ namespace Infrastructure.Extentions {
             {
                 statusCode = HttpStatusCode.BadRequest;
                 errorMessages.Add(localizer[ValidationResource.NoLender]);
+            }else if (exception is LoanNotFoundException)
+            {
+                statusCode = HttpStatusCode.NotFound;
+                errorMessages.Add(localizer[ValidationResource.LoanNotFound]);
             }
             else
             {
