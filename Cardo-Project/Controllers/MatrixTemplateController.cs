@@ -21,7 +21,7 @@ namespace Cardo_Project.Controllers
             _mediator = mediator;
         }
         [Authorize(Roles = "Loan Officer")]
-        [HttpPost("store")]
+        [HttpPost("loanOfficer/store")]
         public async Task<IActionResult> StoreCombinations()
         {
             var command = new StoreCombinationsCommand(); 
@@ -30,7 +30,7 @@ namespace Cardo_Project.Controllers
             return Ok(result);
         }
         [Authorize(Roles = "Loan Officer")]
-        [HttpGet("download")]
+        [HttpGet("loanOfficer/download")]
         public async Task<IActionResult> DownloadCombinations()
         {
             var command = new GenerateExcelFileCommand { MinTenor = 11, MaxTenor = 65 };
@@ -39,7 +39,7 @@ namespace Cardo_Project.Controllers
             return File(fileBytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Combinations.xlsx");
         }
         [Authorize(Roles = "Loan Officer")]
-        [HttpPatch("upload")]
+        [HttpPatch("loanOfficer/upload")]
         public async Task<IActionResult> UploadExcel(IFormFile file)
         {
             if (file == null || file.Length <= 0)

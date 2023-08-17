@@ -20,7 +20,7 @@ namespace Cardo_Project.Controllers
             _mediator = mediator;
         }
         [Authorize]
-        [HttpPost]
+        [HttpPost("borrower")]
         public async Task<IActionResult> CreateBorrower([FromBody] CreateApplicationCommand command, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
             command.CultureId = cultureId;
@@ -30,7 +30,7 @@ namespace Cardo_Project.Controllers
         }
 
         [Authorize(Roles = "Loan Officer")]
-        [HttpPut]
+        [HttpPut("loanOfficer")]
         public async Task<IActionResult> UpdateProduct([FromBody] UpdateProductOfaApplicationCommand command, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
             command.CultureId = cultureId;
@@ -38,7 +38,7 @@ namespace Cardo_Project.Controllers
             return Ok(result);
         }
         [Authorize(Roles = "Loan Officer")]
-        [HttpGet("{borrowerId}")]
+        [HttpGet("loanOfficer/{borrowerId}")]
         public async Task<IActionResult> GetBorrowersApplications(int borrowerId, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
             var query = new GetApplicationsOfABorrowerQuery

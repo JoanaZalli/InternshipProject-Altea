@@ -1,4 +1,5 @@
 ﻿using Application.Contracts;
+using Application.Exceptions;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -21,9 +22,7 @@ namespace Infrastructure.Services
         }
         public async Task<CompanyProfile> GetCompanyProfileAsync(string symbol)
         {
-            try
-            {
-                string apiKey = "cjed84hr01qgod9alaq0cjed84hr01qgod9alaqg";
+                var apiKey = "cjed84hr01qgod9alaq0cjed84hr01qgod9alaqg";
                 string apiUrl = $"https://finnhub.io/api/v1/stock/profile2?symbol={symbol}&token={apiKey}";
 
                 HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
@@ -37,26 +36,28 @@ namespace Infrastructure.Services
                         {
                             ticker = symbol,
                             name = result.name,
-                            description = result.description,
+                            exchange = result.exchange,
                             phone = result.phone,
-                            state = result.state,
+                            ipo = result.ipo,
                             weburl = result.weburl,
-                            address = result.address,
-                            naicsSector = result.naicsSector,
-                            naicsSubsector = result.naicsSubsector,
-                            naicsNationalIndustry = result.naicsNationalIndustry,
-                            currency = result.currency
+                            marketCapitalization = result.marketCapitalization,
+                            shareOutstanding = result.shareOutstanding,
+                            logo = result.logo,
+                            finnhubIndustry = result.finnhubIndustry,
+                            currency = result.currency,
+                            country = result.country,
                         };
                         return companyProfile;
                     }
-                }
-
-                return null; 
             }
-            catch (Exception ex)
+            else
             {
-                return null;
+                throw new FinhubFaildException();
             }
+                
+                
+                return null; 
+           
         }
 
     }

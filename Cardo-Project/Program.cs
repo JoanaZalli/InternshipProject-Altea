@@ -23,6 +23,8 @@ using FluentValidation.AspNetCore;
 using Application.Sorting;
 using Domain.Entities;
 using Microsoft.OpenApi.Models;
+using Hangfire;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
@@ -82,6 +84,11 @@ builder.Services.AddSwaggerGen(c =>
             }
         });
 });
+
+builder.Services.AddHangfire(config =>
+{
+    config.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 // Application services
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddMediatR(typeof(Application.AssemblyReference).Assembly);
@@ -120,6 +127,7 @@ builder.Services.AddScoped<IMatrixCombinationsServices, MatrixCombinationsServic
 builder.Services.AddScoped<IMatrixCombinationRepository, MatrixCombinationRepository>();
 builder.Services.AddScoped<IConditionsRepository, ConditionsRepository>();
 builder.Services.AddScoped<ILoanRepository, LoanRepository>();
+builder.Services.AddScoped<ICompanyProfileRepository, CompanyProfileRepository>();
 
 // ServiceManager and Logger
 builder.Services.ConfigureServiceManager();
@@ -156,6 +164,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseHangfireDashboard();
+app.UseHangfireServer();
 
 app.MapControllers();
 app.Run();

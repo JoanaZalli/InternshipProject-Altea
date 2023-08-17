@@ -1,7 +1,11 @@
 ﻿using Application.Contracts;
+using Application.Moduls.CompanyProfileModul;
+using Application.Moduls.CompanyProfileModul.Command;
 using Domain.Entities;
+using Hangfire;
 using Infrastructure;
 using Infrastructure.Services;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,54 +18,30 @@ namespace Cardo_Project.Controllers
     [ApiController]
     public class CompanyProfileController : ControllerBase
     {
-        private readonly IFinhubService _finhubService;
-        private readonly ApplicationDbContext _context;
-        public CompanyProfileController(IFinhubService finhubService, ApplicationDbContext context)
+        
+        private readonly IMediator _mediator;
+        private readonly CompanyProfileSchedulingService _profileSchedulingService;
+
+        public CompanyProfileController( IMediator mediator,CompanyProfileSchedulingService companyProfileSchedulingService)
         {
-            _finhubService = finhubService;
-            _context = context;
+          
+            _mediator = mediator;
+            _profileSchedulingService = companyProfileSchedulingService;
 
         }
-        [HttpGet("update-all")]
+        [HttpPost("loanOfficer/update")]
         public async Task<IActionResult> UpdateAllCompanyProfiles()
         {
-            string[] symbols = new string[] { "AAPL", "EXCOF", "UPOW" };
+            await _mediator.Send(new UpdateCompanyProfilesCommand());
 
-            foreach (string symbol in symbols)
-            {
-                CompanyProfile companyProfile = await _finhubService.GetCompanyProfileAsync(symbol);
-
-                if (companyProfile != null)
-                {
-                    bool exists = await _context.CompanyProfiles.AnyAsync(cp => cp.ticker == symbol);
-
-                    if (!exists)
-                    {
-                        _context.CompanyProfiles.Add(companyProfile);
-                        _context.SaveChanges();
-                    }
-                    else
-                    {
-                        CompanyProfile existingProfile = await _context.CompanyProfiles.FirstOrDefaultAsync(cp => cp.ticker == symbol);
-                        if (existingProfile != null)
-                        {
-                            existingProfile.name = companyProfile.name;
-                            existingProfile.description = companyProfile.description;
-                            existingProfile.phone = companyProfile.phone;
-                            existingProfile.state = companyProfile.state;
-                            existingProfile.weburl = companyProfile.weburl;
-                            existingProfile.address = companyProfile.address;
-                            existingProfile.naicsSector = companyProfile.naicsSector;
-                            existingProfile.naicsSubsector = companyProfile.naicsSubsector;
-                            existingProfile.naicsNationalIndustry = companyProfile.naicsNationalIndustry;
-                            existingProfile.currency = companyProfile.currency;
-                        }
-                    }
-                }
-            }
-
-            await _context.SaveChangesAsync();
             return Ok("Company profiles updated.");
+        }
+        [HttpPut("loanOfficer/schedule-update")]
+        public IActionResult ScheduleDailyUpdateAction()
+        {
+            _profileSchedulingService.ScheduleDailyUpdate();
+
+            return Ok("Daily company profile updates scheduled.");
         }
     }
 }

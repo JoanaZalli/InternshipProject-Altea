@@ -146,6 +146,11 @@ namespace Infrastructure.Extentions {
                 statusCode = HttpStatusCode.NotFound;
                 errorMessages.Add(localizer[ValidationResource.LoanNotFound]);
             }
+            else if (exception is FinhubFaildException)
+            {
+                statusCode = HttpStatusCode.BadRequest;
+                errorMessages.Add(localizer["Warning: Failed to fetch company profile from Finhub."]);
+            }
             else
             {
                 statusCode = HttpStatusCode.InternalServerError;

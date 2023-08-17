@@ -165,6 +165,19 @@ namespace Infrastructure
                 }
             );
 
+            modelBuilder.Entity<ApplicationStatus>()
+                    .HasKey(e => e.Id);
+
+            modelBuilder.Entity<LoanStatus>()
+                     .HasKey(e => e.Id);
+
+            modelBuilder.Entity<ApplicationStatus>()
+        .HasOne(e => e.LoanStatus) 
+        .WithOne() 
+        .HasForeignKey<ApplicationStatus>(e => e.LoanStatusId) 
+        .OnDelete(DeleteBehavior.NoAction);
+
+
             //application statuses data seed
             modelBuilder.Entity<ApplicationStatus>().HasData(
                 new ApplicationStatus

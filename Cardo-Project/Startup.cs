@@ -25,6 +25,7 @@ using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using OfficeOpenXml;
+using Hangfire;
 
 namespace Infrastructure.Extentions
 {
@@ -104,7 +105,6 @@ namespace Infrastructure.Extentions
             
         }
 
-
-
+       
     }
 }

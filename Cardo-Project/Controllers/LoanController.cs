@@ -18,7 +18,7 @@ namespace Cardo_Project.Controllers
             _mediator = mediator;
         }
         [Authorize(Roles = "Loan Officer")]
-        [HttpPost("validateLoan")]
+        [HttpPost("loanOfficer/validateLoan")]
         public async Task<IActionResult> CreateLoan([FromBody] CreateLoanCommand request, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
 
@@ -34,7 +34,7 @@ namespace Cardo_Project.Controllers
         }
 
         [Authorize(Roles = "Loan Officer")]
-        [HttpPut("updateLoanStatus/{loanId}/{cultureId}")]
+        [HttpPut("loanOfficer/updateLoanStatus/{loanId}/{cultureId}")]
         public async Task<IActionResult> UpdateLoanStatus(int loanId, string cultureId, [FromBody] int loanStatusId)
         {
             var command = new EditLoanStatusCommand
@@ -49,7 +49,7 @@ namespace Cardo_Project.Controllers
         }
 
         [Authorize(Roles = "Loan Officer")]
-        [HttpGet("getLoansByBorrower/{borrowerId}")]
+        [HttpGet("loanOfficer/getLoansByBorrower/{borrowerId}")]
         public async Task<IActionResult> GetLoansByBorrower(int borrowerId, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
             var query = new GetLoansOfABorrowerQuery { BorrowerId = borrowerId, CultureId=cultureId };
@@ -59,7 +59,7 @@ namespace Cardo_Project.Controllers
         }
 
         [Authorize(Roles = "Loan Officer")]
-        [HttpGet("getLoanDetails/{loanId}")]
+        [HttpGet("loanOfficer/getLoanDetails/{loanId}")]
         public async Task<IActionResult> GetLoanDetails(int loanId, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
             var query = new GetDetailsOfALoanQuery { LoanId = loanId, CultureId = cultureId };

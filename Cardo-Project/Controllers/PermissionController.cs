@@ -18,7 +18,7 @@ namespace Cardo_Project.Controllers
         {
             _mediatR = mediatR;
         }
-        [HttpPost("create")]
+        [HttpPost("admin/create")]
         [Authorize(Roles = "Admin")]
 
         public async Task<IActionResult> Create([FromBody] CreatePermissionCommand command, [FromHeader(Name = "Accept-Language")] string cultureId)
@@ -29,7 +29,7 @@ namespace Cardo_Project.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost("assignPermissionToRole")]
+        [HttpPost("admin/assignPermissionToRole")]
         public async Task<IActionResult> AssignPermissionToRole([FromBody] AssignPermissionToRoleCommand command)
         {
           
@@ -39,7 +39,7 @@ namespace Cardo_Project.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost("assignPermissionToUser")]
+        [HttpPost("admin/assignPermissionToUser")]
         public async Task<IActionResult> AssignPermissionToUser([FromBody] CreateUserPermissionCommand command)
         {
 
