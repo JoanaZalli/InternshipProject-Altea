@@ -24,7 +24,7 @@ namespace Application.Moduls.UserModul.Query
 
     }
 
-    internal sealed class GetUsersHandler : IRequestHandler<GetAllUsersQuery, IEnumerable<UserRegistrationDTO>>
+    public sealed class GetUsersHandler : IRequestHandler<GetAllUsersQuery, IEnumerable<UserRegistrationDTO>>
     {
         private readonly IRepositoryManager _repositoryManager;
         private readonly IMapper _mapper;

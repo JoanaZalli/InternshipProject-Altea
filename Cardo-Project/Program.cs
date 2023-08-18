@@ -25,6 +25,7 @@ using Domain.Entities;
 using Microsoft.OpenApi.Models;
 using Hangfire;
 using System.Configuration;
+using Application.Moduls.BorrowerModul.Query;
 
 var builder = WebApplication.CreateBuilder(args);
 LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
@@ -128,7 +129,6 @@ builder.Services.AddScoped<IMatrixCombinationRepository, MatrixCombinationReposi
 builder.Services.AddScoped<IConditionsRepository, ConditionsRepository>();
 builder.Services.AddScoped<ILoanRepository, LoanRepository>();
 builder.Services.AddScoped<ICompanyProfileRepository, CompanyProfileRepository>();
-
 // ServiceManager and Logger
 builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureLoggerService();
