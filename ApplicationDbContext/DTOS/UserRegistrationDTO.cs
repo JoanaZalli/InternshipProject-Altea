@@ -18,8 +18,12 @@ namespace Application.DTOS
         public string? Email { get; init; }
 
         [JsonPropertyName("Prefix")]
-        public int PrefixId { get; init; } // Added PrefixId property
+        public int PrefixId { get; init; } 
         public string? PhoneNumber { get; init; }
+        public string Token { get; set; }
+        public DateTime TokenCreationTime { get; set; }
+        public bool EmailConfirmed { get; init; }
+
 
     }
 }
