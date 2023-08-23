@@ -26,8 +26,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using OfficeOpenXml;
 using Hangfire;
+using Infrastructure;
 
-namespace Infrastructure.Extentions
+namespace Cardo_Project
 {
     public static class Startup
     {
@@ -56,22 +57,22 @@ namespace Infrastructure.Extentions
         {
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-           
+
             services.Configure<RequestLocalizationOptions>(options =>
-            { 
+            {
                 var supportedCultures = new[]
                 {
                   "en","it"
                 };
 
                 options.SetDefaultCulture(supportedCultures[0]).AddSupportedCultures(supportedCultures).AddSupportedUICultures(supportedCultures);
-               
+
             });
-           
+
         }
         public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
         {
-         //   var secretKey = jwtSettings["secret"];
+            //   var secretKey = jwtSettings["secret"];
 
             services.AddAuthentication(opt =>
             {
@@ -98,13 +99,13 @@ namespace Infrastructure.Extentions
 
         public static void ConfigureExcel(this IServiceCollection services)
         {
-           
 
-            ExcelPackage.LicenseContext = LicenseContext.Commercial; 
 
-            
+            ExcelPackage.LicenseContext = LicenseContext.Commercial;
+
+
         }
 
-       
+
     }
 }

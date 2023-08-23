@@ -24,6 +24,7 @@ namespace Infrastructure
                     var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
                     var adminUser = new User
                     {
+                        Id= "392086A6-ABEB-48E1-8666-426BA7B31312",
                         FirstName = "admin",
                         LastName = "admin",
                         PrefixId = 1,

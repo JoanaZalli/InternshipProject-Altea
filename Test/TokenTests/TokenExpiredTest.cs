@@ -1,4 +1,5 @@
-﻿using Application;
+﻿
+using Application;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Test.TokenTests
             DateTime tokenCreationTime = DateTime.UtcNow.AddMinutes(-31);
 
 
-            bool result = TokenValidator.IsTokenExpired(tokenCreationTime);
+            bool result = TokenGenerator.IsTokenExpired(tokenCreationTime);
 
 
             Assert.True(result);

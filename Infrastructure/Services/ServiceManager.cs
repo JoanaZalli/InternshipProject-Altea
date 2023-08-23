@@ -1,4 +1,5 @@
-﻿using Application.Contracts;
+﻿
+using Application.Contracts;
 using AutoMapper;
 using Domain.Entities;
 using Microsoft.AspNetCore.Identity;

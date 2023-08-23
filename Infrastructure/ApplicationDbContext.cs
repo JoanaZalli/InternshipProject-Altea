@@ -1,5 +1,5 @@
 ﻿using Domain.Entities;
-using Infrastructure.Repository.Configuration;
+using Infrastructure.Repositories.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +29,7 @@ namespace Infrastructure
         public DbSet<CompanyProfile> CompanyProfiles { get; set; }
         public DbSet<Applicationn> Applications { get; set; }
         public DbSet<Lender> Lenders { get; set; }
-        public DbSet<Condition> Conditions { get; set; }
+        public DbSet<LenderCondition> LenderConditions { get; set; }
         public DbSet<MatrixTemplate> MatrixTemplates { get; set; }
         public DbSet<Loan> Loans { get; set; }
 
@@ -89,7 +89,8 @@ namespace Infrastructure
                .HasOne(up => up.Permission)
                .WithMany()
                .HasForeignKey(up => up.PermissionId);
-            
+
+            modelBuilder.Entity<LenderCondition>();
 
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Prefix)
@@ -102,6 +103,18 @@ namespace Infrastructure
 
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
 
+            modelBuilder.Entity<IdentityUserRole<string>>()
+                 .HasData(
+                new IdentityUserRole<string>
+                {
+                    UserId= "03DEC9A5-1AC0-4757-8393-BB870D4D53B0",
+                    RoleId= "ACEE1889-E154-4C90-91D4-5F8F396FC5B5"
+                },
+                   new IdentityUserRole<string>
+                   {
+                       UserId = "392086A6-ABEB-48E1-8666-426BA7B31312",
+                       RoleId = "4377AA5F-C7E7-45B9-A879-8409074EE9AB"
+                   });
             //company type
 
             modelBuilder.Entity<CompanyType>().HasData(
@@ -142,7 +155,7 @@ namespace Infrastructure
                    DateCreated = DateTime.Now,
                }
             );
-          
+
             //Products
             modelBuilder.Entity<Product>().HasData(
                 new Product
@@ -177,73 +190,6 @@ namespace Infrastructure
         .HasForeignKey<ApplicationStatus>(e => e.LoanStatusId) 
         .OnDelete(DeleteBehavior.NoAction);
 
-
-            //application statuses data seed
-            modelBuilder.Entity<ApplicationStatus>().HasData(
-                new ApplicationStatus
-                {
-                    Id=1,
-                    Name="In Charge",
-                    Created= DateTime.Now,
-                    Updated= DateTime.Now,
-                },
-                new ApplicationStatus
-                {
-                    Id = 2,
-                    Name = "Loan Issued",
-                    Created = DateTime.Now,
-                    Updated = DateTime.Now,
-                    LoanStatusId=1
-                },
-                new ApplicationStatus
-                {
-                    Id = 3,
-                    Name = "Loan Canceled",
-                    Created = DateTime.Now,
-                    Updated = DateTime.Now,
-                    LoanStatusId=10
-                },
-                 new ApplicationStatus
-                 {
-                     Id = 4,
-                     Name = "Loan Defaulted",
-                     Created = DateTime.Now,
-                     Updated = DateTime.Now,
-                     LoanStatusId=7
-                 },
-                  new ApplicationStatus
-                  {
-                      Id = 5,
-                      Name = "Loan Disbursed",
-                      Created = DateTime.Now,
-                      Updated = DateTime.Now,
-                      LoanStatusId=4
-                  },
-                   new ApplicationStatus
-                   {
-                       Id = 6,
-                       Name = "Loan Guaranteed",
-                       Created = DateTime.Now,
-                       Updated = DateTime.Now,
-                       LoanStatusId=9
-                   },
-                    new ApplicationStatus
-                    {
-                        Id = 7,
-                        Name = "Loan Rejected",
-                        Created = DateTime.Now,
-                        Updated = DateTime.Now,
-                        LoanStatusId=3
-                    },
-                     new ApplicationStatus
-                     {
-                         Id = 8,
-                         Name = "Loan Repaid",
-                         Created = DateTime.Now,
-                         Updated = DateTime.Now,
-                         LoanStatusId=8
-                     }
-                );
             //loan statusees data seed
             modelBuilder.Entity<LoanStatus>().HasData(
                 new LoanStatus
@@ -317,27 +263,82 @@ namespace Infrastructure
                     Updated = DateTime.Now,
                 }
               );
-            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
-                 new IdentityUserRole<string>
+            //application statuses data seed
+            modelBuilder.Entity<ApplicationStatus>().HasData(
+                new ApplicationStatus
+                {
+                    Id = 1,
+                    Name = "In Charge",
+                    Created = DateTime.Now,
+                    Updated = DateTime.Now,
+                },
+                new ApplicationStatus
+                {
+                    Id = 2,
+                    Name = "Loan Issued",
+                    Created = DateTime.Now,
+                    Updated = DateTime.Now,
+                    LoanStatusId = 1
+                },
+                new ApplicationStatus
+                {
+                    Id = 3,
+                    Name = "Loan Canceled",
+                    Created = DateTime.Now,
+                    Updated = DateTime.Now,
+                    LoanStatusId = 10
+                },
+                 new ApplicationStatus
                  {
-                     RoleId = "e995ccf4-801b-41ed-9bab-82d6745dba80",
-                     UserId = "47359644-3e10-4e45-b26c-cab9f4ca27c8",
+                     Id = 4,
+                     Name = "Loan Defaulted",
+                     Created = DateTime.Now,
+                     Updated = DateTime.Now,
+                     LoanStatusId = 7
                  },
-                  new IdentityUserRole<string>
+                  new ApplicationStatus
                   {
-                      RoleId = "6eb872cc-7da6-45cb-b0ed-6904c4bbd06d",
-                      UserId = "44f05ec5-c969-4b07-93c4-7c2472208fe6"
-                  }
+                      Id = 5,
+                      Name = "Loan Disbursed",
+                      Created = DateTime.Now,
+                      Updated = DateTime.Now,
+                      LoanStatusId = 4
+                  },
+                   new ApplicationStatus
+                   {
+                       Id = 6,
+                       Name = "Loan Guaranteed",
+                       Created = DateTime.Now,
+                       Updated = DateTime.Now,
+                       LoanStatusId = 9
+                   },
+                    new ApplicationStatus
+                    {
+                        Id = 7,
+                        Name = "Loan Rejected",
+                        Created = DateTime.Now,
+                        Updated = DateTime.Now,
+                        LoanStatusId = 3
+                    },
+                     new ApplicationStatus
+                     {
+                         Id = 8,
+                         Name = "Loan Repaid",
+                         Created = DateTime.Now,
+                         Updated = DateTime.Now,
+                         LoanStatusId = 8
+                     }
                 );
+           
             //lender data seed
             modelBuilder.Entity<Lender>().HasData(
-                
+
                 new Lender
                 {
-                    Id=1,
-                    Name= "PMI BTECH",
-                    DateCreated= DateTime.Now,
-                    DateUpdated= DateTime.Now,
+                    Id = 1,
+                    Name = "PMI BTECH",
+                    DateCreated = DateTime.Now,
+                    DateUpdated = DateTime.Now,
                 },
                  new Lender
                  {
@@ -356,28 +357,31 @@ namespace Infrastructure
                   );
 
             //condition data seed
-            modelBuilder.Entity<Condition>().HasData(
-                new Condition
+            modelBuilder.Entity<LenderCondition>().HasData(
+                new LenderCondition
                 {
-                    Id=1,
-                    MinRequestedAmount=100000,
-                    TenorMin=30,
-                    CompanyTypeId=5,
+                    Id = 1,
+                    MinRequestedAmount = 100000,
+                    TenorMin = 30,
+                    CompanyTypeId = 5,
+                    LenderId = 1
                 },
-                new Condition
-                { 
-                    Id=2,
-                    MinRequestedAmount=400000,
-                    TenorMin=40,
-                    TenorMax=60,
-                },
-                new Condition
+                new LenderCondition
                 {
-                    Id=3,
-                    MinRequestedAmount=100000,
-                    TenorMin=30,
-                    TenorMax=60,
-                    CompanyTypeId=1
+                    Id = 2,
+                    MinRequestedAmount = 400000,
+                    TenorMin = 40,
+                    TenorMax = 60,
+                    LenderId = 2
+                },
+                new LenderCondition
+                {
+                    Id = 3,
+                    MinRequestedAmount = 100000,
+                    TenorMin = 30,
+                    TenorMax = 60,
+                    CompanyTypeId = 1,
+                    LenderId = 3
                 }
                 );
         }
