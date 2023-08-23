@@ -1,4 +1,5 @@
-﻿using Application.Contracts.Repositories;
+﻿
+using Application.Contracts.Repositories;
 using Application.DTOS;
 using Application.Moduls.BorrowerModul.Query;
 using AutoMapper;
