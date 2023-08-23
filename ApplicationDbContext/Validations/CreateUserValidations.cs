@@ -55,7 +55,7 @@ namespace Application.Validations
                 .Must(HasAlphanumericCharacter).WithMessage(u => localizationService[ValidationResource.Password_RequiresAlphanumeric, cultureId]);
         }
 
-            private bool HasNumber(string username)
+            public bool HasNumber(string? username)
             {
                 return username.Any(char.IsDigit);
             }

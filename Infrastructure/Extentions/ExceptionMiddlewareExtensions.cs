@@ -150,6 +150,10 @@ namespace Infrastructure.Extentions {
             {
                 statusCode = HttpStatusCode.BadRequest;
                 errorMessages.Add(localizer["Warning: Failed to fetch company profile from Finhub."]);
+            } else if (exception is MatrixTemplateException)
+            {
+                statusCode = HttpStatusCode.NotFound;
+                errorMessages.Add(localizer[ValidationResource.MatrixTemplate]);
             }
             else
             {

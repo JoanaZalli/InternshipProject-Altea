@@ -26,6 +26,8 @@ using Microsoft.OpenApi.Models;
 using Hangfire;
 using System.Configuration;
 using Application.Moduls.BorrowerModul.Query;
+using Cardo_Project;
+using Microsoft.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
@@ -36,6 +38,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+
 });
 
 // Identity configuration
@@ -135,16 +138,19 @@ builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureExcel();
 
 var app = builder.Build();
-
-// Database seeding
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    SeedData.Initizlize(services); 
+    SeedData.Initizlize(services);
     SeedAdmin.Initialize(services).Wait();
     SeedLoanOfficer.Initialize(services).Wait();
 }
-
+// Database seeding
+using (var scope = app.Services.GetService<IServiceScopeFactory>().CreateScope())
+{
+    var service = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    service.Database.Migrate();
+}
 
 
 var localizationOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();

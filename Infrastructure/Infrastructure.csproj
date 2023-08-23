@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ApplicationDbContext\Application.csproj" />
+    <ProjectReference Include="..\Application\Application.csproj" />
   </ItemGroup>
 
 </Project>

@@ -277,6 +277,15 @@ namespace Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid data uploaded..
+        /// </summary>
+        public static string MatrixTemplate_InvalidData {
+            get {
+                return ResourceManager.GetString("MatrixTemplate_InvalidData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There is no lender for this application..
         /// </summary>
         public static string NoLender {

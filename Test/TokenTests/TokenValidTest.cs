@@ -16,7 +16,7 @@ namespace Test.TokenTests
             DateTime tokenCreationTime = DateTime.Now;
 
 
-            bool result = TokenValidator.IsTokenExpired(tokenCreationTime);
+            bool result = TokenGenerator.IsTokenExpired(tokenCreationTime);
 
 
             Assert.False(result);
