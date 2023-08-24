@@ -1,5 +1,6 @@
 ﻿using Application.Contracts.Repositories;
 using Application.DTOS;
+using Application.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace Application.Moduls.MatrixTemplateModul.Commands
     public class UpdateSpreadValuesCommand : IRequest
     {
         public IEnumerable<UpdatedExcelRowDTO> SpreadUpdates { get; set; }
+        public string cultureId { get; set; }
     }
     public class UpdateSpreadValuesHandler : IRequestHandler<UpdateSpreadValuesCommand>
     {
@@ -48,7 +50,13 @@ namespace Application.Moduls.MatrixTemplateModul.Commands
                             lender.Name, product.Name, spreadUpdate.Tenor, spreadUpdate.Spread);
                     }
                 }
+                if (lender == null || product == null || spreadUpdate.Tenor == 0 || spreadUpdate.Spread == 0)
+                {
+                    throw new MatrixTemplateException(request.cultureId);
+                }
+
             }
+
 
             return Unit.Value;
         }

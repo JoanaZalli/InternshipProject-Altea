@@ -1,6 +1,6 @@
-﻿
-using Application.Contracts.Repositories;
+﻿using Application.Contracts.Repositories;
 using Application.DTOS;
+using Application.Mappers;
 using Application.Moduls.BorrowerModul.Query;
 using AutoMapper;
 using Domain.Entities;
@@ -21,36 +21,28 @@ namespace IntegrationTests.BorrowerIntegrationTest
 {
     public class GetBorrowerByIdTest : IntegrationTest
     {
+        private readonly BorrowerRepository _borrowerRepository;
+        private readonly IMapper _mapper;
+        public GetBorrowerByIdTest()
+        {
+            var dbContextOptions = GetDbContextOptions();
+            var dbContext = new ApplicationDbContext(dbContextOptions);
+            _borrowerRepository = new BorrowerRepository(dbContext);
+            _mapper = new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile>()).CreateMapper();
+        }
         [Fact]
         public async Task GetBorrowerById()
         {
             var borrowerId = 1;
             var culture = "en";
-            var mapperMock = new Mock<IMapper>();
-            mapperMock.Setup(m => m.Map<BorrowerDTO>(It.IsAny<Borrower>()))
-                      .Returns(new BorrowerDTO());
 
-            var borrowerRepositoryMock = new Mock<IBorrowerRepository>();
-            borrowerRepositoryMock.Setup(repo => repo.GetBorrowerByIdAsync(borrowerId))
-                                 .ReturnsAsync(new Borrower()); borrowerRepositoryMock.Setup(repo => repo.GetBorrowerByIdAsync(It.IsAny<int>()))
-                                 .ReturnsAsync(new Borrower());
-
-            
-
-            using var dbContext = new ApplicationDbContext(GetDbContextOptions());
-            var serviceProvider = new ServiceCollection()
-              .AddSingleton<ApplicationDbContext>(dbContext)
-        .AddScoped<IBorrowerRepository>(provider => borrowerRepositoryMock.Object)
-            .AddScoped<IMapper>(provider => mapperMock.Object)
-              .AddScoped<GetBorrowerByIdQueryHandler>()
-              .BuildServiceProvider();
-
-            using var scope = serviceProvider.CreateScope();
-
-            var queryHandler = scope.ServiceProvider.GetRequiredService<GetBorrowerByIdQueryHandler>();
+            var queryHandler = new GetBorrowerByIdQueryHandler(_borrowerRepository, _mapper);
             var query = new GetBorrowerByIdQuery { BorrowerId = borrowerId, Culture = culture };
             var borrowerDto = await queryHandler.Handle(query, default);
-            Assert.NotNull(borrowerDto);
+
+            Assert.Equal(borrowerDto.CompanyName, "AlteaCompany1");
+            Assert.Equal(borrowerDto.FiscalCode, "12225478915");
+            Assert.Equal(borrowerDto.VatNumber, "12345678910");
 
         }
 

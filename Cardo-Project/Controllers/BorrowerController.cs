@@ -28,7 +28,7 @@ namespace Cardo_Project.Controllers
             return Ok("Borrower Created!");
 
         }
-        [Authorize(Roles = "Loan Officer")]
+       // [Authorize(Roles = "Loan Officer")]
         [HttpGet("borrower/{borrowerId}")]
         public async Task<IActionResult> GetBorrowerById(int borrowerId, [FromHeader(Name = "Accept-Language")] string culture)
         {
