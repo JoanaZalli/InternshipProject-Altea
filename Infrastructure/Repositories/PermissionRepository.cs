@@ -15,6 +15,7 @@ namespace Infrastructure.Repositories
         public Permission Create(Permission permission)
         {
              _context.Set<Permission>().Add(permission);
+            _context.SaveChanges();
             return permission;
         }
         public async Task UpdateAsync(Permission permission)

@@ -19,8 +19,8 @@ namespace Cardo_Project.Controllers
         {
             _mediator = mediator;
         }
-        [Authorize]
-        [HttpPost("borrower")]
+       [Authorize(Roles ="Borrower")]
+        [HttpPost]
         public async Task<IActionResult> CreateBorrower([FromBody] CreateApplicationCommand command, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
             command.CultureId = cultureId;
@@ -29,7 +29,7 @@ namespace Cardo_Project.Controllers
 
         }
 
-        [Authorize(Roles = "Loan Officer")]
+      [Authorize(Roles = "Loan Officer")]
         [HttpPut("loanOfficer")]
         public async Task<IActionResult> UpdateProduct([FromBody] UpdateProductOfaApplicationCommand command, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
@@ -37,7 +37,7 @@ namespace Cardo_Project.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
-        [Authorize(Roles = "Loan Officer")]
+      [Authorize(Roles = "Loan Officer")]
         [HttpGet("loanOfficer/{borrowerId}")]
         public async Task<IActionResult> GetBorrowersApplications(int borrowerId, [FromHeader(Name = "Accept-Language")] string cultureId)
         {

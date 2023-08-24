@@ -17,7 +17,7 @@ namespace Cardo_Project.Controllers
             _mediator = mediator;
         }
         [Authorize(Roles = "Admin")]
-        [HttpPost("admin/create")]
+        [HttpPost("create")]
         public async Task<IActionResult> CreateRole([FromBody] CreateRoleCommand command, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
             command.CultureId = cultureId;
@@ -37,7 +37,7 @@ namespace Cardo_Project.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpDelete("admin/delete")]
+        [HttpDelete("delete")]
         public async Task<IActionResult> DeleteRole([FromBody] DeleteRoleCommand command)
         {
             var result = await _mediator.Send(command);

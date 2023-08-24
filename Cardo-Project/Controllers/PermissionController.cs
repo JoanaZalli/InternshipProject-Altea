@@ -24,7 +24,7 @@ namespace Cardo_Project.Controllers
         public async Task<IActionResult> Create([FromBody] CreatePermissionCommand command, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
             command.CultureId = cultureId;
-            var result = _mediatR.Send(command);
+            var result = await _mediatR.Send(command);
             return Ok(result);
         }
 
@@ -38,7 +38,7 @@ namespace Cardo_Project.Controllers
             
         }
 
-        [Authorize(Roles = "Admin")]
+       [Authorize(Roles = "Admin")]
         [HttpPost("admin/assignPermissionToUser")]
         public async Task<IActionResult> AssignPermissionToUser([FromBody] CreateUserPermissionCommand command)
         {

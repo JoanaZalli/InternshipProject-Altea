@@ -122,7 +122,7 @@ builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
 builder.Services.AddScoped<IRolePermissionRepository, RolePermissionRepository>();
 builder.Services.AddScoped<IUserPermissionRepository, UserPermissionRepository>();
 builder.Services.AddScoped<BaseSorter<BorrowerDTO>, BorrowerSorter>();
-builder.Services.AddScoped<BaseSorter<UserRegistrationDTO>, UserSorter>();
+builder.Services.AddScoped<BaseSorter<UserDto>, UserSorter>();
 builder.Services.AddScoped<IFinhubService, FinhubService>();
 builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();

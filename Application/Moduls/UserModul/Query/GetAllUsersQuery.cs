@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Application.Moduls.UserModul.Query
 {
-    public sealed record GetAllUsersQuery() : IRequest<IEnumerable<UserRegistrationDTO>>
+    public sealed record GetAllUsersQuery() : IRequest<IEnumerable<UserDto>>
     {
         
         public string CultureId { get; init; }
@@ -24,23 +24,23 @@ namespace Application.Moduls.UserModul.Query
 
     }
 
-    public sealed class GetUsersHandler : IRequestHandler<GetAllUsersQuery, IEnumerable<UserRegistrationDTO>>
+    public sealed class GetUsersHandler : IRequestHandler<GetAllUsersQuery, IEnumerable<UserDto>>
     {
         private readonly IRepositoryManager _repositoryManager;
         private readonly IMapper _mapper;
-        private readonly BaseSorter<UserRegistrationDTO> _userSorter;
+        private readonly BaseSorter<UserDto> _userSorter;
 
-        public GetUsersHandler(IRepositoryManager repositoryManager, IMapper mapper, BaseSorter<UserRegistrationDTO> userSorter)
+        public GetUsersHandler(IRepositoryManager repositoryManager, IMapper mapper, BaseSorter<UserDto> userSorter)
         {
             _repositoryManager = repositoryManager;
             _mapper = mapper;
             _userSorter = userSorter;
         }
 
-        public async Task<IEnumerable<UserRegistrationDTO>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<UserDto>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
            var users= await _repositoryManager.User.GetAllUsersAsync();
-            var userDto = _mapper.Map<IEnumerable<UserRegistrationDTO>>(users);
+            var userDto = _mapper.Map<IEnumerable<UserDto>>(users);
             
             if (request.Filter != null)
             {

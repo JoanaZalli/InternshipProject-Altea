@@ -29,7 +29,7 @@ namespace Cardo_Project.Controllers
             _localizer = localizer;
             _service = service;
         }
-        [HttpPost("borrower")]
+        [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand command, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
             var newCommand = new CreateUserCommand
@@ -46,9 +46,9 @@ namespace Cardo_Project.Controllers
             var user = await _mediator.Send(newCommand);
             return Ok(new { Message = "User registered successfully. Verification email sent." });
         }
-        [HttpGet("loanOfficer")]
-        [Authorize(Roles = "Loan Officer")]
-        public async Task<ActionResult<IEnumerable<UserRegistrationDTO>>>GetUsers(string? sortBy = null, bool? sortAscending = null, string? filter=null)
+        [HttpGet]
+      [Authorize(Roles = "Loan Officer")]
+        public async Task<ActionResult<IEnumerable<UserDto>>>GetUsers(string? sortBy = null, bool? sortAscending = null, string? filter=null)
         {
             var query = new GetAllUsersQuery
             {
@@ -60,7 +60,7 @@ namespace Cardo_Project.Controllers
             return Ok(users);
         }
 
-        [HttpGet("borrower/activate")]
+        [HttpGet("activate")]
         public async Task<IActionResult> ActivateAccount([FromQuery] string token, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
             await _mediator.Send(new GetUserByTokenQuery { Token = token, CultureId=cultureId });
@@ -68,7 +68,7 @@ namespace Cardo_Project.Controllers
             
             return Ok(new { Message = "Account activated successfully." });
         }
-        [HttpPost("borrower/requestNewToken")]
+        [HttpPost("requestNewToken")]
         public async Task<IActionResult> RequestNewToken([FromBody] RequestNewTokenCommand request, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
             request.CultureId=cultureId;
@@ -77,7 +77,7 @@ namespace Cardo_Project.Controllers
             return Ok(new { Message = result });
         }
 
-        [HttpPost("borrower/login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
         {
             if (!await _service.AuthenticationService.ValidateUser(user, user.CultureId))
@@ -86,7 +86,7 @@ namespace Cardo_Project.Controllers
             return Ok(tokenDto);
         }
 
-        [HttpPost("borrower/forgotUsername")]
+        [HttpPost("forgotUsername")]
         public async Task<IActionResult> ForgotUsername([FromBody] ForgotUsernameCommand request, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
             request.CultureId=cultureId;
@@ -96,7 +96,7 @@ namespace Cardo_Project.Controllers
         }
        
         
-        [HttpPost("borrower/forgotPassword")]
+        [HttpPost("forgotPassword")]
         public async Task<IActionResult> PasswordRecovery([FromBody] ForgotPasswordCommand request, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
             request.CultureId= cultureId;
@@ -104,7 +104,7 @@ namespace Cardo_Project.Controllers
 
             return Ok(new { Message = "Password recovery initiated. Check your email for the recovery link and token.", PasswordRecoveyToken = token });
         }
-        [HttpPut("borrower/setNewPassword")]
+        [HttpPut("setNewPassword")]
         public async Task<IActionResult> SetNewPasswordWithToken([FromBody] SetNewPasswordCommand request, [FromHeader(Name = "Accept-Language")] string cultureId)
         {
             request.CultureId= cultureId;
