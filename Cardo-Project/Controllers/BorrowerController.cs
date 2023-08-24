@@ -29,7 +29,7 @@ namespace Cardo_Project.Controllers
 
         }
         [Authorize(Roles = "Loan Officer")]
-        [HttpGet("{borrowerId}")]
+        [HttpGet("borrower/{borrowerId}")]
         public async Task<IActionResult> GetBorrowerById(int borrowerId, [FromHeader(Name = "Accept-Language")] string culture)
         {
             var query = new GetBorrowerByIdQuery { BorrowerId = borrowerId };
@@ -38,7 +38,7 @@ namespace Cardo_Project.Controllers
             return Ok(result);
 
         }
-       // [Authorize(Roles = "Loan Officer")]
+        [Authorize(Roles = "Loan Officer")]
         [HttpGet("{userId}")]
         public async Task<ActionResult<IEnumerable<BorrowerDTO>>> GetBorrowersByUserId(string userId, string? sortBy = null, bool? sortAscending = null, string? filter = null)
         {

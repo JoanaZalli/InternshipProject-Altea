@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Application.Sorting
 {
-    public class UserSorter : BaseSorter<UserRegistrationDTO>
+    public class UserSorter : BaseSorter<UserDto>
     {
-        public override IEnumerable<UserRegistrationDTO> Sort(IEnumerable<UserRegistrationDTO> users, string? sortBy, bool? sortAscending)
+        public override IEnumerable<UserDto> Sort(IEnumerable<UserDto> users, string? sortBy, bool? sortAscending)
         {
             if (!string.IsNullOrEmpty(sortBy) && sortAscending.HasValue)
             {

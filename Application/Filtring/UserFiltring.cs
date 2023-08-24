@@ -10,7 +10,7 @@ namespace Application.Filtring
 {
     public static class UserFiltring
     {
-        public static IEnumerable<UserRegistrationDTO> ApplyFilter(IEnumerable<UserRegistrationDTO> users, string? filterValue)
+        public static IEnumerable<UserDto> ApplyFilter(IEnumerable<UserDto> users, string? filterValue)
         {
             if (!string.IsNullOrEmpty(filterValue))
             {
