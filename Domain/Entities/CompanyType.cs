@@ -11,6 +11,7 @@ namespace Domain.Entities
         public int Id { get; set; } 
         public string Company_Type { get; set; }
         public DateTime DateCreated { get; set; }
+        public ICollection<Borrower> Borrowers { get; set; }
 
     }
 }

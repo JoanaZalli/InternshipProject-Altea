@@ -19,6 +19,8 @@ namespace Domain.Entities
         public string UserId { get; set; }
         public User User { get; set; }
         public ICollection<Applicationn> Applications { get; set; }
+        public int? CompanyProfileId { get; set; }
+        public CompanyProfile? CompanyProfile { get; set; }
 
 
 

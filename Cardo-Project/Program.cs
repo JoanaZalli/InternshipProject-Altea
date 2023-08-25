@@ -70,20 +70,22 @@ builder.Services.AddSwaggerGen(c =>
         Description = "JWT Authorization header using the Bearer scheme",
         Name = "Authorization",
         In = ParameterLocation.Header,
-        Type = SecuritySchemeType.ApiKey
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "bearer"
     });
 
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
         {
             {
-                new OpenApiSecurityScheme
+                  new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
                 {
-                    Reference = new OpenApiReference
-                    {
-                        Type = ReferenceType.SecurityScheme,
-                        Id = "Bearer"
-                    }
-                },
+                    Type=ReferenceType.SecurityScheme,
+                    Id="Bearer"
+                }
+            },
                 new string[] {}
             }
         });
@@ -132,6 +134,7 @@ builder.Services.AddScoped<IMatrixCombinationRepository, MatrixCombinationReposi
 builder.Services.AddScoped<IConditionsRepository, ConditionsRepository>();
 builder.Services.AddScoped<ILoanRepository, LoanRepository>();
 builder.Services.AddScoped<ICompanyProfileRepository, CompanyProfileRepository>();
+builder.Services.AddScoped<CompanyProfileSchedulingService>();
 // ServiceManager and Logger
 builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureLoggerService();

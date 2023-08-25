@@ -29,8 +29,8 @@ namespace Cardo_Project.Controllers
             _profileSchedulingService = companyProfileSchedulingService;
 
         }
-        [HttpPost("loanOfficer/update")]
-        public async Task<IActionResult> UpdateAllCompanyProfiles()
+        [HttpGet("getCompanyProfiles")]
+        public async Task<IActionResult> GetAllCompanyProfiles()
         {
             await _mediator.Send(new UpdateCompanyProfilesCommand());
 

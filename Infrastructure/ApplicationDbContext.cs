@@ -115,8 +115,11 @@ namespace Infrastructure
                        UserId = "392086A6-ABEB-48E1-8666-426BA7B31312",
                        RoleId = "4377AA5F-C7E7-45B9-A879-8409074EE9AB"
                    });
-            //company type
-
+            //company type: borrower
+            modelBuilder.Entity<CompanyType>()
+              .HasMany(ct => ct.Borrowers)
+               .WithOne(b => b.CompanyType)
+                .HasForeignKey(b => b.CompanyTypeId);
             modelBuilder.Entity<CompanyType>().HasData(
             new CompanyType
             {
@@ -155,7 +158,6 @@ namespace Infrastructure
                    DateCreated = DateTime.Now,
                }
             );
-
             //Products
             modelBuilder.Entity<Product>().HasData(
                 new Product
